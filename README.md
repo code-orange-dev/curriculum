@@ -16,9 +16,19 @@ All materials are released under **CC0 1.0 Universal (Public Domain)** — use t
 
 ## Programs
 
+### Recommended Learning Path
+
+```
+Bitcoin Dojo (7 weeks) ──> rawBit (10 weeks) ──> Decoding Bitcoin (8 weeks)
+        │                                                │
+        └── Sovereign Bitcoiner (5-10 weeks)             └── Open-source contribution
+```
+
 | Program | Duration | Level | Directory |
 |---------|----------|-------|-----------|
-| **Decoding Bitcoin** | 8 weeks | Intermediate | [`/decoding-bitcoin/`](./decoding-bitcoin/) |
+| **Bitcoin Dojo** | 7 weeks | Beginner-Intermediate | [`/bitcoin-dojo/`](./bitcoin-dojo/) |
+| **rawBit Study Cohort** | 10 weeks | Intermediate | [`/rawbit/`](./rawbit/) |
+| **Decoding Bitcoin** | 8 weeks | Intermediate-Advanced | [`/decoding-bitcoin/`](./decoding-bitcoin/) |
 | **Sovereign Bitcoiner Crash Course** | 5-10 weeks | Beginner-Intermediate | [`/sovereign-bitcoiner/`](./sovereign-bitcoiner/) |
 | **Vibe Coding on Nostr** | Monthly workshops | All levels | [`/nostr-workshops/`](./nostr-workshops/) |
 | **Workshop Modules** | Single session | Varies | [`/workshops/`](./workshops/) |
@@ -55,7 +65,28 @@ curriculum/
 ├── README.md                          # This file
 ├── LICENSE                            # CC0 1.0 Universal
 ├── CONTRIBUTING.md                    # How to contribute
-├── decoding-bitcoin/                  # 8-week developer cohort
+├── bitcoin-dojo/                      # 7-week cryptography & primitives cohort
+│   ├── README.md                      # Program overview, syllabus & facilitator guide
+│   ├── week-01/                       # Finite Fields
+│   ├── week-02/                       # Elliptic Curves
+│   ├── week-03/                       # Keys, Addresses & Encoding
+│   ├── week-04/                       # Serialisation & Transactions
+│   ├── week-05/                       # Script & Transaction Validation
+│   ├── week-06/                       # SegWit & Advanced Transactions
+│   └── week-07/                       # Graduation & Next Steps
+├── rawbit/                            # 10-week raw transaction building cohort
+│   ├── README.md                      # Program overview, syllabus & facilitator guide
+│   ├── week-01/                       # Legacy Transactions (P2PK, P2PKH)
+│   ├── week-02/                       # Multisig Transactions
+│   ├── week-03/                       # Timelocks
+│   ├── week-04/                       # OP_RETURN & Data Anchoring
+│   ├── week-05/                       # Transaction Malleability & Payment Channels
+│   ├── week-06/                       # SegWit (P2WPKH)
+│   ├── week-07/                       # SegWit Scripts (P2WSH)
+│   ├── week-08/                       # Taproot Basics
+│   ├── week-09/                       # Advanced Taproot & MuSig2
+│   └── week-10/                       # Final Project & Graduation
+├── decoding-bitcoin/                  # 8-week protocol contribution cohort
 │   ├── README.md                      # Program overview & facilitator guide
 │   ├── week-01-bitcoin-fundamentals/
 │   ├── week-02-transactions/
