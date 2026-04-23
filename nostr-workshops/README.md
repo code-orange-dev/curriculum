@@ -25,7 +25,7 @@ Each module in `modules/` is a self-contained workshop:
 
 ## Format
 
-- Monthly in-person sessions on Code Orange Dev School [Discord](https://discord.gg/6XPJ96sCY4)
+- Monthly in-person sessions at Bitcoin House Bali (or remote)
 - 2-3 hours per session
 - Laptop required
 - All skill levels welcome
