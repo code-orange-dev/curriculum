@@ -1,0 +1,13 @@
+[package]
+name = "pdk-exercise"
+version = "0.1.0"
+edition = "2021"
+description = "Code Orange Privacy Track — Payjoin Dev Kit integration exercise"
+license = "CC0-1.0"
+
+[dependencies]
+payjoin = { version = "0.21", features = ["send", "receive", "v2"] }
+bitcoin = "0.32"
+bitcoincore-rpc = "0.19"
+tokio = { version = "1", features = ["full"] }
+anyhow = "1"
