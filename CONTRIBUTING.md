@@ -1,61 +1,104 @@
-# Contributing to Code Orange Curriculum
+# Contributing to Code Orange Dev School
 
-Thank you for helping improve Bitcoin education. Every contribution — whether a typo fix, a new exercise, or a full translation — strengthens the global Bitcoin developer community.
+> Your path from curious Bitcoiner to Bitcoin open-source contributor.
 
-## How to Contribute
+---
 
-### Small Fixes (Typos, Broken Links, Clarifications)
+## Quick Start
 
-1. Fork this repo
-2. Make your changes
-3. Submit a Pull Request with a clear description
+1. **Join our Discord**: https://discord.gg/PrHct9eY6Z — introduce yourself in #introductions
+2. **Pick your starting point** based on where you are (see below)
+3. **Show up** — we run bi-weekly sessions at Bitcoin House Bali and remote cohorts on Discord
 
-### New Exercises or Assessments
+---
 
-1. Open an Issue describing the exercise and which week/module it belongs to
-2. Follow the existing format in the relevant week's directory
-3. Include solutions where applicable
-4. Submit a PR referencing the Issue
+## Where to Start
 
-### Translations
+### "I'm new to Bitcoin"
+→ Join the **Reading Club** (The Bitcoin Standard, Mastering Bitcoin)
+→ Attend a **Sovereign Bitcoiner** workshop (nodes, self-custody, multisig)
+→ No technical background needed
 
-We actively welcome translations into any language, with priority for Southeast Asian languages:
+### "I understand Bitcoin but haven't coded on it"
+→ Join the **Bitcoin Dojo** (7 weeks, Chaincode BOSS Challenge)
+→ Or join **rawBit** (10 weeks, elliptic curves to Taproot)
+→ You'll write your first Bitcoin scripts and understand the protocol
 
-- Indonesian (Bahasa Indonesia)
-- Thai
-- Vietnamese
-- Malay
-- Mandarin
-- Tagalog
-- Burmese
-- Khmer
+### "I can code and want to contribute to Bitcoin"
+→ Join **Decoding Bitcoin** (8 weeks, transaction deep dive)
+→ Or jump into the **Privacy Track** (24 sessions, chain analysis through CoinSwap)
+→ You'll submit your first PR to a real Bitcoin project
 
-**To start a translation:**
+### "I'm already contributing and want funding"
+→ Apply for a **Developer Fellowship** ($500/mo, 6 months)
+→ Pick a project, get a mentor, ship code: fellowship@codeorange.dev
+→ Details: https://github.com/code-orange-dev/fellowships
 
-1. Open an Issue titled "Translation: [Language] — [Program Name]"
-2. Create a subdirectory using the ISO 639-1 code (e.g., `decoding-bitcoin/translations/id/` for Indonesian)
-3. Translate week by week — partial translations are welcome
-4. Submit PRs as you complete each week
+### "I want to teach Bitcoin in my community"
+→ Apply for an **Educator Fellowship** ($250/mo, 6 months)
+→ Run cohorts and workshops in your city using our CC0 curriculum
+→ Details: https://github.com/code-orange-dev/fellowships
 
-### New Workshop Modules
+---
 
-1. Open an Issue describing the proposed workshop
-2. Include: topic, target audience, prerequisites, estimated duration, required hardware/software
-3. Follow the existing workshop template structure
-4. Include both slides (as PDF or Markdown) and a facilitator guide
+## Contributing to Our Repos
 
-## Style Guide
+All our curriculum is CC0-licensed. You can use, adapt, and improve it.
 
-- Write for clarity, not cleverness — many readers are non-native English speakers
-- Use practical, hands-on examples over theoretical explanations
-- Include the "why" — not just how to do something, but why it matters for Bitcoin
-- Link to upstream sources (Chaincode, Bitcoin Dev Project, Optech) rather than duplicating content
-- All code examples should be tested and reproducible
+### How to contribute
+
+1. Fork the repo you want to improve
+2. Make your changes (fix typos, improve exercises, add examples, translate)
+3. Submit a PR with a clear description of what you changed and why
+4. We'll review within a week
+
+### What we're looking for
+
+- **Typo fixes and clarifications** — always welcome
+- **New exercises** — especially hands-on coding exercises with real Bitcoin tools
+- **Translations** — Bahasa Indonesia, Thai, Vietnamese, Korean, Portuguese
+- **Improved examples** — real-world scenarios, better explanations
+- **New workshop materials** — slides, handouts, facilitator guides
+
+### Repos open for contribution
+
+| Repo | What It Is | Good For |
+|------|-----------|----------|
+| [curriculum](https://github.com/code-orange-dev/curriculum) | All cohort syllabi | Adding exercises, translations, improvements |
+| [workshops](https://github.com/code-orange-dev/workshops) | Workshop slide decks and materials | New topics, translations, facilitator notes |
+| [PR-tracking-dashboard](https://github.com/code-orange-dev/PR-tracking-dashboard) | Monthly PR tracking | Updating your own contributions |
+
+---
+
+## Your First Bitcoin Open-Source PR
+
+Not sure where to start contributing to Bitcoin itself? Here are beginner-friendly projects our community contributes to:
+
+| Project | Language | Good First Issues |
+|---------|----------|-------------------|
+| [rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin) | Rust | Documentation, tests, small fixes |
+| [BDK](https://github.com/bitcoindevkit/bdk) | Rust | Wallet tooling, tests |
+| [Floresta](https://github.com/Davidson-Souza/Floresta) | Rust | Light client node, good first issues labeled |
+| [BlueWallet](https://github.com/BlueWallet/BlueWallet) | React Native | Translations, UI improvements |
+| [BTCPay Server](https://github.com/btcpayserver/btcpayserver) | C# | Merchant payments, documentation |
+| [peer-observer](https://github.com/peer-observer/peer-observer) | Rust | P2P network monitoring |
+
+**Pro tip**: Start by reading the project's CONTRIBUTING.md, then look for issues labeled `good first issue` or `help wanted`. Our Discord has a #contribution-help channel where you can ask questions.
+
+---
 
 ## Code of Conduct
 
-Be respectful, constructive, and patient. We are building a global community of Bitcoin educators. Disagreements about technical approaches are welcome; personal attacks are not.
+We're here to learn and build. Be respectful, be helpful, be patient with newcomers. We don't tolerate harassment, discrimination, or toxicity. If someone needs help, help them.
 
-## License
+---
 
-By contributing, you agree that your contributions will be released under the [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) license. This means your contributions enter the public domain and can be used by anyone for any purpose.
+## Questions?
+
+- **Discord**: https://discord.gg/PrHct9eY6Z
+- **Email**: fellowship@codeorange.dev
+- **Twitter/X**: [@CodeOrangeDevs](https://x.com/CodeOrangeDevs)
+
+---
+
+*Code Orange Dev School | [codeorange.dev](https://codeorange.dev)*
