@@ -1,1083 +1,405 @@
-# Bitcoin Privacy Developer Track
+# Code Orange — Bitcoin Privacy Track
 
-**Learn Bitcoin privacy. Build privacy tools. Contribute to open source. 24 sessions over 12 months.**
+**A drop-in, drop-out program where every session ends with a real contribution to a Bitcoin privacy project.**
 
----
-
-## Why This Track Exists
-
-People accepting bitcoin for their work, running a small business, donating to causes, or saving for the future reasonably expect the same kind of day-to-day financial privacy they would get from traditional banking tools. As Greg Maxwell put it back in 2013:
-
-> *"Traditional banking provides a fair amount of privacy by default. Your in-laws don't see that you're buying birth control that deprives them of grandchildren, your employer doesn't learn about the non-profits you support with money from your paycheck, and thieves don't see your latest purchases or how wealthy you are to help them target and scam you. Poor privacy in Bitcoin can be a major practical disadvantage for both individuals and businesses."*
-
-Bitcoin's base layer has real privacy gaps. Address reuse exposes payment history. The common-input-ownership heuristic lets chain analysis firms cluster wallets. Wallet software creates identifiable fingerprints in every transaction. Light clients leak user addresses to third parties. Your node's network connections can reveal which transactions are yours.
-
-The solutions exist — Silent Payments, Payjoin, Coinswap, compact block filters, ASmap, privacy-aware transaction construction — but they need developers to build, integrate, and maintain them. The biggest bottleneck isn't research. It's a shortage of developers who understand these problems deeply enough to write the code.
-
-**This curriculum produces those developers.**
-
-Every session teaches a real privacy problem, shows you the code that solves it, and guides you to contribute to the open-source projects building the fix. You don't need to be an expert developer to start. You need to be curious and willing to learn.
+You do not have to attend all of this. There is no "start" and no "finish." Each session stands on its own, teaches one privacy topic completely, and guides you to open a real pull request against a real open-source privacy repository before you leave. Come to one session. Come to ten. Come when a topic interests you, skip when it doesn't. The only thing every session has in common is the goal: **you contribute.**
 
 ---
 
-## How This Track Works
+## Why this track exists
 
-| | |
-|---|---|
-| **Structure** | 24 bi-weekly sessions (every 2 weeks), 2-2.5 hours each |
-| **Duration** | 12 months |
-| **Drop in, drop out** | **Every session stands on its own.** Join at any session. Attend the ones that interest you. Skip the ones that don't. Come back whenever you want. Some people will do all 24. Others will show up for the Payjoin sessions, disappear for three months, and come back for the CoinSwap block. All of that is fine. Each session teaches one complete topic and ends with a real contribution to a real Bitcoin project. |
-| **Who is this for** | Anyone with basic Bitcoin knowledge who wants to build. Completed Bitcoin Dojo or equivalent. Comfortable reading code. Python or Rust experience helpful but not required. |
-| **What you walk away with** | PRs on real Bitcoin privacy projects. A portfolio of open-source contributions. Deep understanding of how Bitcoin privacy works and what's broken. A community of builders who care about the same things you do. |
-| **License** | CC0 1.0 Universal (public domain) |
+Privacy on Bitcoin matters for the same reason it matters anywhere else. Someone accepting bitcoin for their work, running a small shop, donating to a cause, or saving for the future expects the same everyday financial privacy they'd get from a bank — their landlord shouldn't see their balance, their employer shouldn't see their donations, and a stranger shouldn't be able to look up how much they hold and target them for it.
+
+But Bitcoin's base layer is public by default. Every transaction is permanently visible to anyone. Most of the privacy weaknesses people actually hit aren't in the protocol — they're in **wallet behavior** and **how transactions get built**. That's exactly the kind of thing open-source contributors can fix. Reusing an address, picking change badly, leaking which wallet you use through subtle fingerprints, broadcasting in a way that reveals your IP — these are software problems, and software problems get solved by people sending pull requests.
+
+That's what this track is for. Not to talk about privacy — to **ship** privacy.
 
 ---
 
-## For Tutors — You Don't Need to Be an Expert
+## How this track works
 
-**You don't need to be a deep technical developer to run this track.** You need to be a curious Bitcoiner with a desire to build on Bitcoin and a willingness to learn alongside your participants.
-
-Every session includes a **Tutor Preparation** section written in plain language. It tells you:
-- What the session is actually about (no jargon)
-- How much time to spend studying beforehand (usually 2-3 hours)
-- Analogies you can use to explain the concepts
-- Common questions participants will ask, and how to answer them
-- How to run the session step by step
-- What to do when you don't know the answer
-
-**The five rules for teaching this well:**
-
-1. **Do the reading.** Each session lists 2-3 resources. Read them the week before. You don't need to understand every line of code — you need to understand the *concept* well enough to explain *why it matters*.
-2. **Do the exercises yourself first.** Run through the Build section before the session. You'll hit the same errors your participants will hit. That's gold — you'll know how to help them.
-3. **Be honest about what you don't know.** "I don't know, let's figure it out together" is a perfectly valid answer. Your participants are developers — they respect honesty over faking expertise. Often someone in the room will know.
-4. **Focus on the WHY, not just the HOW.** Anyone can look up how ECDH works. What matters is *why* Silent Payments need ECDH, and what happens to real people's privacy without it.
-5. **Use the analogies.** Each Tutor Preparation section includes plain-language analogies. They work. Use them.
-
-**You will learn this material deeply by teaching it.** That's not a bug — it's a feature. The best Bitcoin developers started by teaching what they'd just learned. This track is designed so that the tutor grows alongside the participants.
+- **Online and global.** Sessions run remotely. Anyone, anywhere, any timezone we can manage. You need a laptop and curiosity.
+- **Standalone sessions.** Every session is self-contained. You will never be lost because you "missed last week." Each one re-teaches the small amount of context it needs.
+- **Drop in, drop out.** Join any session. Leave any session. Come back next month. No attendance requirement, no sequence to follow, no graduation gate. Your progress is measured in merged PRs, not in seats filled.
+- **Every session ends in a contribution.** You don't leave with notes. You leave with a pull request open against a real repository — picked from our curated issue pool (see below), run through a quick quality checklist, and submitted upstream.
+- **Low barrier on purpose.** Session one can be your first day writing Rust. We've designed the contribution targets so a curious Bitcoiner can ship something real immediately and grow from there.
 
 ---
 
-## What Bitcoin Privacy Problems We're Solving
+## A note for tutors
 
-Bitcoin has specific, known privacy weaknesses. Each one has projects working on a fix. This track covers all of them:
+**You do not need to be a deep technical developer to teach this track.** You need to be a curious Bitcoiner who wants to build on Bitcoin. That's it. This track is as much a teaching ground for *you* as for the people in the room — you will learn this material by preparing it and by working through the exercises alongside everyone else.
 
-| Privacy Problem | What's Actually Happening | The Fix | Sessions |
+Here is how to teach it well:
+
+1. **Do the reading and the exercise yourself first.** Every session below has a "Tutor preparation" block with plain-language explanations, an analogy you can use, the questions people will ask, and how long to budget for prep. Work through the build *before* the session. If you can do it, you can teach it.
+2. **Teach the WHY, not the HOW.** Your job is not to be the smartest coder in the room. Your job is to explain *why this privacy problem matters* and *where in the code it lives*. The repo's own documentation handles the HOW. Point people at it.
+3. **Be honest when you don't know.** "I don't know — let's find out together" is the most powerful thing you can say. It models exactly the behavior a good open-source contributor needs. Look it up live. Read the code together. Ask in the repo's chat.
+4. **Learn alongside the room.** You are not above the participants, you are one session ahead of them. That's enough. The best tutors here are people who started as participants.
+5. **Protect the relationship with maintainers.** This is the one rule you must not bend. We contribute *from a curated issue pool* and we run *a quality checklist* before anything goes upstream. Read `PR_CHECKLIST.md` and make sure every participant runs it. A program that sends sloppy pull requests gets ignored; a program that sends prepared contributors gets welcomed. You are the guardian of that reputation.
+
+If you can host a call, do the homework one session ahead, and stay curious, you can run this track.
+
+---
+
+## How contributing works — read this before any session
+
+We optimize for **volume of merged pull requests** — lots of real, accepted contributions. But there's a trap: the maintainers of these privacy repos are mostly unpaid and time-starved, and the privacy world is small. If we flood them with random, low-quality PRs, "Code Orange" becomes a name they associate with noise, and doors close. So we keep volume high *and* protect the relationship with three rules:
+
+1. **Pick from the curated pool, never the wild.** All contribution targets come from [`ISSUE_POOL.md`](./ISSUE_POOL.md) — a living list of issues we've verified are still open, genuinely wanted, and beginner-appropriate. Don't go hunting for random issues to "fix."
+2. **Run the checklist before you submit.** Every PR passes [`PR_CHECKLIST.md`](./PR_CHECKLIST.md): it builds locally, tests pass, it links the issue, and it follows the repo's own CONTRIBUTING guide. Ten minutes that turns a maybe-PR into a merge.
+3. **Submit directly upstream — but prepared.** Once it clears the checklist, you open the PR yourself against the real repo and engage with the maintainer's review like a real contributor. Because you are one.
+
+The result: high throughput, defensible quality, and maintainers who are glad to see us.
+
+---
+
+## The repositories we contribute to
+
+All Rust. All central to base-layer privacy. Ordered roughly easiest-to-enter first.
+
+| Repo | What it is | Why privacy cares | Entry level |
 |---|---|---|---|
-| **Address reuse** | If you use the same Bitcoin address twice, anyone can see all payments you've ever received to it. Like having your bank account balance on a billboard. | [Silent Payments (BIP352)](https://github.com/bitcoin/bips/blob/master/bip-0352.mediawiki) — derive a unique address for every payment from one static identifier | 5-8 |
-| **Common-input-ownership** | When you spend from multiple addresses in one transaction, analysts assume all those addresses belong to you — and cluster your entire wallet. | [Payjoin (BIP77/78)](https://github.com/payjoin/rust-payjoin) — both sender and receiver contribute inputs, breaking the assumption | 9-12 |
-| **Wallet fingerprinting** | Every wallet builds transactions slightly differently. Version numbers, fee rates, output ordering — tiny differences that tell analysts which wallet you use. | Better transaction construction in [Bitcoin Core](https://github.com/bitcoin/bitcoin), [BDK](https://github.com/bitcoindevkit/bdk), [rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin) | 2-4, 22 |
-| **Light client privacy** | Most people don't run full nodes. Light wallets ask servers "do you have transactions for my addresses?" — telling the server exactly which addresses are yours. | [Compact block filters (BIP157/158)](https://github.com/rustaceanrob/kyoto), [Floresta](https://github.com/vinteumorg/Floresta) — check locally, never reveal your addresses | 7, 14-15 |
-| **Network surveillance** | When your node broadcasts a transaction, the first node that sees it can link your IP to it. Your ISP sees everything. | Dandelion++, [ASmap](https://github.com/sipa/asmap), Tor/I2P integration | 13-14 |
-| **Transaction graph analysis** | Analysts follow the trail of transactions across the blockchain. Your coins leave breadcrumbs. | [Coinswap/Teleport](https://github.com/nickhntv/teleport-transactions), [JoinMarket NG](https://github.com/nickhntv/joinmarket-ng) — break the trail | 17-18 |
-| **Coin selection leaks** | How your wallet chooses which coins to spend reveals information — your balance, which output is change, which addresses are linked. | Privacy-aware coin selection in [Bitcoin Core](https://github.com/bitcoin/bitcoin/blob/master/src/wallet/coinselection.cpp) and [BDK](https://github.com/bitcoindevkit/bdk) | 3, 21 |
-| **Taproot adoption gap** | Taproot makes complex transactions look identical to simple ones — but only if enough people use it. Privacy needs a crowd. | Wallet integrations, default P2TR in [rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin), BDK | 16 |
+| **rust-bitcoin** | The foundational Bitcoin library in Rust | Everything else is built on it; tx parsing, addresses, script all live here | 🟢 Easiest — strong good-first-issue culture |
+| **Floresta** | A Utreexo-based full node in Rust | Lets people run their own node cheaply = no third party watching their wallet | 🟢 Welcoming, active |
+| **BDK (bdk_wallet)** | The Bitcoin Dev Kit wallet library | Coin selection, change handling, descriptors — where wallet privacy is won or lost | 🟡 Moderate |
+| **Payjoin Dev Kit (rust-payjoin)** | Library for Payjoin collaborative transactions | Breaks the assumption that all transaction inputs belong to one person | 🟡 Moderate |
+| **Silent Payments tooling** | Libraries implementing BIP352 | Lets you receive to a single static address with zero address reuse | 🟡 Moderate / advanced |
+| **Kyoto** | A BIP157/158 compact-block-filter light client in Rust | Light clients that don't leak which addresses are yours to a server | 🟡 Moderate / advanced |
 
 ---
 
-## The Contribution Ladder
+## The privacy problems we're solving
 
-You start by reading code. You end by shipping code. Every step counts.
+Every session maps to a concrete, well-known weakness. In plain language:
 
-| Sessions | Level | What You're Doing |
+| The problem | What it means for a normal person | Where we fix it |
 |---|---|---|
-| 1-4 | **Engage** | Star repos, read source code, file issues, improve documentation |
-| 5-8 | **Submit** | Review PRs, add test cases, submit your first pull request |
-| 9-12 | **Build** | Fix bugs, add features, submit PRs to multiple projects |
-| 13-16 | **Lead** | Tackle harder issues, review others' PRs, help newcomers |
-| 17-20 | **Research** | Identify gaps, propose improvements, build new tools |
-| 21-24 | **Ship** | Substantial contributions, present your work, join the fellowship |
+| **Address reuse** | Reusing an address turns your whole history into one searchable profile | Silent Payments sessions |
+| **Common-input-ownership** | Spending two coins together usually proves the same person owns both | Heuristics + collaborative-tx sessions |
+| **Change detection** | Analysts can often guess which output is your change, then follow your money | Coin selection sessions (BDK) |
+| **Wallet fingerprinting** | The *way* your wallet builds a transaction can reveal which wallet — and sometimes which user | Fingerprinting sessions (rust-bitcoin/BDK) |
+| **Light-client leakage** | "Light" wallets often tell a server exactly which addresses are yours | Light-client sessions (Kyoto) |
+| **Node/IP exposure** | Broadcasting a transaction can leak the IP it came from | P2P privacy + node sessions (Floresta) |
+| **Network-level deanonymization** | An attacker controlling network routes can isolate or watch your node | ASmap + eclipse-attack sessions |
+| **Linking on receipt** | One static donation address links every donor and every payment together | Silent Payments sessions |
 
 ---
 
-## Curriculum
+## The sessions
 
-### Phase 1: Foundations — How Privacy Breaks on Bitcoin's Base Layer
-*Sessions 1-4*
+These are **modules, not a sequence.** Pick whatever pulls you in. Each lists who it's for, what you'll learn in plain terms, a full tutor-preparation block, what you'll build, and the contribution you'll make.
 
-Before you can build privacy tools, you need to understand exactly how privacy fails today. These four sessions teach the core chain analysis techniques, how wallet software creates fingerprints, and how coin selection leaks information.
-
----
-
-#### Session 01: Chain Analysis & Surveillance — How Privacy Fails Today
-
-##### Tutor Preparation
-
-**Study time:** 2-3 hours the week before.
-
-**What this session is about in plain language:** Chain analysis companies use a handful of simple tricks — called heuristics — to figure out who owns which Bitcoin addresses. The most important one: if two addresses appear as inputs in the same transaction, they probably belong to the same person. That single assumption lets them cluster hundreds of addresses into one identity. This session teaches what those tricks are, so participants can later build tools that break them.
-
-**The 5 heuristics you need to understand and explain:**
-
-1. **Common-input-ownership (CIOH):** "If Alice uses two addresses as inputs in one transaction, both are probably Alice's." *Analogy: paying for dinner with money from two different pockets — a watcher concludes both pockets are yours.*
-
-2. **Change detection:** "In a 2-output transaction, one output is the payment and one is change. Analysts figure out which is which." *Analogy: handing a $50 bill for a $30 item. The $20 coming back is obviously change.*
-
-3. **Address reuse:** "If an address appears in multiple transactions, they're all linked." *Analogy: using the same email for Amazon, political donations, and medical bills — anyone who knows one sees all.*
-
-4. **Timing analysis:** "When transactions appear correlates with time zones and personal patterns." *Analogy: always sending Bitcoin at 9am Bangkok time? Probably in Southeast Asia.*
-
-5. **Amount correlation:** "Round amounts and unusual amounts can be matched across transactions." *Analogy: sending exactly 0.31337 BTC, then someone receiving exactly that — probably connected.*
-
-**Key point to drive home:** These aren't theoretical. Chainalysis uses them daily. Governments buy this data. People's financial lives are traced. Privacy tools aren't for criminals — they're for everyone who wants basic financial privacy.
-
-**Common questions and how to handle them:**
-- *"Isn't this just for criminals?"* → No. Read the Greg Maxwell quote in the intro. Your employer seeing your donations, thieves seeing your wealth, your family seeing your medical purchases. Privacy is normal.
-- *"Can't I just use Tor?"* → Tor helps with IP privacy but doesn't help with on-chain analysis at all. The blockchain is permanent and public.
-- *"Why not just use Monero?"* → Different tradeoffs. We're here to fix Bitcoin's privacy, not switch chains.
-
-**How to run this session:**
-1. Open [mempool.space](https://mempool.space) on the projector. Pick a random transaction. Walk through it: how many inputs? Outputs? Script types? Which output is probably change?
-2. Show a real reused address (donation addresses work). Show the full transaction history visible to anyone.
-3. Then let participants do the Build exercises.
+A good first session for anyone brand new is **F1**. After that, follow your curiosity.
 
 ---
 
-**The problem:** Chain analysis firms use 5 core heuristics to deanonymize Bitcoin users. Understanding what every transaction reveals is the prerequisite for building solutions.
+### Foundations
 
-**Learn:**
-- The 5 chain analysis heuristics: common-input-ownership (CIOH), change detection, address reuse, timing analysis, amount correlation
-- How chain analysis firms cluster addresses into identity groups
-- What the UTXO model reveals vs what an account model reveals
-- Why privacy is a protocol-level requirement, not a user preference
-- Real-world examples of harm from poor financial privacy
+#### F1 · Set up your toolchain and ship your first contribution
+**Who it's for:** Total newcomers. Possibly your first day writing Rust.
+**What you'll learn (plain):** How to clone a Bitcoin repo, build it, run its tests, and open a pull request. The mechanics of contributing — fork, branch, commit, PR, respond to review.
 
-**Build:**
-- Trace a 5-hop transaction chain on [mempool.space](https://mempool.space) and [OXT.me](https://oxt.me)
-- Apply CIOH to cluster addresses. Identify likely change outputs using 4 different heuristics
-- Write a Python script that takes a transaction ID and returns: input count, output count, script types, likely change output, fee rate, and a "privacy score" (0-100)
-- Analyze 10 real mainnet transactions and classify each by privacy quality
+**Tutor preparation** *(prep: ~90 min the first time, ~20 min after)*
+- **The concept in plain words:** Contributing to open source is just five moves: copy the project (fork), make a workspace (branch), change something, save it with a note (commit), and offer it back (pull request). Everything else is detail.
+- **Analogy to use:** It's like suggesting an edit to a shared recipe. You photocopy the cookbook (fork), scribble your improvement on your copy (branch + commit), and hand it to the author saying "want this?" (PR). They might say yes, or ask you to change it first.
+- **Common questions and answers:**
+  - *"Do I need to know Rust?"* — Not today. Today we fix a doc, a comment, or a failing-to-be-clear error message. You'll write Rust in later sessions.
+  - *"What if my PR gets rejected?"* — Totally normal and not a failure. Maintainers often ask for changes. That conversation *is* contributing.
+  - *"Will I break Bitcoin?"* — No. You're proposing a change to a copy. Nothing you do touches the real network or gets merged without review.
+- **How to run it:** Screen-share the whole flow once, slowly, on rust-bitcoin. Then everyone does it on a curated `good-first-issue` (docs/typo/clarity issues are ideal here). Budget half the session for "my build is failing" — that's the real lesson.
+- **When you get stuck:** rust-bitcoin's CONTRIBUTING.md and its chat are excellent. Reading them together is part of the teaching.
 
-**Contribute:**
-- Create a GitHub account if you don't have one
-- Star and fork these repos — the projects you'll contribute to:
-  - [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin) — Bitcoin Core
-  - [cygnet3/rust-silentpayments](https://github.com/cygnet3/rust-silentpayments) — Silent Payments library
-  - [payjoin/rust-payjoin](https://github.com/payjoin/rust-payjoin) — Payjoin Dev Kit
-  - [vinteumorg/Floresta](https://github.com/vinteumorg/Floresta) — Privacy-preserving light client
-  - [rustaceanrob/kyoto](https://github.com/rustaceanrob/kyoto) — BIP157/158 compact block filter client
-  - [bitcoindevkit/bdk](https://github.com/bitcoindevkit/bdk) — Bitcoin Dev Kit
-  - [rust-bitcoin/rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin) — Rust Bitcoin library
-- Clone `bitcoin/bitcoin` and build it locally. Read `src/wallet/coinselection.cpp` — you won't understand all of it yet, but you start reading real Bitcoin code on day one
-- Read the [Bitcoin Wiki Privacy page](https://en.bitcoin.it/wiki/Privacy). Find one section that's outdated or unclear — you'll file an issue or edit later
-
-**Reading:**
-- [Bitcoin Privacy Wiki](https://en.bitcoin.it/wiki/Privacy) (read fully)
-- Greg Maxwell's [CoinJoin original post](https://bitcointalk.org/index.php?topic=279249.0) (2013)
+**Build:** Fork, build, and test rust-bitcoin (or Floresta) locally.
+**Contribute:** Pick a `good-first-issue` from the pool (a docs/clarity/test fix) and open your first PR.
 
 ---
 
-#### Session 02: Transaction Anatomy for Privacy — What Every Byte Reveals
+#### F2 · Read a Bitcoin transaction byte by byte
+**Who it's for:** Anyone who wants to actually *see* where privacy leaks happen.
+**What you'll learn (plain):** What's inside a transaction — inputs, outputs, amounts, scripts, locktime — and which of those fields quietly leak information.
 
-##### Tutor Preparation
+**Tutor preparation** *(prep: ~60 min)*
+- **The concept in plain words:** A transaction is just a list of "coins I'm spending" (inputs) and "where the money goes" (outputs), plus some settings. Every one of those fields is public forever, and several of them accidentally say something about you.
+- **Analogy to use:** A transaction is like a cheque you photocopy and pin to a public noticeboard for all time. Most people only think about the amount — but the handwriting, the bank, the way you fill in the date, all reveal things too.
+- **Common questions:**
+  - *"Why are amounts public?"* — Bitcoin needs everyone to verify no money was invented. Public amounts are the price of not trusting a central bank.
+  - *"What's a 'script'?"* — The little rulebook attached to each coin saying how it can be spent. Different wallets write it differently — that's a fingerprint.
+- **How to run it:** Decode a real transaction together using rust-bitcoin's parsing. Point at each field and ask "what could someone learn from this?"
+- **When you get stuck:** rust-bitcoin's `Transaction` docs label every field.
 
-**Study time:** 2-3 hours.
-
-**What this session is about in plain language:** A Bitcoin transaction is a blob of data — a few hundred bytes. But every byte carries information. The version number, the locktime, the sequence numbers, the order of outputs, the script type — all slightly different depending on which wallet built the transaction. It's like handwriting analysis: even if you write the same words, an expert can tell which pen you used.
-
-**Key concept — "transaction construction":** This is the process by which a wallet builds a raw Bitcoin transaction. The *choices* the wallet makes — which inputs, what order for outputs, what fee rate, what locktime — these ARE the fingerprint. Improving how wallets construct transactions is one of the most important things Bitcoin privacy needs right now.
-
-**Transaction fields explained simply:**
-- **nVersion:** Almost always 1 or 2. Some wallets always use 2, some use 1. That alone is a tell.
-- **nLockTime:** Some wallets set this to the current block height (anti-fee-sniping). Others leave it at 0. Different wallets, different behavior.
-- **nSequence:** RBF signaling. Bitcoin Core uses one value, other wallets use another. Another fingerprint.
-- **Output ordering:** Payment first then change? Change first? Random? Each is a pattern.
-- **Script types:** If your inputs are SegWit but your change is Taproot, that mismatch reveals which output is change.
-
-*Analogy: sending a letter. The words are the payment. But the envelope, stamp placement, handwriting, ink color, paper type — all tell the analyst who you are, even without a return address.*
-
-**Common questions:**
-- *"Why don't all wallets just agree on one standard?"* → They should. That's partly what this track is about. Coordination is hard, and many developers don't prioritize privacy.
-- *"How much does this really matter?"* → A lot. Narrow down to "this came from Electrum" and you've eliminated 90% of wallets. Combined with other heuristics, it's very powerful.
-
-**How to run this session:**
-1. Decode a raw transaction hex together on the projector — field by field
-2. Show 3-4 transactions side by side. Ask: "which wallet made each one?"
-3. Then have them build a fingerprint-clean transaction themselves.
+**Build:** A tiny Rust program using rust-bitcoin that decodes a raw transaction and prints each field.
+**Contribute:** Improve the docs or examples for transaction parsing in rust-bitcoin — clarity fixes here are genuinely valued. Pick from the pool.
 
 ---
 
-**The problem:** Every field in a Bitcoin transaction creates fingerprints that identify which wallet software built it. Fixing this is critical for base-layer privacy.
+### Transaction privacy & wallet behavior
 
-**Learn:**
-- Raw transaction structure byte-by-byte: nVersion, vin[], vout[], nLockTime
-- How nVersion, nLockTime, and nSequence differ across wallets
-- Script types and their privacy implications: P2PKH, P2SH, P2WPKH, P2WSH, P2TR
-- Fee estimation patterns as wallet fingerprints
-- Output ordering: BIP69 (deterministic) vs random vs amount-sorted
-- [0xB10C's wallet fingerprinting research](https://b10c.me/observations/03-blocktemplate-coinbase-transactions/)
+#### T1 · The five privacy heuristics
+**Who it's for:** Anyone. No code required to understand it; light code to contribute.
+**What you'll learn (plain):** The five rules of thumb chain-analysis firms use to deanonymize people — and how to recognize each one.
 
-**Build:**
-- Decode 5 raw testnet transactions manually. Extract: version, locktime, sequence, script types, fee rate, output ordering
-- Determine which wallet software likely created each based on fingerprints alone
-- Construct a raw transaction that avoids all known fingerprints
+**Tutor preparation** *(prep: ~75 min)*
+- **The five heuristics in plain words:**
+  1. **Common-input-ownership** — if a transaction spends several coins at once, they're probably all owned by the same person. (Like paying with a fistful of bills from the same pocket.)
+  2. **Address reuse** — using one address repeatedly ties all those payments into one identity. (Like using one email address for everything.)
+  3. **Round amounts** — a payment of exactly 0.05 BTC is probably the *payment*; the weird leftover is probably your *change*.
+  4. **Change detection** — combine the above to guess which output comes back to you, then keep following it.
+  5. **Wallet fingerprinting** — the style in which a transaction is built points to a specific wallet.
+- **Analogy to use:** Imagine watching people at a market through binoculars. You can't hear them, but you notice who pulls cash from the same wallet, who always uses the same stall, who gets exact change back. You'd learn a lot. That's chain analysis.
+- **Common questions:**
+  - *"Isn't this just for catching criminals?"* — No. The same techniques let anyone — a stalker, a thief, a nosy employer — profile an ordinary person. Privacy is normal; surveillance is the anomaly.
+- **How to run it:** Walk through one real transaction and apply each heuristic out loud as a group. Let people *feel* how easy it is.
+- **When you get stuck:** These are conceptual; no deep code needed to teach.
 
-**Contribute:**
-- Pick one wallet (Sparrow, BlueWallet, Electrum, Green, Nunchuk). Test its current version against known fingerprint patterns. Document everything
-- If the behavior differs from published research, draft a GitHub issue (submit in Session 4)
-- Browse the [Bitcoin Optech Topics page](https://bitcoinops.org/en/topics/). Note anything missing or outdated
-
-**Reading:**
-- 0xB10C's [wallet fingerprinting observations](https://b10c.me/)
-- [Wallet fingerprinting and transaction construction](https://ishaana.com/blog/wallet_fingerprinting/) by Ishaana Misra
-- Bitcoin Core source: `src/wallet/spend.cpp` — focus on `CreateTransaction()`
+**Build:** Annotate a real transaction identifying which heuristics apply.
+**Contribute:** Many privacy libraries have docs explaining these heuristics. Improve or extend that explanatory documentation in BDK or rust-bitcoin — pick from the pool.
 
 ---
 
-#### Session 03: UTXO Management & Coin Selection — The Hidden Privacy Leak
+#### T2 · Coin selection and change — how wallets leak
+**Who it's for:** People ready for a bit of wallet logic.
+**What you'll learn (plain):** How a wallet decides which coins to spend, and how that choice either protects or exposes you.
 
-##### Tutor Preparation
+**Tutor preparation** *(prep: ~90 min)*
+- **The concept in plain words:** When you spend, your wallet picks from the coins you hold (your "UTXOs"). Picking badly — grabbing more coins than needed, or producing tell-tale change — hands analysts a map. Good coin selection is quiet.
+- **Analogy to use:** It's like paying with coins from a jar. If you tip the whole jar out every time, everyone sees exactly what you have and how much you got back. A careful person picks just enough.
+- **Common questions:**
+  - *"Why not always pick one coin?"* — Sometimes you can't; the amounts don't line up. The art is choosing to minimize what you reveal.
+  - *"What's a 'change output'?"* — Coins almost never match the price exactly, so the wallet sends the leftover back to you. That leftover is the juiciest thing for an analyst.
+- **How to run it:** Read BDK's coin-selection code together. You don't need to understand every line — find *where the decision is made* and discuss what each strategy reveals.
+- **When you get stuck:** BDK's docs describe its coin-selection algorithms by name; read them as a group.
 
-**Study time:** 2 hours.
-
-**What this session is about in plain language:** When you want to send 0.5 BTC, your wallet has to decide *which* of your coins to use. Maybe you have a 1 BTC coin and three 0.2 BTC coins. Each choice has different privacy consequences. This is called "coin selection" and it's one of the most underappreciated privacy leaks in Bitcoin.
-
-**The 4 algorithms explained simply:**
-1. **Largest-first:** Always picks the biggest coin. Simple but terrible — reveals you have a coin at least that big, always creates large change.
-2. **Branch-and-bound (BnB):** Tries to find an exact combination that matches the payment. If it works, NO change output — ideal for privacy. Bitcoin Core prefers this.
-3. **Knapsack:** Randomly tries combinations until it finds one close enough. Moderate privacy.
-4. **Random:** Pick coins randomly until you have enough. Unpredictable but may link more addresses together.
-
-**Key insight:** The best outcome is no change output at all. The worst is when change is obvious (you pay 1.0 BTC and get back 0.00003241 — that tiny output screams "change").
-
-**Why this matters:** Both Bitcoin Core and BDK handle coin selection. Improvements here cascade to every wallet that uses them.
+**Build:** Run BDK's coin selection on sample wallets and observe the change behavior.
+**Contribute:** Tests and documentation around coin selection in BDK. Pick a pool issue.
 
 ---
 
-**The problem:** How a wallet chooses which UTXOs to spend reveals enormous amounts of information. Coin selection in [Bitcoin Core](https://github.com/bitcoin/bitcoin/blob/master/src/wallet/coinselection.cpp) and [BDK](https://github.com/bitcoindevkit/bdk) directly affects every user's privacy.
+#### T3 · Wallet fingerprinting
+**Who it's for:** The curious. Moderate.
+**What you'll learn (plain):** The subtle "tells" — input ordering, locktime, version numbers, fee-bumping signals — that reveal which wallet built a transaction.
 
-**Learn:**
-- 4 coin selection algorithms: largest-first, branch-and-bound, knapsack, random
-- How each algorithm affects privacy — why BnB is preferred when it finds an exact match
-- [Murch's coin selection research](https://murch.one/wp-content/uploads/2016/11/erhardt2016coinselection.pdf) and its influence on Bitcoin Core
-- Dust attacks: how tiny UTXOs are tracking beacons
-- Coin control: manual UTXO selection as a privacy tool
+**Tutor preparation** *(prep: ~90 min)*
+- **The concept in plain words:** Two wallets can make a valid transaction in slightly different ways — the order they list things, a setting they flip, a number they pick. None of it affects whether it works, but it acts like handwriting: it identifies the author.
+- **Analogy to use:** Two people can write the same sentence, but their handwriting, spacing, and how they cross their sevens give them away. Wallets have handwriting too.
+- **Common questions:**
+  - *"Why does ordering matter?"* — There's a standard (BIP69) for ordering inputs and outputs neutrally. A wallet that *doesn't* follow it stands out.
+  - *"What's nLockTime/RBF?"* — Settings about when/whether a tx can be replaced. The specific values a wallet chooses are a fingerprint.
+- **How to run it:** Compare transactions from two wallets side by side. Spot the differences as a group — that *is* fingerprinting.
+- **When you get stuck:** rust-bitcoin exposes all these fields; the BIP69 spec is short and readable.
 
-**Build:**
-- Implement all 4 coin selection algorithms in Python
-- Run each against identical UTXO sets. Score for privacy: input count, change amount, detectability
-- Build a "privacy-optimized" selector that prefers changeless transactions
-
-**Contribute:**
-- Read Bitcoin Core's coin selection: `src/wallet/coinselection.cpp` and `src/wallet/spend.cpp`. Find a comment that could be clearer, a confusing variable name, or an untested edge case
-- Browse [BDK issues labeled "coin-selection"](https://github.com/bitcoindevkit/bdk/labels/coin-selection). If you can reproduce one, comment with your findings
-- Look at Murch's research. Are the algorithms fully implemented in Core today?
-
-**Reading:**
-- Murch's [coin selection thesis](https://murch.one/wp-content/uploads/2016/11/erhardt2016coinselection.pdf)
-- Bitcoin Core source: `src/wallet/coinselection.cpp`
-- BDK documentation on [coin selection](https://docs.rs/bdk_wallet/latest/bdk_wallet/)
+**Build:** A script that flags fingerprintable traits in a set of transactions.
+**Contribute:** Documentation or test coverage for transaction-construction fields in rust-bitcoin. Pick from the pool.
 
 ---
 
-#### Session 04: Wallet Fingerprinting & Your First Contribution
+### Collaborative transactions
 
-##### Tutor Preparation
+#### C1 · Payjoin fundamentals (BIP78 / BIP77)
+**Who it's for:** Anyone curious about breaking chain-analysis assumptions.
+**What you'll learn (plain):** How Payjoin lets the sender *and* receiver both put inputs into one transaction, quietly destroying the "all inputs are one owner" assumption.
 
-**Study time:** 2 hours.
+**Tutor preparation** *(prep: ~90 min)*
+- **The concept in plain words:** Normally one transaction = one payer's coins. Payjoin has the *receiver* also add a coin of their own. Now the common-input-ownership heuristic is simply wrong — and analysts can't tell a Payjoin apart from a normal payment, so it poisons their assumptions for everyone.
+- **Analogy to use:** Imagine splitting a restaurant bill where both people put cash on the table into one pile before paying. An onlooker can no longer assume all the cash came from one wallet.
+- **Common questions:**
+  - *"Does the receiver pay more?"* — No, the amounts net out; they just contribute an input that comes back to them.
+  - *"BIP78 vs BIP77?"* — Two versions of the coordination. BIP77 (async) doesn't require both parties online at once. That's the newer, more practical direction.
+- **How to run it:** Read Payjoin Dev Kit's README and trace the sender/receiver roles. Don't aim to implement it live — aim to understand the dance.
+- **When you get stuck:** Payjoin Dev Kit's docs and example code are the reference.
 
-**What this session is about:** This pulls together everything from Sessions 1-3. Participants analyze real transactions, identify wallets, and build fingerprint-clean transactions. Then they file their first GitHub issue or documentation PR.
-
-**This is the first real contribution session.** Many people are intimidated by contributing to open-source Bitcoin projects. Your job is to make it feel achievable:
-- "You're not rewriting Bitcoin Core. You're filing a well-described issue about a fingerprint you found."
-- "Documentation PRs are how every Bitcoin Core contributor started."
-- "The maintainers want help. They'll be glad to see your issue."
-
-**How to handle contributions:**
-1. Have everyone pick Option A, B, C, or D before starting
-2. Walk the room. Read their drafts. Suggest improvements.
-3. Pair anyone who's stuck with someone more confident
-4. Goal: everyone leaves with something submitted or ready to submit
-
----
-
-**The problem:** If every wallet constructed transactions identically, chain analysis would lose one of its most powerful tools. Fixing this requires work in foundational libraries and in individual wallets.
-
-**Learn:**
-- Complete catalog of known wallet fingerprints
-- How to construct a "fingerprint-clean" transaction
-- Transaction batching: when it helps privacy and when it hurts
-- The concept of "privacy by default" — users shouldn't need to think about fingerprinting
-
-**Build:**
-- Given 10 raw transactions, identify which wallet created each
-- Construct a fingerprint-clean transaction. Have another participant try to identify the wallet — if they can't, you win
-- Write a "transaction construction privacy checklist" for wallet developers
-
-**Contribute — your first real contribution:**
-- **Option A:** File an issue on a wallet repo documenting a privacy fingerprint you discovered
-- **Option B:** Submit a documentation PR to the [Bitcoin Wiki Privacy page](https://en.bitcoin.it/wiki/Privacy)
-- **Option C:** Submit a PR to [rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin) or [BDK](https://github.com/bitcoindevkit/bdk) improving docs or adding a test case
-- **Option D:** Publish your fingerprinting analysis as a GitHub gist and share with the community
-
-> **Phase 1 checkpoint:** You've read real Bitcoin Core source code, analyzed real transactions, and made your first contribution. You understand how chain analysis works and how wallet behavior creates privacy leaks.
+**Build:** Run a Payjoin example transaction from the Payjoin Dev Kit examples.
+**Contribute:** Docs, examples, or test fixes in rust-payjoin. Pick from the pool.
 
 ---
 
-### Phase 2: Silent Payments (BIP352) — Solving Address Reuse
-*Sessions 5-8*
+#### C2 · Building with Async Payjoin
+**Who it's for:** People who did C1 or already grasp Payjoin.
+**What you'll learn (plain):** Why "both parties online at once" is a real-world blocker, and how async Payjoin (BIP77) removes it.
 
-Address reuse is the most common on-chain privacy failure. Static donation addresses, payment pages, and QR codes all reuse addresses — exposing the full payment history of the recipient. [BIP352 Silent Payments](https://github.com/bitcoin/bips/blob/master/bip-0352.mediawiki) solves this by deriving unique addresses from a single public identifier, without the sender and receiver ever needing to interact.
+**Tutor preparation** *(prep: ~90 min)*
+- **The concept in plain words:** The original Payjoin needs sender and receiver online simultaneously — awkward for a shop or a donation page. Async Payjoin uses a relay so the two sides can coordinate without being online together.
+- **Analogy to use:** Instead of needing both people on a live phone call, they leave messages in a shared mailbox and pick them up whenever they're around.
+- **Common questions:**
+  - *"Is the relay a trusted third party?"* — It coordinates but is designed not to learn or control the funds. Discuss the trust boundaries — this is a great real conversation.
+- **How to run it:** Walk the async flow in the Payjoin Dev Kit. Identify each message that crosses the relay.
+- **When you get stuck:** The rust-payjoin async examples.
 
----
-
-#### Session 05: BIP352 Deep Dive — How Silent Payments Work
-
-##### Tutor Preparation
-
-**Study time:** 3 hours. This is the most cryptography-heavy session. Don't panic.
-
-**What this session is about in plain language:** If you put a Bitcoin address on your website for donations, everyone who donates can see every other donation, your total balance, and when you spend. Silent Payments fix this: you publish ONE identifier, and every sender's wallet automatically derives a *unique, one-time address* that only you can spend from. No two senders ever use the same address. No interaction needed.
-
-**ECDH explained simply (you MUST understand this):**
-
-ECDH = Elliptic Curve Diffie-Hellman. The core idea:
-- Alice has secret key `a`, public key `A`
-- Bob has secret key `b`, public key `B`
-- Alice computes `a × B` → gets a point
-- Bob computes `b × A` → gets the SAME point
-- They've created a shared secret without revealing their private keys
-
-*Analogy: Alice and Bob each have a secret paint color. They publicly share yellow paint. Alice mixes her secret with yellow, Bob mixes his with yellow, they exchange results. Each adds their own secret to arrive at the same final color — but nobody watching can figure it out.*
-
-For Silent Payments: the sender uses their private key and the receiver's public scan key to derive a shared secret. That secret tweaks the receiver's spend key to produce a unique output.
-
-**The scanning problem:** The receiver doesn't know when someone has sent them a Silent Payment. They must check EVERY transaction in EVERY block. For a full node, slow but possible. For a phone wallet, too heavy. This is why compact block filters (BIP157/158) and [Kyoto](https://github.com/rustaceanrob/kyoto) matter — they reduce the scanning burden.
-
-**Common questions:**
-- *"Why not just use HD wallets?"* → HD wallets need you to give each sender a different address. That requires interaction. Silent Payments work from one static identifier.
-- *"How is this different from Monero stealth addresses?"* → Similar concept, designed specifically for Bitcoin's UTXO model.
+**Build:** Trace an async Payjoin flow end to end using the library's examples.
+**Contribute:** Pick an async-Payjoin-related pool issue (often docs/tests/examples).
 
 ---
 
-**The problem:** Address reuse exposes full payment history. Existing solutions (HD wallets, BIP47) require interaction. Silent Payments solve this using ECDH.
+#### C3 · CoinJoin and JoinMarket concepts
+**Who it's for:** The conceptually curious. Light contribution.
+**What you'll learn (plain):** How many people combining one big transaction breaks the link between who put money in and who took it out.
 
-**Learn:**
-- The address reuse problem in depth
-- ECDH shared secret derivation on secp256k1
-- BIP352: scan keys vs spend keys, shared secret → unique output address, labeling
-- Why scanning is expensive and how compact block filters help
-- Current implementation status: Bitcoin Core, [rust-silentpayments](https://github.com/cygnet3/rust-silentpayments)
+**Tutor preparation** *(prep: ~75 min)*
+- **The concept in plain words:** A CoinJoin is one transaction with many participants, all with equal-sized outputs, so you can't tell whose input maps to whose output. JoinMarket adds a marketplace so makers and takers can find each other.
+- **Analogy to use:** Twenty people each drop an identical envelope of cash into a box, shake it, and each takes one identical envelope out. You can't match who put in which to who took which.
+- **Common questions:**
+  - *"Why equal amounts?"* — Unequal amounts would let you match by size. Equality is what makes the mix work.
+- **How to run it:** Conceptual walk-through plus reading project docs. Focus on the *why*.
+- **When you get stuck:** Stay at the conceptual level; this session is about understanding, with documentation-level contributions.
 
-**Build:**
-- Derive Silent Payment shared secrets by hand using pure Python secp256k1 math
-- Compute the full flow: SP address → ECDH shared secret → tweak → output key
-- Verify against official [BIP352 test vectors](https://github.com/bitcoin/bips/tree/master/bip-0352)
-
-**Contribute:**
-- Read [BIP352](https://github.com/bitcoin/bips/blob/master/bip-0352.mediawiki) end to end. File an issue for anything ambiguous
-- Clone [rust-silentpayments](https://github.com/cygnet3/rust-silentpayments). Build it. Run the tests. Read `sending.rs`
-- Browse [open issues](https://github.com/cygnet3/rust-silentpayments/issues). Comment on one with your understanding
+**Build:** Diagram a CoinJoin and explain why the linkage breaks.
+**Contribute:** Documentation improvements to a relevant collaborative-transaction project. Pick from the pool.
 
 ---
 
-#### Session 06: Implement a Silent Payments Sender
+#### C4 · CoinSwap concepts
+**Who it's for:** Those who enjoyed C3.
+**What you'll learn (plain):** How swapping coins with someone else — so the coin you end up with has a totally different history — defeats following the money.
 
-##### Tutor Preparation
+**Tutor preparation** *(prep: ~75 min)*
+- **The concept in plain words:** Instead of mixing in one visible transaction, two people swap coins in a way that, on-chain, looks like two ordinary unrelated payments. The history trail is cut.
+- **Analogy to use:** You and a stranger discreetly trade identical-value gift cards. Anyone tracking your original card now follows a card that was never yours.
+- **Common questions:**
+  - *"How is this different from CoinJoin?"* — CoinJoin is one obvious group transaction; CoinSwap aims to look like normal, separate payments. Harder to even detect.
+- **How to run it:** Conceptual. Read the CoinSwap design notes together.
+- **When you get stuck:** Keep it conceptual; contributions here are docs/tests.
 
-**Study time:** 2 hours. Do the Build exercise yourself.
-
-**What this session is about:** Participants implement the full sending pipeline in code. They did the math by hand in Session 5; now they build the complete flow. This is mostly hands-on coding. Walk the room, help debug. Common issues: byte ordering, key serialization, getting the ECDH input wrong.
-
-**If someone is stuck:** Pair them up. Pair programming is how real open-source development works.
-
----
-
-**Learn:**
-- Complete SP send flow: input selection, key aggregation, shared secret computation, output key derivation
-- Edge cases: single vs multiple inputs, Taproot vs SegWit, multiple recipients
-- Full BIP352 test vector validation
-
-**Build:**
-- Implement the full SP sending pipeline in Python
-- Handle all edge cases: single Taproot input, mixed types, multiple SP recipients
-- Pass every [BIP352 test vector](https://github.com/bitcoin/bips/tree/master/bip-0352)
-
-**Contribute:**
-- Check the test vectors. Any edge cases missing? File an issue
-- Add a test case to [rust-silentpayments](https://github.com/cygnet3/rust-silentpayments)
-- Publish your Python implementation as a reference tool on GitHub
+**Build:** Diagram a CoinSwap vs. a CoinJoin and contrast their on-chain footprints.
+**Contribute:** Docs/test contribution to a relevant project from the pool.
 
 ---
 
-#### Session 07: Scanning, Receiving & Compact Block Filters (BIP157/158)
+### Receiving privately — Silent Payments
 
-##### Tutor Preparation
+#### S1 · Silent Payments fundamentals (BIP352)
+**Who it's for:** Anyone who's ever posted a static donation address.
+**What you'll learn (plain):** How you can publish *one* unchanging address and still receive every payment to a *different*, unlinkable on-chain address.
 
-**Study time:** 2-3 hours.
+**Tutor preparation** *(prep: ~2 hrs — the math is the meat)*
+- **The concept in plain words:** Normally a static address links every payment to it. Silent Payments use a shared-secret trick: the sender combines your public address with their own key to compute a fresh, unique address only you can detect and spend. You publish one thing; the chain shows many unrelated things.
+- **Analogy to use (the key one):** Mixing paint. You each have a secret color. When the sender mixes their secret with your public color, they get a specific shade. You can recreate that exact shade because you know your own secret — but no onlooker can, because they're missing one of the colors. Each payment produces a different shade.
+- **Common questions:**
+  - *"Doesn't the sender need to talk to me?"* — No interaction needed. They derive it from your published address alone. That's the magic.
+  - *"What's ECDH?"* — The "shared secret from two key pairs" math behind the paint-mixing. You don't need the equations to teach the idea — use the analogy.
+  - *"What's the catch?"* — The receiver has to *scan* the chain to find payments meant for them. That's a real cost, and it's why light-client work (Kyoto) matters here.
+- **How to run it:** Teach the paint analogy first, *then* show the BIP352 flow. Don't open with math or you'll lose the room.
+- **When you get stuck:** BIP352 is the spec; the Rust Silent Payments crates have readable examples.
 
-**What this session is about in plain language:** Sessions 5-6 were about *sending* Silent Payments. This is about *receiving* them — the hard part. The receiver must check every transaction in every block to find payments addressed to them. Compact block filters solve this: download a small filter per block, check locally whether the block *might* contain your transaction. If no, skip it. If yes, download and check.
-
-*Analogy: looking for a book in a library. Instead of reading every book, check the catalog. The catalog says "possibly on this shelf" or "definitely not." Only check shelves the catalog flags.*
-
-**[Kyoto](https://github.com/rustaceanrob/kyoto)** implements this in Rust — critical infrastructure for mobile Silent Payments wallets. **[Floresta](https://github.com/vinteumorg/Floresta)** takes a different approach using utreexo. Both need contributors.
-
----
-
-**The problem:** Receiving Silent Payments requires scanning every block. Compact block filters let light clients check locally without revealing addresses to servers.
-
-**Learn:**
-- SP scanning algorithm: extract input keys → compute ECDH → check outputs
-- Compact block filters: Golomb-Rice Coded Sets, false positive rates, BIP157 protocol
-- How CBFs optimize SP scanning
-- [Kyoto](https://github.com/rustaceanrob/kyoto) and [Floresta](https://github.com/vinteumorg/Floresta) architectures
-
-**Build:**
-- Build a minimal SP scanner in Python
-- Implement Golomb-Rice encoding/decoding from scratch
-- Build a compact block filter. Measure false positive rate
-- Combine CBF + scanner. Measure the speedup
-
-**Contribute:**
-- Review a PR on [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin) related to Silent Payments or block filters
-- Clone [Kyoto](https://github.com/rustaceanrob/kyoto). Build it. Run it. File well-described bugs
-- File issues for any performance problems or bugs in your scanner
+**Build:** Use a Silent Payments library to derive a payment address from a static one.
+**Contribute:** Docs, examples, or tests in a Silent Payments crate. Pick from the pool.
 
 ---
 
-#### Session 08: Contributing to Silent Payments — Your First PR
+#### S2 · Scanning and the light-client connection
+**Who it's for:** People who did S1.
+**What you'll learn (plain):** Why finding your own Silent Payments is hard, and how compact block filters make it possible without a server spying on you.
 
-##### Tutor Preparation
+**Tutor preparation** *(prep: ~90 min)*
+- **The concept in plain words:** Because each Silent Payment lands at a fresh address, your wallet must scan blocks to recognize which are yours. Doing that privately (without telling a server your addresses) is where BIP157/158 filters come in — they let you check blocks yourself.
+- **Analogy to use:** Instead of asking the post office "any mail for me?" (and revealing your name), you get a tiny summary of every mailbag and check it yourself at home.
+- **Common questions:**
+  - *"Why not just ask a server?"* — Because then the server knows every address you own. The whole point is to not leak that.
+- **How to run it:** Connect the dots between S1's scanning cost and the light-client sessions (N1). This is the bridge session.
+- **When you get stuck:** BIP158 spec + Kyoto docs.
 
-**Study time:** 1-2 hours prep. This session is mostly facilitation.
-
-**Before the session:** Browse open issues on rust-silentpayments, Kyoto, and bitcoin/bitcoin (SP-related). Make a list of 10-15 approachable issues. Categorize by difficulty and language.
-
-**During the session:** Match each participant to an issue based on their skill level. Let them work. Walk the room. Help with git, build issues, PR formatting.
-
-**The phrase to repeat:** "Your PR doesn't have to be perfect. It has to exist."
-
----
-
-**Build:**
-- Clone your target repo. Build locally. Run tests. Pick an issue. Write your fix. Submit your PR.
-
-**Contribute — submit a PR:**
-- **Option A (Rust):** Test case, documentation, or feature in [rust-silentpayments](https://github.com/cygnet3/rust-silentpayments) or [Kyoto](https://github.com/rustaceanrob/kyoto)
-- **Option B (C++):** Review and test a Silent Payments PR on [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin)
-- **Option C (Any language):** Improve documentation for BIP352, wallet integration guides, Bitcoin Optech
-- **Option D (Ambitious):** Start integrating Silent Payments into a wallet that doesn't have it
-
-**Nobody leaves without a PR submitted or a substantive review posted.**
-
-> **Phase 2 checkpoint:** You've submitted at least 1 PR or review to a Silent Payments or block filter project. You understand BIP352 cryptography and the scanning problem.
+**Build:** Demonstrate filtering a block for relevant outputs.
+**Contribute:** A pool issue tying Silent Payments and filters together (often in Kyoto or a SP crate).
 
 ---
 
-### Phase 3: Payjoin (BIP77/78) — Breaking Chain Analysis's Best Weapon
-*Sessions 9-12*
+### Network and node privacy
 
-The common-input-ownership heuristic is the single most powerful tool in chain analysis. [Payjoin](https://github.com/payjoin/rust-payjoin) breaks it by having both sender and receiver contribute inputs — making the transaction look ordinary but invalidating the assumption that all inputs belong to one person. Unlike CoinJoin, Payjoin transactions are *invisible*. They improve privacy for everyone.
+#### N1 · Light clients and compact block filters (BIP157/158)
+**Who it's for:** Anyone who uses a phone wallet. Moderate.
+**What you'll learn (plain):** Why most "light" wallets leak your addresses to a server, and how compact block filters fix it.
 
----
+**Tutor preparation** *(prep: ~90 min)*
+- **The concept in plain words:** Old light wallets (BIP37) basically told a server which addresses to watch — handing over your identity. BIP157/158 flips it: the server sends tiny *summaries* of each block, and your wallet checks them privately at home.
+- **Analogy to use:** BIP37 is telling the librarian exactly which books you want so they fetch them (now they know your interests). BIP158 is getting the catalog and finding your books yourself.
+- **Common questions:**
+  - *"Is this slower?"* — There's more data to download, but you stop leaking your addresses. Privacy has a cost; this one's worth it.
+- **How to run it:** Read Kyoto's README and find where filters are checked. Trace one block's path.
+- **When you get stuck:** Kyoto docs + BIP158.
 
-#### Session 09: How Payjoin Defeats Chain Analysis
-
-##### Tutor Preparation
-
-**Study time:** 2-3 hours.
-
-**What this session is about in plain language:** Remember CIOH? "If two addresses are inputs in the same transaction, they belong to the same person." Payjoin destroys it. In a normal payment, only the sender puts inputs in. In a Payjoin, BOTH sender and receiver contribute. The transaction looks normal — but the CIOH assumption is wrong.
-
-*Analogy: at a restaurant, one person puts money on the table. In a Payjoin, both put money on the table and both get change. An observer can't tell whose is whose.*
-
-**Why this is so powerful:** Every Payjoin makes CIOH unreliable not just for that transaction, but for ALL transactions. If some violate CIOH, analysts can never be sure any follows it. This raises the baseline privacy of every Bitcoin user.
-
-**BIP77 vs BIP78:**
-- BIP78 (V1): Receiver must be online. Sender → receiver → sender → broadcast.
-- BIP77 (V2, "Async Payjoin"): Serverless. Uses a relay directory. Neither party needs to be online at the same time.
-
-**The 5 sender checks** (prevents the receiver from stealing):
-1. No new outputs added
-2. Original outputs not reduced
-3. No inputs removed
-4. Fees don't spike unreasonably
-5. Transaction still valid to sign
+**Build:** Run Kyoto against the network and watch it sync via filters.
+**Contribute:** Docs/tests/examples in Kyoto. Pick from the pool.
 
 ---
 
-**Learn:**
-- CIOH in depth: why it's chain analysis's best weapon and what breaks when it fails
-- Payjoin V1 (BIP78) and V2 (BIP77, Async Payjoin)
-- The 5 sender verification checks
-- Why Payjoin is more powerful than CoinJoin for systemic privacy
-- Current adoption: [BTCPay Server](https://github.com/btcpayserver/btcpayserver), [Bull Bitcoin](https://www.bullbitcoin.com/)
+#### N2 · Run your own node privately (Floresta and Utreexo)
+**Who it's for:** Anyone who wants to stop trusting someone else's node. 🟢 Welcoming.
+**What you'll learn (plain):** Why running your own node is the single biggest privacy upgrade, and how Utreexo makes it light enough to be realistic.
 
-**Build:**
-- Analyze 10 testnet transactions — which are Payjoins? (Should be hard to tell)
-- Walk through the full BIP77 async flow
-- Implement all 5 sender verification checks in pseudocode
+**Tutor preparation** *(prep: ~90 min)*
+- **The concept in plain words:** If you use someone else's node, they can see which addresses are yours and which transactions you broadcast. Your own node fixes that — but a normal full node is heavy. Utreexo shrinks the data you must store using a clever cryptographic accumulator, so a node can run on modest hardware.
+- **Analogy to use:** Instead of keeping every receipt you've ever had (full node), you keep one cryptographic "fingerprint" that can still prove any receipt is real (Utreexo).
+- **Common questions:**
+  - *"Do I lose security?"* — You still verify everything yourself; you just store a compressed proof structure instead of the whole set.
+- **How to run it:** Build and run Floresta together. It's an active, friendly Rust project — great for first real contributions.
+- **When you get stuck:** Floresta's docs and issue tracker are beginner-friendly.
 
-**Contribute:**
-- Clone [rust-payjoin](https://github.com/payjoin/rust-payjoin). Build it. Run tests. Read `src/send.rs` and `src/receive.rs`
-- Browse [open issues](https://github.com/payjoin/rust-payjoin/issues). Target `good first issue` labels
-- Read [BIP77](https://github.com/bitcoin/bips/blob/master/bip-0077.mediawiki). File issues for inconsistencies
+**Build:** Build and run a Floresta node.
+**Contribute:** Floresta has a healthy good-first-issue flow — pick one from the pool (docs, tests, small fixes).
 
 ---
 
-#### Session 10: Building with Payjoin Dev Kit
+#### N3 · P2P privacy, eclipse attacks, and node fingerprinting
+**Who it's for:** The networking-curious. Moderate.
+**What you'll learn (plain):** How merely *connecting* to the Bitcoin network can leak your IP or let an attacker surround your node.
 
-##### Tutor Preparation
+**Tutor preparation** *(prep: ~90 min)*
+- **The concept in plain words:** When your node broadcasts a transaction, the way it spreads can hint at which IP it started from. And if an attacker controls all the peers you connect to (an "eclipse"), they can feed you a fake view of the network or watch everything you do.
+- **Analogy to use:** An eclipse attack is like someone quietly replacing everyone you talk to with their own actors — you think you're seeing the world, but you're only seeing what they show you.
+- **Common questions:**
+  - *"How do I broadcast without leaking my IP?"* — Techniques like routing over Tor and careful peer selection. This session explains the threat; defenses are ongoing work.
+- **How to run it:** Conceptual plus reading P2P/networking docs in Floresta or rust-bitcoin's networking pieces.
+- **When you get stuck:** Stay conceptual; contributions are docs/tests.
 
-**Study time:** 2-3 hours. Build the Rust exercise yourself.
-
-**Your role:** Circulate. Help people understand the *flow*. The Rust specifics are secondary — participants can read docs. What they need from you is understanding of what the code does and why. If someone can't do Rust, they can follow along in Python or pair up.
-
----
-
-**Learn:**
-- [PDK (Payjoin Dev Kit)](https://github.com/payjoin/rust-payjoin) architecture
-- PSBT construction and modification
-- Integrating PDK into a wallet application
-
-**Build:**
-- Complete Payjoin flow in Rust using PDK
-- Analyze the on-chain result — can you tell it was a Payjoin?
-
-**Contribute:**
-- File issues on [rust-payjoin](https://github.com/payjoin/rust-payjoin): unclear docs, bad error messages, missing examples
-- Fix documentation yourself — docs PRs are the fastest path to merged code
-- Submit integration examples to the examples/ directory
+**Build:** Map your node's peer connections and discuss exposure.
+**Contribute:** Documentation/test contribution on P2P behavior from the pool.
 
 ---
 
-#### Session 11: Payjoin Adoption — Integration Is Everything
+#### N4 · ASmap — defending against network-level deanonymization
+**Who it's for:** Those who did N3. Moderate.
+**What you'll learn (plain):** How an attacker who controls chunks of internet infrastructure could deanonymize nodes, and how ASmap spreads your connections across independent networks to stop it.
 
-##### Tutor Preparation
+**Tutor preparation** *(prep: ~90 min)*
+- **The concept in plain words:** The internet is divided into big networks ("autonomous systems"). If all your node's connections happen to run through one network an attacker controls, they can watch or isolate you. ASmap makes your node deliberately spread its connections across *different* networks so no single operator sees them all.
+- **Analogy to use:** Don't send every messenger out the same gate — if one guard is bribed, they see everything. Send them through different gates.
+- **Common questions:**
+  - *"Is this a real threat for normal users?"* — It's more relevant to dedicated attackers, but it raises everyone's baseline. Worth understanding.
+- **How to run it:** Read how ASmap data is used in node connection logic. Conceptual + code-reading.
+- **When you get stuck:** ASmap documentation and the relevant networking code.
 
-**Study time:** 2 hours. Set up BTCPay Server on testnet before class.
-
-**Key insight:** One well-researched GitHub issue titled "Payjoin (BIP77) Support — Feasibility Assessment" on a popular wallet's repo can be the seed that leads to adoption. Wallet developers are busy. Hand them a clear analysis and they're much more likely to act.
-
----
-
-**Learn:**
-- BTCPay Server's Payjoin implementation
-- UX: making Payjoin invisible to users
-- The adoption curve: which wallets support Payjoin, which should be next
-
-**Build:**
-- Set up BTCPay Server with Payjoin. Make payments. Trace the code path
-- Compare on-chain: Payjoin vs regular payment (there should be no observable difference)
-
-**Contribute:**
-- Pick a wallet that doesn't support Payjoin. Write a feasibility assessment as a GitHub issue
-- Test BTCPay Server's Payjoin with different sender wallets. File bugs
-- Review open Payjoin PRs
+**Build:** Explain how ASmap would change your node's peer selection.
+**Contribute:** Docs/test contribution related to ASmap or peer selection from the pool.
 
 ---
 
-#### Session 12: Contributing to Payjoin — Ship Your Code
+## The contribution ladder
 
-##### Tutor Preparation
+You're never stuck at one level, and you can enter at any rung:
 
-Same format as Session 08. Working session. Curate 10-15 issues. Match participants. Walk the room.
+1. **Engage** — build a repo, read its code, join its chat, understand an issue.
+2. **Fix** — docs, comments, error messages, small clarity improvements. (Most first PRs.)
+3. **Test** — add or improve test coverage. Maintainers love this and it teaches you the code.
+4. **Build** — implement a small feature or fix a real bug from the pool.
+5. **Ship** — take on a substantial issue and see it through review to merge.
+6. **Lead** — curate issues for others, mentor newcomers, or become a regular contributor to a repo. (Several tutors started here.)
 
----
-
-**Contribute — submit a PR:**
-- Target: [rust-payjoin](https://github.com/payjoin/rust-payjoin), [BTCPay Server](https://github.com/btcpayserver/btcpayserver), or any wallet
-- **Peer review:** every participant reviews one other participant's PR
-
-> **Phase 3 checkpoint:** PRs in both Silent Payments and Payjoin ecosystems. You can explain how CIOH works and how Payjoin defeats it.
-
----
-
-### Phase 4: Network & Protocol Privacy — Your Node Leaks Too
-*Sessions 13-16*
-
-Privacy isn't just about transactions on the blockchain. Your node's network connections, peer selection, and light client queries all leak information.
+There's no pressure to climb. A program full of solid rung-2 and rung-3 contributions is a successful program.
 
 ---
 
-#### Session 13: P2P Network Privacy — Transaction Relay, ASmap & Eclipse Attacks
+## What success looks like
 
-##### Tutor Preparation
+We measure four things, in order of importance:
 
-**Study time:** 2-3 hours.
-
-**What this session is about:** Everything so far has been about what's visible ON the blockchain. This session is about what's visible on the NETWORK — the internet connections your Bitcoin node makes.
-
-**Three concepts to explain:**
-
-1. **First-spy attacks:** Your node sends a transaction to its peers. The first peer to receive it knows you're probably the source. *Analogy: whispering a secret to 8 people simultaneously — any listener knows you're the source.* **Dandelion++** fixes this by first sending along a random single path (stem) before broadcasting widely (fluff).
-
-2. **Eclipse attacks:** If an attacker controls all your node's connections, they control what you see. **Mitigated by** clever bucketing in Bitcoin Core's address manager and "anchor connections."
-
-3. **ASmap:** An AS (autonomous system) is a chunk of internet controlled by one organization. If all your peers are in the same AS, that org sees all your traffic. [ASmap](https://github.com/sipa/asmap) maps IPs to ASes so Bitcoin Core diversifies peer connections across network boundaries. **Actively needs contributors.**
+1. **Merged PRs** — the headline. Target: 50–100 merged per year across an active group of 10–20 contributors.
+2. **Merge rate** — our quality proxy. If the share of PRs that get merged drops, our quality floor is too low and we tighten the checklist. A healthy merge rate is the real sign we're respecting maintainers.
+3. **Repeat contributors** — are people coming back? Drop-in is the model, but people returning is the signal that it works.
+4. **Maintainer sentiment** — the leading indicator almost nobody tracks. Are maintainers glad to see Code Orange contributors? This is the asset that compounds. Guard it.
 
 ---
 
-**Learn:**
-- Transaction relay and IP linking
-- Dandelion++ stem-and-fluff
-- [ASmap](https://github.com/sipa/asmap): peer diversity across autonomous systems
-- Tor and I2P integration in Bitcoin Core
-- Eclipse attack mitigations
+## In short
 
-**Build:**
-- Configure Bitcoin Core: clearnet-only, Tor-only, and hybrid. Compare peer connections
-- Map your node's peers to autonomous systems. Calculate eclipse attack surface
+Show up to any session. Learn one privacy topic properly. Pick a vetted issue, run the checklist, open a real pull request. Leave having made Bitcoin a little more private for everyone — whether it's your first PR or your fiftieth.
 
-**Contribute:**
-- Improve Bitcoin Core's `doc/tor.md` or `doc/i2p.md`
-- [ASmap](https://github.com/sipa/asmap) needs contributors — better data sources, testing, documentation
-- Comment on P2P-related Bitcoin Core issues with test results
-
----
-
-#### Session 14: Compact Block Filters — Privacy-Preserving Light Clients
-
-##### Tutor Preparation
-
-**Study time:** 2 hours.
-
-**BIP37 vs BIP157 — the key difference:**
-- BIP37 (old): Client tells the server what it's looking for. Server learns your addresses. [Privacy disaster.](https://eprint.iacr.org/2014/763.pdf)
-- BIP157 (new): Server creates a filter for each block. Client downloads and checks locally. Server never learns what you're looking for.
-
-*Analogy: BIP37 = telling a librarian your interests. BIP157 = the librarian posts a catalog and you check it yourself.*
-
----
-
-**Learn:**
-- Why BIP37 was broken
-- Golomb-Rice Coded Sets: the compression behind compact block filters
-- BIP157 client-server protocol
-- [Kyoto](https://github.com/rustaceanrob/kyoto) and [Floresta](https://github.com/vinteumorg/Floresta) implementations
-
-**Build:**
-- Implement Golomb-Rice encoding/decoding from scratch
-- Build a GCS filter. Query it. Calculate false positive rate
-
-**Contribute:**
-- [Kyoto](https://github.com/rustaceanrob/kyoto): clone, build, run, file bugs
-- [Floresta](https://github.com/vinteumorg/Floresta): browse issues, comment with analysis
-- Test both on signet. Submit missing setup docs
-
----
-
-#### Session 15: Light Client Privacy — The Full Spectrum
-
-##### Tutor Preparation
-
-**Study time:** 2 hours.
-
-**Draw this on a whiteboard — the privacy spectrum:**
-1. SPV (worst) → 2. Electrum (bad) → 3. BIP157/Kyoto (good) → 4. Floresta/utreexo (good) → 5. Full node (best)
-
-**Key question to pose:** "If you're building a mobile wallet, which approach gives the best privacy for a phone's constraints?"
-
----
-
-**Learn:**
-- The full light client privacy spectrum
-- Floresta: utreexo-based validation
-- Kyoto: BIP157/158 implementation
-- How Silent Payments scanning differs in each model
-
-**Build:**
-- Set up Floresta on signet. Monitor information flow
-- Build a privacy comparison matrix for all 5 approaches
-
-**Contribute:**
-- [Floresta "good first issue"](https://github.com/vinteumorg/Floresta/issues) labels
-- Submit your comparison matrix as a docs PR
-- File issues with reproduction steps for any bugs
-
----
-
-#### Session 16: Taproot Privacy — Making Complex Transactions Invisible
-
-##### Tutor Preparation
-
-**Study time:** 2 hours.
-
-**What this session is about:** Before Taproot, multisig looked different from single-sig on-chain. Taproot fixes this — a 2-of-3 multisig can look identical to a regular payment. But Taproot only provides privacy if enough people use it. If only 5% of transactions are Taproot, those users stand out. Privacy needs a crowd.
-
-**Key concepts:** Key path spending (happy path, invisible), script path spending (backup, reveals the script), MuSig2 (multi-party signatures that look like single-sig), FROST (threshold signatures), CISA (future proposal making CoinJoin cheaper).
-
----
-
-**Learn:**
-- Taproot: multisig indistinguishable from single-sig
-- MAST: complex conditions, only reveal the branch used
-- MuSig2 and FROST
-- CISA: making CoinJoin cheaper
-- Why Taproot adoption matters
-
-**Build:**
-- Create three Taproot transactions on signet: single-sig, 2-of-2 MuSig, script path
-- Compare on-chain footprints
-- Analyze Taproot adoption metrics
-
-**Contribute:**
-- File issues on wallets that don't default to Taproot
-- Review Taproot PRs on Bitcoin Core, rust-bitcoin, or BDK
-
-> **Phase 4 checkpoint:** Contributed to 3-4 repos. Understand P2P privacy, ASmap, block filters, light clients, and Taproot.
-
----
-
-### Phase 5: Advanced Privacy — CoinJoin, CoinSwap, eCash & Lightning
-*Sessions 17-20*
-
-Advanced techniques that complement base-layer privacy. CoinJoin, Coinswap, eCash, and Lightning each solve different parts of the privacy puzzle.
-
----
-
-#### Session 17: CoinJoin & JoinMarket NG — Equal-Output Mixing
-
-##### Tutor Preparation
-
-**Study time:** 2-3 hours.
-
-**CoinJoin explained:** Multiple users combine transactions into one where everyone's outputs are equal amounts. An observer can't tell which input maps to which output.
-
-*Analogy: 5 people put $100 bills into a hat. Hat shakes. 5 people take out $100 bills. Can't tell whose is whose.*
-
-**The problem — toxic change:** If Alice puts in 0.15 BTC, takes out 0.1 (equal output) + 0.05 (change), that change might link back to her.
-
-**JoinMarket NG:** Orderbook-based CoinJoin without a central coordinator. Makers offer liquidity and earn fees. Takers pay to mix. No coordinator needed.
-
----
-
-**Learn:**
-- CoinJoin mechanics and toxic change
-- WabiSabi protocol
-- [JoinMarket NG](https://github.com/nickhntv/joinmarket-ng)
-- CoinJoin weaknesses: Sybil attacks, timing, amount analysis
-
-**Build:**
-- Analyze 20 mainnet transactions. Identify CoinJoins. Calculate anonymity sets
-- Simulate a 5-user CoinJoin. Analyze what an analyst can determine
-- Compare CoinJoin vs Payjoin
-
-**Contribute:**
-- Publish your CoinJoin analyzer as a CC0 repo
-- Clone [Teleport Transactions](https://github.com/nickhntv/teleport-transactions) (next session). File issues
-- Write a comparison of CoinJoin implementations
-
----
-
-#### Session 18: CoinSwap & Teleport — Breaking the Transaction Graph
-
-##### Tutor Preparation
-
-**Study time:** 2 hours.
-
-**CoinSwap vs CoinJoin:** CoinJoin mixes within one visible transaction. CoinSwap makes two SEPARATE normal-looking transactions that swap coins. No visible connection.
-
-*Analogy: Alice has a red ball, Bob has a blue ball. They use separate dropboxes. Alice picks up the blue ball, Bob picks up the red one. An observer sees two ordinary handoffs.*
-
-Trustless via Hash Time-Locked Contracts. [Teleport Transactions](https://github.com/nickhntv/teleport-transactions) is the active implementation — early-stage and needs contributors badly.
-
----
-
-**Learn:**
-- How CoinSwap breaks the transaction graph
-- HTLCs: trustless atomic swaps
-- Multi-hop CoinSwap for plausible deniability
-- [Teleport Transactions](https://github.com/nickhntv/teleport-transactions)
-
-**Build:**
-- Diagram a 2-party and 3-hop CoinSwap. Analyze what observers see
-- Calculate costs vs CoinJoin
-
-**Contribute:**
-- [Teleport Transactions](https://github.com/nickhntv/teleport-transactions) is early-stage — **high impact** contribution territory
-- File issues, improve docs, start on a bug fix
-
----
-
-#### Session 19: eCash Privacy — Fedimint & Cashu
-
-##### Tutor Preparation
-
-**Study time:** 2 hours.
-
-**What eCash does differently:** Everything else improves privacy on the blockchain. eCash moves transactions off-chain into a system where the operator literally cannot see who's transacting — via blind signatures.
-
-*Analogy: put money in an envelope with carbon paper. The bank stamps the outside without opening it. The stamp transfers through. Bank recognizes its stamp later but never saw what was inside.*
-
-**Trust tradeoff:** You trust the mint not to steal or inflate. Cashu = single operator, Fedimint = federated (multiple operators, threshold signatures).
-
----
-
-**Learn:**
-- Chaumian blind signatures
-- [Cashu](https://github.com/cashubtc/nutshell): mint-receive-send-melt lifecycle
-- [Fedimint](https://github.com/fedimint/fedimint): federated custody, Lightning gateway
-- How eCash complements on-chain privacy
-
-**Build:**
-- Set up a Cashu mint on signet. Mint, send, redeem tokens
-- Analyze what the mint learns at each stage
-
-**Contribute:**
-- [cashubtc/nutshell](https://github.com/cashubtc/nutshell) is Python — accessible to everyone
-- [fedimint/fedimint](https://github.com/fedimint/fedimint) has "good first issue" labels
-- Write a setup guide and submit as a docs PR
-
----
-
-#### Session 20: Lightning Privacy — BOLT12 & Blinded Paths
-
-##### Tutor Preparation
-
-**Study time:** 2 hours.
-
-**Lightning's privacy model:** Onion-routed payments (good). But channel balances can be probed, the graph is public, and BOLT11 invoices reveal the receiver's node. BOLT12 offers fix receiver privacy with blinded paths — the last hops are encrypted.
-
----
-
-**Learn:**
-- Lightning privacy: onion routing, balance probing, graph analysis
-- BOLT12 blinded paths: receiver privacy
-- Private vs public channels
-- Trampoline routing
-
-**Build:**
-- Set up LN nodes on signet. Probe channel balances
-- Compare BOLT11 vs BOLT12: what information is revealed?
-
-**Contribute:**
-- [LDK (rust-lightning)](https://github.com/lightningdevkit/rust-lightning) has "good first issue" labels
-- Publish your privacy analysis
-- File issues for any problems found during testing
-
-> **Phase 5 checkpoint:** Contributing across 5+ repos. Understand CoinJoin, CoinSwap, eCash, and Lightning privacy.
-
----
-
-### Phase 6: Building & Shipping
-*Sessions 21-24*
-
-Everything learned, applied. Ship real code.
-
----
-
-#### Session 21: Privacy-Preserving Wallet Development with BDK
-
-##### Tutor Preparation
-
-**Study time:** 2-3 hours.
-
-**What this session is about:** [BDK](https://github.com/bitcoindevkit/bdk) is the foundation for many wallets. Privacy improvements here cascade to every wallet built on it. Participants build a wallet that's private by default.
-
-**Your role:** Help with design decisions. "What coin selection strategy should the wallet default to? What happens when a user reuses an address?"
-
----
-
-**Learn:**
-- BDK architecture: descriptor wallets, coin selection, PSBT building
-- Privacy-by-default wallet design
-- Adding Silent Payments or Payjoin support to a BDK wallet
-
-**Build:**
-- Scaffold a BDK wallet: privacy-optimized coin selection, address reuse detection, anti-fee-sniping
-- Add Payjoin send support using PDK
-
-**Contribute:**
-- Submit a PR to [BDK](https://github.com/bitcoindevkit/bdk): privacy config, docs, coin selection improvements
-
----
-
-#### Session 22: Privacy Testing & Scoring
-
-##### Tutor Preparation
-
-**Study time:** 2 hours. Great publishable work — a well-built privacy scorer is a visible community contribution.
-
----
-
-**Learn:**
-- Systematic transaction privacy evaluation
-- Mempool analysis
-- Automated privacy testing for wallet CI
-
-**Build:**
-- Build a transaction privacy scorer: address reuse, script mixing, round amounts, change detection, fee fingerprints, locktime patterns, output ordering
-- Score 20 mainnet transactions
-
-**Contribute:**
-- Publish your scorer as a CC0 repo
-- Run it against popular wallets. File issues with data
-- Submit methodology to Bitcoin Optech or Bitcoin Wiki
-
----
-
-#### Session 23: Contribution Sprint — The Big Push
-
-##### Tutor Preparation
-
-Prepare 15-20 curated issues across all target repos. Categorize by difficulty and language.
-
-**3-hour working session. Code ships today.**
-
-| Time | Activity |
-|---|---|
-| 00:00 - 00:30 | Pick an issue from the curated list |
-| 00:30 - 02:00 | Code: write, test, prepare the PR |
-| 02:00 - 02:30 | Peer review: each participant reviews one PR |
-| 02:30 - 03:00 | Submit and celebrate |
-
-**Target repos:**
-
-| Repo | Language |
-|---|---|
-| [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin) | C++ |
-| [rust-silentpayments](https://github.com/cygnet3/rust-silentpayments) | Rust |
-| [rust-payjoin](https://github.com/payjoin/rust-payjoin) | Rust |
-| [Floresta](https://github.com/vinteumorg/Floresta) | Rust |
-| [Kyoto](https://github.com/rustaceanrob/kyoto) | Rust |
-| [Teleport](https://github.com/nickhntv/teleport-transactions) | Rust |
-| [Fedimint](https://github.com/fedimint/fedimint) | Rust |
-| [Cashu/nutshell](https://github.com/cashubtc/nutshell) | Python |
-| [BDK](https://github.com/bitcoindevkit/bdk) | Rust |
-| [LDK](https://github.com/lightningdevkit/rust-lightning) | Rust |
-| [rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin) | Rust |
-| [ASmap](https://github.com/sipa/asmap) | Python/C++ |
-
----
-
-#### Session 24: Capstone — Present Your Contributions
-
-##### Tutor Preparation
-
-Confirm presentations. Help anyone who needs it prepare. Invite the broader community.
-
-Each participant presents (10 minutes):
-1. **What you contributed** — Walk through your PRs. Show the code.
-2. **What impact it has** — Who benefits? How does this make Bitcoin more private?
-3. **What you learned** — What was harder than expected?
-4. **What's next** — If you had 6 more months, what would you build?
-
-Open to the full Code Orange community.
-
-**Graduation:** Submitted 3+ PRs to Bitcoin privacy projects and presented at capstone → eligible for the **Code Orange Developer Fellowship** ($500/month, 6 months) to continue contributing full-time.
-
----
-
-## Expected Output
-
-### Per participant:
-
-| Metric | Target |
-|---|---|
-| PRs submitted | 5-8 |
-| PRs merged | 3-5 |
-| Repos contributed to | 3+ |
-| Code reviews posted | 10+ |
-| Issues filed | 5+ |
-
-### Per cohort (15 participants, 12 months):
-
-| Metric | Target |
-|---|---|
-| PRs submitted | 75-120 |
-| PRs merged | 45-75 |
-| New privacy developers | 15 |
-| Repos contributed to | 12+ |
-
----
-
-## Session Format
-
-Every session follows this structure:
-
-| Time | Activity |
-|---|---|
-| 00:00 - 00:15 | **Review:** What did you contribute since last session? What got merged? What's blocking? |
-| 00:15 - 00:45 | **Concept:** Theory and protocol walkthrough |
-| 00:45 - 01:45 | **Build:** Hands-on coding |
-| 01:45 - 02:15 | **Contribute:** Open laptops. Find issues. File PRs. Review code. |
-| 02:15 - 02:30 | **Plan:** Reading + contribution goal for next 2 weeks |
-
----
-
-## Contribution Tracker
-
-| Session | Contribution | Target Repos |
-|---|---|---|
-| 01 | Star repos. Clone bitcoin/bitcoin. Read coinselection.cpp | bitcoin/bitcoin, BDK, rust-silentpayments, rust-payjoin, Floresta, Kyoto, rust-bitcoin |
-| 02 | Test a wallet's fingerprint. Draft an issue | Any wallet repo |
-| 03 | Comment on a BDK coin selection issue | BDK, bitcoin/bitcoin |
-| 04 | **File your first issue or docs PR** | Any wallet repo, Bitcoin Wiki, rust-bitcoin |
-| 05 | Read BIP352. Comment on a rust-silentpayments issue | bitcoin/bips, rust-silentpayments |
-| 06 | Add a test case or file issue on SP test vectors | bitcoin/bips, rust-silentpayments |
-| 07 | Review a PR on bitcoin/bitcoin or Kyoto | bitcoin/bitcoin, Kyoto |
-| 08 | **Submit your first PR** | rust-silentpayments, Kyoto, bitcoin/bitcoin |
-| 09 | Clone rust-payjoin. Comment on an issue | rust-payjoin |
-| 10 | File issues on PDK docs or API | rust-payjoin |
-| 11 | File Payjoin feasibility issue on a wallet | Any wallet repo, BTCPay |
-| 12 | **Submit a PR** to Payjoin ecosystem | rust-payjoin, BTCPay |
-| 13 | Improve Bitcoin Core P2P docs or test ASmap | bitcoin/bitcoin, ASmap |
-| 14 | Test and file issues on Kyoto or Floresta | Kyoto, Floresta |
-| 15 | **Submit a PR** to Floresta or Kyoto | Floresta, Kyoto |
-| 16 | File Taproot adoption issues | Any wallet repo |
-| 17 | Publish CoinJoin analysis tool | teleport-transactions |
-| 18 | **Submit a PR** to Teleport | teleport-transactions |
-| 19 | Submit docs or test PR to Cashu or Fedimint | nutshell, fedimint |
-| 20 | Submit a PR to LDK | rust-lightning |
-| 21 | **Submit a PR** to BDK | BDK |
-| 22 | Publish privacy scoring tool | Any wallet repo |
-| 23 | **Contribution sprint** | Any privacy repo |
-| 24 | Present. Apply for fellowship. | — |
-
----
-
-## Exercises & Code
-
-```
-phase-1-foundations/
-  session-01/  chain_analysis_lab.py
-  session-02/  tx_anatomy_lab.py
-  session-03/  coin_selection_simulator.py
-  session-04/  wallet_fingerprint_lab.py
-
-phase-2-silent-payments/
-  session-05/  sp_ecdh_derivation.py
-  session-06/  silent_payments_sender.py
-  session-07/  sp_scanner_cbf.py
-
-phase-3-payjoin/
-  session-09/  payjoin_analysis.py
-  session-10/  pdk_integration/
-  session-11/  btcpay_payjoin_lab.md
-
-phase-4-network-privacy/
-  session-13/  p2p_privacy_lab.py
-  session-14/  compact_block_filters.py
-  session-16/  taproot_privacy_lab.py
-
-phase-5-advanced/
-  session-17/  coinjoin_analysis.py
-  session-18/  coinswap_walkthrough.md
-  session-19/  cashu_mint_exercise.md
-
-phase-6-contributing/
-  session-21/  bdk_privacy_wallet/
-  session-22/  privacy_scorer.py
-```
-
----
-
-## Resources
-
-- **[Reading List](reading-list.md)** — 70+ resources organized by phase
-- **[Glossary](glossary.md)** — 60+ terms
-- **[Facilitator Guide](facilitator-guide.md)** — Session-by-session notes
-- **[Capstone Projects](capstone-projects.md)** — 4 project tracks with rubrics
-- **[Contributing](CONTRIBUTING.md)** — How to contribute to this curriculum
-
----
-
-## Our Track Record
-
-Code Orange Dev School has already produced **45+ merged PRs** across Bitcoin Core, rust-bitcoin, BDK, rust-payjoin, peer-observer, LDK, hex-conservative, kernel-node, and more. Our graduates — [Chaitika](https://github.com/chaitika) (Silent Payments), [Arowolo](https://github.com/Arowolokehinde) (Payjoin), [Peter](https://github.com/pzafonte) (Bitcoin Core), [Razor](https://github.com/RazorBest) (peer-observer), [Vaan](https://github.com/va-an) (BDK/rust-bitcoin) — are already contributing to the exact projects this curriculum targets.
-
-This works. We've proven it. The Privacy Track takes what we've learned and focuses it on the biggest open problem in Bitcoin: building the privacy tools that every user needs.
-
----
-
-*Code Orange Dev School · Bitcoin House Bali, Indonesia · [codeorange.dev](https://codeorange.dev) · CC0 1.0 Universal*
+Privacy isn't something you wait for. It's something you ship.
