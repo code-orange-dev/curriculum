@@ -325,15 +325,15 @@ Action today:
    - Study their coin control implementation
 
 3. **Bitcoin Script Types**
-   - "Taproot Guide" — https://bitcoinops.org/en/topics/taproot/
+   - "Taproot Guide" - https://bitcoinops.org/en/topics/taproot/
    - Why Taproot is better for privacy
 
 4. **BIP32 Derivation**
-   - "Hierarchical Deterministic Wallets" — BIP32
+   - "Hierarchical Deterministic Wallets" - BIP32
    - Understanding address generation
 
 5. **Coin Selection Algorithms**
-   - "Change Avoidance & Consolidation" — privacy trade-offs
+   - "Change Avoidance & Consolidation" - privacy trade-offs
 
 ---
 
@@ -686,7 +686,7 @@ Action:
 ### Reading List
 
 1. **Privacy Heuristics**
-   - "Chain Analysis 101" — Chainalysis blog
+   - "Chain Analysis 101" - Chainalysis blog
    - Understanding what analysts look for
 
 2. **Consolidation and Change Detection**
@@ -694,15 +694,15 @@ Action:
    - Real examples of privacy leaks
 
 3. **CoinJoin Pattern Recognition**
-   - "Identifying CoinJoin Transactions" — academic papers
+   - "Identifying CoinJoin Transactions" - academic papers
    - How to detect mixing patterns
 
 4. **Bitcoin Script Analysis**
-   - "Address Types and Privacy" — bitcoinops.org
+   - "Address Types and Privacy" - bitcoinops.org
 
 ---
 
-## Session 23: Contribution Sprint — Ship Code Together
+## Session 23: Contribution Sprint - Ship Code Together
 
 ### Real-World Scenario
 
@@ -860,7 +860,7 @@ Real developers learn by shipping. Ship your first PR today.
 
 ---
 
-## Session 24: Capstone — Present Your Work, Apply for Fellowship
+## Session 24: Capstone - Present Your Work, Apply for Fellowship
 
 ### Real-World Scenario
 
@@ -1025,7 +1025,7 @@ As you graduate from this track:
 ### Reading List
 
 1. **Bitcoin Privacy Philosophy**
-   - "Bitcoin Privacy: Problems and Opportunities" — various authors
+   - "Bitcoin Privacy: Problems and Opportunities" - various authors
    - Why privacy matters
 
 2. **OpenSats Fellowship Guidelines**

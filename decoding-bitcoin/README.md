@@ -1,4 +1,4 @@
-# Decoding Bitcoin — 8-Week Developer Study Cohort
+# Decoding Bitcoin - 8-Week Developer Study Cohort
 
 > **An intensive, hands-on cohort taking developers from Bitcoin fundamentals to active open-source contribution.**
 
@@ -8,9 +8,9 @@
 
 ## Overview
 
-Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 weeks, participants self-study Bitcoin protocol fundamentals — transactions, Script, Taproot, PSBTs — and learn how to contribute to Bitcoin open-source software through structured peer-learning sessions with experienced mentors.
+Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 weeks, participants self-study Bitcoin protocol fundamentals - transactions, Script, Taproot, PSBTs - and learn how to contribute to Bitcoin open-source software through structured peer-learning sessions with experienced mentors.
 
-**Our 2nd cohort produced 12 graduates who are now actively contributing to Bitcoin open-source projects** — with merged and approved PRs across Bitcoin Core, rust-bitcoin, BDK, rust-payjoin, peer-observer, LDK, and BlueWallet.
+**Our 2nd cohort produced 12 graduates who are now actively contributing to Bitcoin open-source projects** - with merged and approved PRs across Bitcoin Core, rust-bitcoin, BDK, rust-payjoin, peer-observer, LDK, and BlueWallet.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 |-----------|---------|
 | **Duration** | 8 weeks |
 | **Time commitment** | 8-12 hours per week (self-study + sessions) |
-| **Weekly sessions** | 2x per week — group discussion + TA office hours |
+| **Weekly sessions** | 2x per week - group discussion + TA office hours |
 | **Group size** | 10-20 participants, split into study groups of 4-5 |
 | **Assessments** | 2 technical questions per week + final contribution project |
 | **Mentors** | Experienced Bitcoin developers and Code Orange alumni |
@@ -34,10 +34,10 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 
 1. **Monday**: Week's readings and exercises are assigned
 2. **Self-study**: Participants study independently throughout the week
-3. **Wednesday session**: Small group discussions — participants explain their answers to peers
+3. **Wednesday session**: Small group discussions - participants explain their answers to peers
 4. **Friday session**: TA-led Q&A covering the week's technical questions
 5. **Weekend**: Participants submit written answers to 2 technical assessment questions
-6. **Week 8**: Final project — submit a real PR to a Bitcoin open-source project
+6. **Week 8**: Final project - submit a real PR to a Bitcoin open-source project
 
 ---
 
@@ -59,7 +59,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 1. Build Bitcoin Core from source on your machine
 2. Start a regtest network and mine 101 blocks
 3. Create a wallet, generate addresses, and send transactions between two wallets using `bitcoin-cli`
-4. Explore a block using `getblock` and `getrawtransaction` — decode and explain every field
+4. Explore a block using `getblock` and `getrawtransaction` - decode and explain every field
 
 **Assessment Questions:**
 1. Explain the UTXO model. How does it differ from an account-based model? What are the trade-offs?
@@ -88,7 +88,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 1. Create a raw transaction using `createrawtransaction`, sign it with `signrawtransactionwithwallet`, and broadcast with `sendrawtransaction`
 2. Decode a raw transaction hex and label every field (version, vin count, txid, vout, scriptSig, sequence, vout count, value, scriptPubKey, locktime)
 3. Calculate a txid by hand (double SHA256 of serialised transaction)
-4. Create a transaction with multiple inputs and multiple outputs — explain the fee calculation
+4. Create a transaction with multiple inputs and multiple outputs - explain the fee calculation
 
 **Assessment Questions:**
 1. What is transaction malleability? Why was it a problem, and how did SegWit fix it?
@@ -111,7 +111,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 **Exercises:**
 1. Trace the execution of a P2PKH script step-by-step through the stack
 2. Create a P2SH multisig transaction (2-of-3) on regtest
-3. Write a custom script using `OP_IF`, `OP_ELSE`, and timelocks — test on regtest
+3. Write a custom script using `OP_IF`, `OP_ELSE`, and timelocks - test on regtest
 4. Analyse a real mainnet transaction with an unusual script pattern
 
 **Assessment Questions:**
@@ -133,7 +133,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 - [Bitcoin Optech: SegWit](https://bitcoinops.org/en/topics/segwit/)
 
 **Exercises:**
-1. Create and compare legacy (P2PKH) vs native SegWit (P2WPKH) transactions on regtest — compare sizes and fees
+1. Create and compare legacy (P2PKH) vs native SegWit (P2WPKH) transactions on regtest - compare sizes and fees
 2. Decode a SegWit transaction and identify the witness data
 3. Calculate the weight units and virtual size (vbytes) of a transaction
 4. Create a P2WSH (Pay-to-Witness-Script-Hash) multisig transaction
@@ -160,7 +160,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 **Exercises:**
 1. Create a Taproot (P2TR) address and send a transaction to it on regtest
 2. Spend from a Taproot output using the key-path (default)
-3. Create a Taproot output with a script tree containing two spending conditions — spend using the script-path
+3. Create a Taproot output with a script tree containing two spending conditions - spend using the script-path
 4. Compare the on-chain footprint of a Taproot multisig vs a P2WSH multisig
 
 **Assessment Questions:**
@@ -183,7 +183,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 
 **Exercises:**
 1. Create a PSBT using `walletcreatefundedpsbt`, inspect with `decodepsbt`
-2. Implement a 2-of-3 multisig signing workflow using PSBTs — Creator, Updater, Signer(s), Finaliser, Extractor
+2. Implement a 2-of-3 multisig signing workflow using PSBTs - Creator, Updater, Signer(s), Finaliser, Extractor
 3. Use `combinepsbt` to merge partial signatures from two signers
 4. Build a PSBT workflow with a hardware wallet simulator (or HWI if available)
 
@@ -211,7 +211,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 1. Clone Bitcoin Core, build from source, and run the functional test suite
 2. Navigate the codebase: identify where transaction validation, block validation, and P2P networking code live
 3. Pick a "good first issue" from Bitcoin Core (or another Bitcoin OSS project) and write up a plan for addressing it
-4. Review an open Bitcoin Core PR — write review comments (even if you don't submit them)
+4. Review an open Bitcoin Core PR - write review comments (even if you don't submit them)
 
 **Assessment Questions:**
 1. Describe the Bitcoin Core review process. Why is it considered one of the most rigorous in open source?
@@ -256,11 +256,11 @@ Each participant presents their contribution to the cohort:
 
 Graduates are encouraged to:
 
-1. **Continue contributing** — aim for 1 PR per month to any Bitcoin OSS project
-2. **Apply to fellowships** — Chaincode Labs, base58, Btrust/Qala, Vinteum
-3. **Apply for grants** — OpenSats, HRF Bitcoin Development Fund, Brink
-4. **Mentor the next cohort** — become a TA or mentor for future Decoding Bitcoin cohorts
-5. **Join the community** — stay active in our Discord, attend monthly reading clubs
+1. **Continue contributing** - aim for 1 PR per month to any Bitcoin OSS project
+2. **Apply to fellowships** - Chaincode Labs, base58, Btrust/Qala, Vinteum
+3. **Apply for grants** - OpenSats, HRF Bitcoin Development Fund, Brink
+4. **Mentor the next cohort** - become a TA or mentor for future Decoding Bitcoin cohorts
+5. **Join the community** - stay active in our Discord, attend monthly reading clubs
 
 ---
 

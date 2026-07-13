@@ -6,9 +6,9 @@
 
 ## Quick Start
 
-1. **Join our Discord**: https://discord.gg/PrHct9eY6Z — introduce yourself in #introductions
+1. **Join our Discord**: https://discord.gg/PrHct9eY6Z - introduce yourself in #introductions
 2. **Pick your starting point** based on where you are (see below)
-3. **Show up** — we run bi-weekly sessions at Bitcoin House Bali and remote cohorts on Discord
+3. **Show up** - we run bi-weekly sessions at Bitcoin House Bali and remote cohorts on Discord
 
 ---
 
@@ -54,11 +54,11 @@ All our curriculum is CC0-licensed. You can use, adapt, and improve it.
 
 ### What we're looking for
 
-- **Typo fixes and clarifications** — always welcome
-- **New exercises** — especially hands-on coding exercises with real Bitcoin tools
-- **Translations** — Bahasa Indonesia, Thai, Vietnamese, Korean, Portuguese
-- **Improved examples** — real-world scenarios, better explanations
-- **New workshop materials** — slides, handouts, facilitator guides
+- **Typo fixes and clarifications** - always welcome
+- **New exercises** - especially hands-on coding exercises with real Bitcoin tools
+- **Translations** - Bahasa Indonesia, Thai, Vietnamese, Korean, Portuguese
+- **Improved examples** - real-world scenarios, better explanations
+- **New workshop materials** - slides, handouts, facilitator guides
 
 ### Repos open for contribution
 

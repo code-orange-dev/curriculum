@@ -28,7 +28,7 @@
 
 **ECDH (Elliptic Curve Diffie-Hellman):** A key agreement protocol that allows two parties to derive a shared secret using their respective key pairs. In Silent Payments, the sender uses their private key + receiver's public key to compute the same shared secret that the receiver can compute using their private key + sender's public key.
 
-**Scan key (b_scan / B_scan):** The receiver's key used to detect incoming Silent Payments. The private scan key can be on a hot/online device because it only detects payments — it cannot spend them. The public scan key is part of the Silent Payment address.
+**Scan key (b_scan / B_scan):** The receiver's key used to detect incoming Silent Payments. The private scan key can be on a hot/online device because it only detects payments - it cannot spend them. The public scan key is part of the Silent Payment address.
 
 **Spend key (b_spend / B_spend):** The receiver's key used to spend received Silent Payments. The private spend key should be kept cold/offline. The public spend key is part of the Silent Payment address.
 
@@ -88,9 +88,9 @@
 
 **WabiSabi:** A cryptographic protocol used in modern CoinJoin implementations (Wasabi Wallet, Ginger Wallet) that allows variable-denomination outputs while maintaining anonymity. Uses keyed-verification anonymous credentials to prevent the coordinator from linking inputs to outputs.
 
-**Anonymity set:** The number of equal-value outputs in a CoinJoin transaction. If 50 participants each create a 0.01 BTC output, each output has an anonymity set of 50 — an observer cannot distinguish between the 50 possible owners.
+**Anonymity set:** The number of equal-value outputs in a CoinJoin transaction. If 50 participants each create a 0.01 BTC output, each output has an anonymity set of 50 - an observer cannot distinguish between the 50 possible owners.
 
-**CoinSwap:** A privacy technique where two parties atomically swap UTXOs. Unlike CoinJoin, the two transactions look like normal payments on-chain — there is no recognizable multi-party pattern. Uses hash time-locked contracts (HTLCs) or adaptor signatures for atomic execution.
+**CoinSwap:** A privacy technique where two parties atomically swap UTXOs. Unlike CoinJoin, the two transactions look like normal payments on-chain - there is no recognizable multi-party pattern. Uses hash time-locked contracts (HTLCs) or adaptor signatures for atomic execution.
 
 **Teleport Transactions:** Chris Belcher's implementation of CoinSwap for Bitcoin. Supports multi-hop swaps through intermediaries for stronger privacy. Currently in development, funded by OpenSats.
 

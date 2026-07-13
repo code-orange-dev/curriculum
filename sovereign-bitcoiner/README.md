@@ -1,4 +1,4 @@
-# Sovereign Bitcoiner Crash Course — 5-10 Week Program
+# Sovereign Bitcoiner Crash Course - 5-10 Week Program
 
 > **A hands-on deep-dive for Bitcoiners who want to take full control of their Bitcoin stack.**
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-The Sovereign Bitcoiner Crash Course takes curious Bitcoiners and transforms them into fully self-sovereign node operators, miners, and privacy advocates. Every graduate leaves with deployed, working systems — a running full node, a BTCPay server, a multisig inheritance plan, and the knowledge to defend their Bitcoin stack against both digital and physical threats.
+The Sovereign Bitcoiner Crash Course takes curious Bitcoiners and transforms them into fully self-sovereign node operators, miners, and privacy advocates. Every graduate leaves with deployed, working systems - a running full node, a BTCPay server, a multisig inheritance plan, and the knowledge to defend their Bitcoin stack against both digital and physical threats.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ The Sovereign Bitcoiner Crash Course takes curious Bitcoiners and transforms the
 - History of financial censorship in Southeast Asia
 
 **Readings:**
-- The Bitcoin Standard, Chapters 1-3 (Ammous) — or selected excerpts
+- The Bitcoin Standard, Chapters 1-3 (Ammous) - or selected excerpts
 - [Why Run a Full Node](https://bitcoin.org/en/full-node)
 - Alex Gladstein: "Check Your Financial Privilege"
 
@@ -60,7 +60,7 @@ The Sovereign Bitcoiner Crash Course takes curious Bitcoiners and transforms the
 **Hands-On:**
 1. Install Umbrel (or Bitcoin Core directly) on a Raspberry Pi or old laptop
 2. Start the initial block download (IBD)
-3. Explore the node dashboard — mempool, peers, block height
+3. Explore the node dashboard - mempool, peers, block height
 4. Connect a mobile wallet (e.g., BlueWallet) to your own node via Tor
 
 **Hardware Needed:**
@@ -113,7 +113,7 @@ The Sovereign Bitcoiner Crash Course takes curious Bitcoiners and transforms the
 **Topics:**
 - Why Bitcoin privacy matters (fungibility, surveillance, censorship)
 - CoinJoin and PayJoin
-- eCash: Fedimint and Cashu — chaumian e-cash on Bitcoin
+- eCash: Fedimint and Cashu - chaumian e-cash on Bitcoin
 - Tor integration for node and wallet traffic
 - BTCPay Server: accepting Bitcoin payments without a third party
 
@@ -132,7 +132,7 @@ Graduates are equipped to:
 - Manage their Bitcoin with multisig self-custody
 - Accept Bitcoin payments via BTCPay Server
 - Understand and use privacy tools
-- Teach others — become a local Bitcoin educator
+- Teach others - become a local Bitcoin educator
 
 ---
 
@@ -147,7 +147,7 @@ Graduates are equipped to:
 
 ### Tips
 - Start with philosophy (Week 1) to establish motivation before diving into technical content
-- Let participants struggle with setup — the debugging process is part of the learning
+- Let participants struggle with setup - the debugging process is part of the learning
 - Use regtest/testnet for all exercises to avoid financial risk
 - Celebrate every working node, every successful multisig recovery
 

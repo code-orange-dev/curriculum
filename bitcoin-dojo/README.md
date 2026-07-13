@@ -1,4 +1,4 @@
-# Bitcoin Dojo — 7-Week Developer Study Cohort
+# Bitcoin Dojo - 7-Week Developer Study Cohort
 
 > **Build Bitcoin primitives from scratch. Understand the cryptography that makes Bitcoin work.**
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-Bitcoin Dojo is a 7-week study cohort run in partnership with [Chaincode Labs](https://chaincode.com/) as part of the [BOSS Challenge](https://learning.chaincode.com/) (Building Open Source Software). Participants build Bitcoin's cryptographic primitives from scratch using Jimmy Song's [Programming Bitcoin](https://github.com/jimmysong/programmingbitcoin) — covering finite fields, elliptic curves, ECDSA, key generation, address encoding, and transaction construction.
+Bitcoin Dojo is a 7-week study cohort run in partnership with [Chaincode Labs](https://chaincode.com/) as part of the [BOSS Challenge](https://learning.chaincode.com/) (Building Open Source Software). Participants build Bitcoin's cryptographic primitives from scratch using Jimmy Song's [Programming Bitcoin](https://github.com/jimmysong/programmingbitcoin) - covering finite fields, elliptic curves, ECDSA, key generation, address encoding, and transaction construction.
 
 This is not a lecture course. Participants study independently, then defend their understanding in weekly group calls where they explain answers to assigned questions. The goal: turn developers into Bitcoiners who are ready to contribute to open-source projects.
 
@@ -18,7 +18,7 @@ This is not a lecture course. Participants study independently, then defend thei
 
 - Comfortable writing code in Python (the exercises use Python)
 - Basic understanding of algebra (modular arithmetic is taught from scratch)
-- No prior Bitcoin knowledge required — we build everything from first principles
+- No prior Bitcoin knowledge required - we build everything from first principles
 
 ## Format
 
@@ -36,7 +36,7 @@ This is not a lecture course. Participants study independently, then defend thei
 
 1. **Each week**: 2 chapters assigned from Programming Bitcoin
 2. **Self-study**: Work through the chapters and solve the Python exercises
-3. **Weekly questions**: 2-3 technical questions assigned per week — you must prepare written answers
+3. **Weekly questions**: 2-3 technical questions assigned per week - you must prepare written answers
 4. **Monday call (11:00 UTC)**: Group discussion where participants explain their answers to peers
 5. **Vibe coding homework**: Students vibe-code a website to visually explain one concept from the week's material
 6. **Graduation**: Final call with personalised next-step plans for each developer
@@ -225,7 +225,7 @@ Each participant presents:
 - [ ] Post weekly readings and questions every Sunday
 - [ ] Host Monday 11:00 UTC calls (record for those who miss)
 - [ ] Assign vibe-coding homework: build a website explaining one concept
-- [ ] Track participation — nudge quiet participants after week 2
+- [ ] Track participation - nudge quiet participants after week 2
 - [ ] Highlight exceptional student work on social media (with permission)
 
 ### After the Cohort

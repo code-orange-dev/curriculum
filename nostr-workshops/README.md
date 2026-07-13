@@ -1,4 +1,4 @@
-# Vibe Coding on Nostr — Monthly Workshop Series
+# Vibe Coding on Nostr - Monthly Workshop Series
 
 > **Monthly hands-on sessions exploring Bitcoin-adjacent open-source development.**
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-Vibe Coding on Nostr is a monthly workshop series where participants build on Nostr, integrate Lightning payments, and contribute to the broader FOSS ecosystem around Bitcoin. Each session is standalone — attend any session without prerequisites.
+Vibe Coding on Nostr is a monthly workshop series where participants build on Nostr, integrate Lightning payments, and contribute to the broader FOSS ecosystem around Bitcoin. Each session is standalone - attend any session without prerequisites.
 
 ## Workshop Modules
 

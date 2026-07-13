@@ -2,7 +2,7 @@
 
 ## Overview
 
-Phase 2 dives deep into **BIP352 Silent Payments**, the next-generation Bitcoin privacy solution. Unlike traditional static payment addresses (which create a privacy leak when reused), Silent Payments allow a sender to generate a unique on-chain output for every payment to the same static address—without on-chain interaction, without per-payment address derivation, and without revealing to observers that multiple payments went to the same recipient. By the end of Phase 2, you'll implement a complete Silent Payments sender, understand scanning and light client architecture, and contribute to production Bitcoin privacy infrastructure.
+Phase 2 dives deep into **BIP352 Silent Payments**, the next-generation Bitcoin privacy solution. Unlike traditional static payment addresses (which create a privacy leak when reused), Silent Payments allow a sender to generate a unique on-chain output for every payment to the same static address-without on-chain interaction, without per-payment address derivation, and without revealing to observers that multiple payments went to the same recipient. By the end of Phase 2, you'll implement a complete Silent Payments sender, understand scanning and light client architecture, and contribute to production Bitcoin privacy infrastructure.
 
 **Time Commitment:** 4 weeks, 10-12 hours per session  
 **Target Audience:** Developers with Phase 1 foundation; crypto/cryptography knowledge helpful  
@@ -22,7 +22,7 @@ A Bitcoin educator and podcast host publishes a single static Bitcoin address in
 - Which transactions belong to her
 - Whether donors are recurring or one-time
 
-Meanwhile, the host holds a single private key that can find and spend all incoming Silent Payments without revealing her identity to anyone—not even the donors who funded her. This is Silent Payments: the first practical on-chain privacy solution that solves the "static address reuse" problem without requiring interaction per payment.
+Meanwhile, the host holds a single private key that can find and spend all incoming Silent Payments without revealing her identity to anyone-not even the donors who funded her. This is Silent Payments: the first practical on-chain privacy solution that solves the "static address reuse" problem without requiring interaction per payment.
 
 ### Learning Objectives
 
@@ -37,11 +37,11 @@ By the end of Session 5, you will:
 ### Privacy Tools You'll Use
 
 - **BIP352 Specification** (https://github.com/bitcoin/bips/blob/master/bip-0352.md)
-- **Cake Wallet** — First production Silent Payments wallet (already shipping SP support)
-- **Bitcoin Core PR #28122** — In-progress Silent Payments implementation
-- **Sparrow Wallet** — Upcoming Silent Payments support (planned)
-- **Kyoto / Floresta** — Light client scanning infrastructure for SP
-- **rust-silentpayments** — Reference implementation (github.com/cygnet3/rust-silentpayments)
+- **Cake Wallet** - First production Silent Payments wallet (already shipping SP support)
+- **Bitcoin Core PR #28122** - In-progress Silent Payments implementation
+- **Sparrow Wallet** - Upcoming Silent Payments support (planned)
+- **Kyoto / Floresta** - Light client scanning infrastructure for SP
+- **rust-silentpayments** - Reference implementation (github.com/cygnet3/rust-silentpayments)
 
 ### Hands-On Exercise: "Follow the Silent Payment"
 
@@ -172,7 +172,7 @@ If you use Cake Wallet, you already have a Silent Payments address. If not:
 6. You can receive unlimited payments to one static address
 7. No one can see your total balance or payment count
 
-This single address replaces the need to generate new addresses for every donation, invoice, or payment—one of the most impactful privacy improvements in Bitcoin since SegWit.
+This single address replaces the need to generate new addresses for every donation, invoice, or payment-one of the most impactful privacy improvements in Bitcoin since SegWit.
 
 ### Reading List with Links
 
@@ -180,11 +180,11 @@ This single address replaces the need to generate new addresses for every donati
    https://github.com/bitcoin/bips/blob/master/bip-0352.md
    - Complete specification (Sections 1-3 are essential)
 
-2. **"Silent Payments Explained" — Bitcoin Optech**  
+2. **"Silent Payments Explained" - Bitcoin Optech**  
    https://bitcoinops.org/en/newsletters/2022/08/03/#overview-of-the-bip352-silent-payments-proposal
    - Non-technical overview of the proposal
 
-3. **"How Silent Payments Will Change Bitcoin Privacy" — Bitcoin Magazine**  
+3. **"How Silent Payments Will Change Bitcoin Privacy" - Bitcoin Magazine**  
    https://bitcoinmagazine.com/articles/silent-payments
    - Real-world use case analysis
 
@@ -200,7 +200,7 @@ This single address replaces the need to generate new addresses for every donati
    https://github.com/rustaceanrob/kyoto
    - Scanning optimization for mobile wallets
 
-7. **"The Privacy Case for Silent Payments" — Bitcoin Privacy Institute**  
+7. **"The Privacy Case for Silent Payments" - Bitcoin Privacy Institute**  
    https://bitcoinprivacyinstitute.org/silent-payments/
    - Comparison to other privacy solutions (CoinJoin, L2 solutions)
 
@@ -211,7 +211,7 @@ This single address replaces the need to generate new addresses for every donati
 ### Real-World Scenario
 
 **The Invoice Dilemma**  
-You're building a freelancing platform where clients need to pay creators with Bitcoin. Traditionally, you'd generate a new address for each invoice—but now your creator has hundreds of invoices scattered across the blockchain. Or they could publish one address... but then anyone can see their total income. Silent Payments solves this: the creator publishes one SP address. Each client's payment creates a unique output. The creator receives all payments with a single private key. You, as the platform builder, implement this by writing a **Silent Payments sender**: code that takes a creator's SP address and produces a unique output for that creator's payment.
+You're building a freelancing platform where clients need to pay creators with Bitcoin. Traditionally, you'd generate a new address for each invoice-but now your creator has hundreds of invoices scattered across the blockchain. Or they could publish one address... but then anyone can see their total income. Silent Payments solves this: the creator publishes one SP address. Each client's payment creates a unique output. The creator receives all payments with a single private key. You, as the platform builder, implement this by writing a **Silent Payments sender**: code that takes a creator's SP address and produces a unique output for that creator's payment.
 
 ### Learning Objectives
 
@@ -496,7 +496,7 @@ This validates your implementation against real Bitcoin before going mainnet.
 ### Real-World Scenario
 
 **The Scanning Nightmare**  
-You build a Bitcoin mobile wallet with Silent Payments support. Your users publish SP addresses and receive payments. But when they open the app, they expect their balance to update immediately—not after scanning 800,000 transactions. A traditional wallet downloads headers and filters transactions. A Silent Payments wallet must test every transaction to see if it contains a payment for the user. On 4G, this takes minutes. Your app crashes. Users complain. The solution: **light clients with server-assisted filtering**. The server scans transactions and creates filters that tell the client "these blocks might contain your payment." The client downloads only the relevant blocks. Privacy is nearly perfect (the server doesn't learn which outputs belong to you), and the app is fast.
+You build a Bitcoin mobile wallet with Silent Payments support. Your users publish SP addresses and receive payments. But when they open the app, they expect their balance to update immediately-not after scanning 800,000 transactions. A traditional wallet downloads headers and filters transactions. A Silent Payments wallet must test every transaction to see if it contains a payment for the user. On 4G, this takes minutes. Your app crashes. Users complain. The solution: **light clients with server-assisted filtering**. The server scans transactions and creates filters that tell the client "these blocks might contain your payment." The client downloads only the relevant blocks. Privacy is nearly perfect (the server doesn't learn which outputs belong to you), and the app is fast.
 
 ### Learning Objectives
 
@@ -510,12 +510,12 @@ By the end of Session 7, you will:
 
 ### Privacy Tools You'll Use
 
-- **Cake Wallet** — Production SP scanning (built-in)
-- **Kyoto** (https://github.com/rustaceanrob/kyoto) — Rust light client with SP support
-- **Floresta** (https://github.com/commerceblock/floresta) — Utreexo-based light client
-- **Bitcoin Core with pruning** — Full node SP scanning (reference)
-- **BDK (Bitcoin Dev Kit)** — Wallet framework with SP support (planned)
-- **electrs** — Electrum server (for understanding server-side filtering)
+- **Cake Wallet** - Production SP scanning (built-in)
+- **Kyoto** (https://github.com/rustaceanrob/kyoto) - Rust light client with SP support
+- **Floresta** (https://github.com/commerceblock/floresta) - Utreexo-based light client
+- **Bitcoin Core with pruning** - Full node SP scanning (reference)
+- **BDK (Bitcoin Dev Kit)** - Wallet framework with SP support (planned)
+- **electrs** - Electrum server (for understanding server-side filtering)
 
 ### Hands-On Exercise: "Build a Light Client Scanner"
 
@@ -799,7 +799,7 @@ This shows you: Silent Payments are practical today, and scanning is handled tra
    https://github.com/commerceblock/floresta
    - Alternative approach to efficient scanning
 
-5. **"Silent Payments Scanning Optimization" — Bitcoin Optech**  
+5. **"Silent Payments Scanning Optimization" - Bitcoin Optech**  
    https://bitcoinops.org/en/newsletters/2024/01/10/#silent-payments-scanning-optimization
    - Latest research on efficient scanning
 
@@ -807,7 +807,7 @@ This shows you: Silent Payments are practical today, and scanning is handled tra
    https://cakewallet.com/articles/technical-details
    - How production wallet implements SP scanning
 
-7. **BDK (Bitcoin Dev Kit) — Wallet Framework**  
+7. **BDK (Bitcoin Dev Kit) - Wallet Framework**  
    https://github.com/bitcoindevkit/bdk
    - Wallet library with SP support (in development)
 
@@ -1213,6 +1213,6 @@ After completing Phase 2, you're ready for advanced privacy infrastructure:
 - Cross-chain atomic swaps with privacy
 - ZK-proof-based systems (future Bitcoin research)
 
-The knowledge you've built—chain analysis, transaction structure, UTXO management, cryptography, and production development—applies to all of these.
+The knowledge you've built-chain analysis, transaction structure, UTXO management, cryptography, and production development-applies to all of these.
 
 You're now a **Bitcoin Privacy Infrastructure Developer**. Use this power responsibly.

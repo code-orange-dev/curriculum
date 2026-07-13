@@ -47,7 +47,7 @@ If you've completed the exercises and want to share your solutions as reference 
 - Python exercises: Python 3.8+, minimal dependencies, clear docstrings, type hints
 - Rust exercises: stable Rust, idiomatic style, well-commented
 - All exercises must include: clear instructions, type signatures, test cases, and reflection questions
-- Never include complete solutions in the exercise files — only hints, pseudocode, and test cases
+- Never include complete solutions in the exercise files - only hints, pseudocode, and test cases
 
 ### File structure
 

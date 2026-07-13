@@ -5,13 +5,13 @@ This phase moves beyond basics into production-grade privacy tools. You'll maste
 
 ---
 
-## Session 17: CoinJoin — WabiSabi, JoinMarket, Collaborative Transactions
+## Session 17: CoinJoin - WabiSabi, JoinMarket, Collaborative Transactions
 
 ### Real-World Scenario
 
 You bought 0.5 BTC on Coinbase with full KYC. Your ID is linked to that Bitcoin address. Now you want to buy coffee at a merchant who doesn't trust chain analysis. If you spend your KYC Bitcoin directly, Coinbase will know you bought coffee. Their compliance team could even flag the merchant.
 
-A CoinJoin transaction pools your coins with 50 other participants. The transaction has 51 identical 0.01 BTC outputs. Nobody — not Coinbase, not the chain analyst, not the merchant — can prove which output is "yours." The link between your identity and your future spending is broken.
+A CoinJoin transaction pools your coins with 50 other participants. The transaction has 51 identical 0.01 BTC outputs. Nobody - not Coinbase, not the chain analyst, not the merchant - can prove which output is "yours." The link between your identity and your future spending is broken.
 
 **This is how real people reclaim their privacy.**
 
@@ -53,7 +53,7 @@ A CoinJoin transaction pools your coins with 50 other participants. The transact
    - Click "Enqueue"
    - Wasabi begins searching for mixing partners
    - Watch the transaction build in real-time (or come back in 10-60 minutes)
-   - **Key learning:** The mixing output is derived using Wasabi's output selection algorithm. This is intentional — round outputs (0.01, 0.03, 0.1) make it harder to fingerprint which output is "yours"
+   - **Key learning:** The mixing output is derived using Wasabi's output selection algorithm. This is intentional - round outputs (0.01, 0.03, 0.1) make it harder to fingerprint which output is "yours"
 
 4. **Analyze the CoinJoin Output**
    - Once mixed, open the transaction on OXT.me
@@ -84,9 +84,9 @@ A CoinJoin transaction pools your coins with 50 other participants. The transact
 
 3. **Calculate Anonset**
    - Count equal-denomination outputs: `N`
-   - This is your **forward anonset** — when you spend, how many outputs could yours be?
+   - This is your **forward anonset** - when you spend, how many outputs could yours be?
    - Now follow one of those outputs: if it was CoinJoined again, multiply the anonsets
-   - This is your **heuristic anonset** — accounting for multiple rounds
+   - This is your **heuristic anonset** - accounting for multiple rounds
 
 4. **Identify Clustering Attacks**
    - Which outputs were spent within 24 hours? (suggests urgency, might leak timing info)
@@ -188,7 +188,7 @@ You're a merchant who receives customer payments on-chain. But you don't want an
 
 CoinSwap is different. You swap coins with another Bitcoin user, 1-to-1, in a series of smart contract-like transactions. From the outside, it looks like a normal Bitcoin transaction. No obvious pattern. No anonymity set. The blockchain observer has no idea what happened.
 
-**This is stealth privacy — it looks like nothing at all.**
+**This is stealth privacy - it looks like nothing at all.**
 
 ### Learning Objectives
 
@@ -297,7 +297,7 @@ Write a 500-word proposal.
 
 ### Daily Life Privacy Tip
 
-**If you want invisible privacy, CoinSwap is better than CoinJoin — but you need a swap partner.**
+**If you want invisible privacy, CoinSwap is better than CoinJoin - but you need a swap partner.**
 
 Reality check: CoinSwap is still experimental. For today:
 1. Use CoinJoin (Wasabi) for your routine privacy
@@ -311,21 +311,21 @@ Reality check: CoinSwap is still experimental. For today:
    - citadel-tech coinswap repo: https://github.com/citadeltech/coinswap
 
 2. **Scriptless Scripts & Hash Time-Locked Contracts**
-   - "Scriptless Scripts via Discrete Log Contracts" — Poelstra
+   - "Scriptless Scripts via Discrete Log Contracts" - Poelstra
    - https://github.com/ElementsProject/scriptless-scripts
 
 3. **Atomic Swaps**
-   - "Atomic Swaps: Cross-Chain Transactions" — Tier Nolan, 2013
+   - "Atomic Swaps: Cross-Chain Transactions" - Tier Nolan, 2013
 
 ---
 
-## Session 19: eCash — Fedimint & Cashu for Privacy-Preserving Communities
+## Session 19: eCash - Fedimint & Cashu for Privacy-Preserving Communities
 
 ### Real-World Scenario
 
 Bitcoin House Bali is a community hub where 50 people work and spend Bitcoin daily. But every transaction is public on-chain. They don't want the Indonesian government seeing exactly who paid whom for food, coworking, or events.
 
-Solution: The community runs a Fedimint federation. Members deposit Bitcoin once. They receive eCash tokens (blind coins). When two members transact, they swap eCash tokens. The Bitcoin stays locked on-chain. The Fedimint federation cannot see who paid whom — the blind signatures ensure mathematical privacy.
+Solution: The community runs a Fedimint federation. Members deposit Bitcoin once. They receive eCash tokens (blind coins). When two members transact, they swap eCash tokens. The Bitcoin stays locked on-chain. The Fedimint federation cannot see who paid whom - the blind signatures ensure mathematical privacy.
 
 **This is institutional privacy: Bitcoin goes in, perfect privacy comes out.**
 
@@ -353,7 +353,7 @@ Solution: The community runs a Fedimint federation. Members deposit Bitcoin once
    - Blind Signature concept: Created by David Chaum (1983)
    - How it works: User blinds a message, server signs it blindly, user unblinds
    - Privacy property: Server learns nothing about the message it signed
-   - Resource: Read "Blind Signatures for Untraceable Payments" — Chaum, 1983
+   - Resource: Read "Blind Signatures for Untraceable Payments" - Chaum, 1983
 
 2. **Implement a toy blind signature scheme**
    - Use Python or JavaScript
@@ -468,7 +468,7 @@ Privacy gain: Perfect privacy for community transactions
 ### Reading List
 
 1. **Blind Signatures & eCash**
-   - "Blind Signatures for Untraceable Payments" — David Chaum
+   - "Blind Signatures for Untraceable Payments" - David Chaum
    - https://chaum.com/blind-signatures/
 
 2. **Fedimint Protocol**
@@ -484,7 +484,7 @@ Privacy gain: Perfect privacy for community transactions
 
 ---
 
-## Session 20: Lightning Network Privacy — BOLT12, Blinded Paths & Channel Probing
+## Session 20: Lightning Network Privacy - BOLT12, Blinded Paths & Channel Probing
 
 ### Real-World Scenario
 
@@ -706,9 +706,9 @@ Write a 1000-word "Privacy Architecture" proposal that uses techniques from Sess
 ## How to Excel in Phase 5
 
 1. **Read the specifications**, not just the summaries
-2. **Run the tools** — hands-on execution teaches more than reading
-3. **Contribute code** — you don't just learn; you ship
-4. **Ask questions** — privacy is complex; engage with the community
-5. **Think about trade-offs** — privacy is never free; understand what you're trading
+2. **Run the tools** - hands-on execution teaches more than reading
+3. **Contribute code** - you don't just learn; you ship
+4. **Ask questions** - privacy is complex; engage with the community
+5. **Think about trade-offs** - privacy is never free; understand what you're trading
 
 Your future work in Bitcoin privacy depends on mastering these techniques. Make Phase 5 count.

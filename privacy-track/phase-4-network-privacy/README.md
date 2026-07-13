@@ -1,4 +1,4 @@
-# Phase 4: Network & Protocol Privacy — Sessions 13-16
+# Phase 4: Network & Protocol Privacy - Sessions 13-16
 
 **Objective:** Master the network and protocol layers of Bitcoin privacy, learning how to hide transaction broadcast origins, discover addresses privately, and use Taproot for script obfuscation.
 
@@ -37,12 +37,12 @@ Result: Broadcasting a transaction no longer reveals your IP address.
 
 ### Privacy Tools You'll Use
 
-- **Bitcoin Core** — full node with Tor/I2P support
-- **Tor** — onion routing network
-- **I2P** — decentralized anonymity network
-- **Dandelion++** — transaction broadcast privacy (conceptual)
-- **bitcoin-cli getpeerinfo** — peer analysis
-- **tcpdump** — network traffic inspection
+- **Bitcoin Core** - full node with Tor/I2P support
+- **Tor** - onion routing network
+- **I2P** - decentralized anonymity network
+- **Dandelion++** - transaction broadcast privacy (conceptual)
+- **bitcoin-cli getpeerinfo** - peer analysis
+- **tcpdump** - network traffic inspection
 
 ### Detailed Hands-On Exercise
 
@@ -167,7 +167,7 @@ While Bitcoin Core doesn't implement Dandelion++ yet, understand the protocol:
    - Standard Bitcoin Core: Observe latency from node to all peers
    - Tor: Random latency, harder to trace
    - I2P: Even higher variance
-   - Dandelion++: Asymmetric—harder to measure
+   - Dandelion++: Asymmetric-harder to measure
 
 2. **Create a test:**
    - Send 5 transactions without Tor
@@ -291,11 +291,11 @@ Privacy moves from "trust the server" to "trust the math."
 
 ### Privacy Tools You'll Use
 
-- **Compact Block Filters (BIP157/158)** — filter specification
-- **Kyoto** — Rust light client with CBF support
-- **Floresta** — Utreexo-based light client
-- **Neutrino** (LND) — Lightning client with CBF support
-- **Python/Rust** — filter implementation
+- **Compact Block Filters (BIP157/158)** - filter specification
+- **Kyoto** - Rust light client with CBF support
+- **Floresta** - Utreexo-based light client
+- **Neutrino** (LND) - Lightning client with CBF support
+- **Python/Rust** - filter implementation
 
 ### Detailed Hands-On Exercise
 
@@ -429,7 +429,7 @@ Privacy moves from "trust the server" to "trust the math."
        hashed = hash_address(address_bytes)
        
        # Decode filter and check
-       # (This is simplified—real implementation more complex)
+       # (This is simplified-real implementation more complex)
        filter_values = decode_filter_from_bytes(filter_bytes, m)
        
        # Check for false positives (expected)
@@ -550,12 +550,12 @@ If you use mobile Bitcoin:
 
 ---
 
-## Session 15: Light Client Privacy — Floresta & Kyoto
+## Session 15: Light Client Privacy - Floresta & Kyoto
 
 ### Real-World Scenario
 
 **Your Constraint:**
-You can't run a full node on your phone—it requires ~500GB storage and ~10Mbps constant bandwidth.
+You can't run a full node on your phone-it requires ~500GB storage and ~10Mbps constant bandwidth.
 
 **Your Goal:**
 You want full validation (don't trust servers) AND address privacy (don't leak which addresses you own).
@@ -578,10 +578,10 @@ Floresta uses Utreexo accumulators to compress the UTXO set from ~10GB to ~600MB
 
 ### Privacy Tools You'll Use
 
-- **Floresta** — Utreexo-based light client (Rust)
-- **Kyoto** — Header-based light client with CBF (Rust)
-- **Bitcoin Core** — full node for Utreexo bridge
-- **bitcoin-cli** — validation
+- **Floresta** - Utreexo-based light client (Rust)
+- **Kyoto** - Header-based light client with CBF (Rust)
+- **Bitcoin Core** - full node for Utreexo bridge
+- **bitcoin-cli** - validation
 
 ### Detailed Hands-On Exercise
 
@@ -768,7 +768,7 @@ If you have a Raspberry Pi or old laptop:
 
 ---
 
-## Session 16: Taproot Privacy — Schnorr, MAST, MuSig2
+## Session 16: Taproot Privacy - Schnorr, MAST, MuSig2
 
 ### Real-World Scenario
 
@@ -799,11 +799,11 @@ With Taproot, the same 3-of-3 multisig:
 
 ### Privacy Tools You'll Use
 
-- **bitcoin-cli** — create Taproot addresses and transactions
-- **Sparrow Wallet** — full Taproot support
-- **bitcoinjs-lib** (JavaScript) — Taproot construction
-- **rust-bitcoin** — Taproot primitives
-- **libsecp256k1-zkp** — Schnorr signatures
+- **bitcoin-cli** - create Taproot addresses and transactions
+- **Sparrow Wallet** - full Taproot support
+- **bitcoinjs-lib** (JavaScript) - Taproot construction
+- **rust-bitcoin** - Taproot primitives
+- **libsecp256k1-zkp** - Schnorr signatures
 
 ### Detailed Hands-On Exercise
 
@@ -812,12 +812,12 @@ With Taproot, the same 3-of-3 multisig:
 1. **Why Schnorr > ECDSA for Privacy:**
 
    **ECDSA (Bitcoin legacy):**
-   - Signature: (r, s) — two 32-byte values
+   - Signature: (r, s) - two 32-byte values
    - Different signatures for same key/message (randomness in signing)
    - Non-linear signature equation (harder to aggregate)
 
    **Schnorr (Taproot):**
-   - Signature: (R, s) — one 32-byte point + one 32-byte scalar
+   - Signature: (R, s) - one 32-byte point + one 32-byte scalar
    - Deterministic signatures (same input → same signature)
    - Linear equation (easy to aggregate multiple signatures)
 
@@ -1084,4 +1084,4 @@ A Bitcoiner who implements all four phases becomes:
 - Indistinguishable in the largest anonymity set (Taproot)
 
 **Your Next Challenge:**
-The best privacy tool is adoption. Your mission now: Build, deploy, and teach others the tools you've learned. Privacy is not a feature—it's a human right.
+The best privacy tool is adoption. Your mission now: Build, deploy, and teach others the tools you've learned. Privacy is not a feature-it's a human right.

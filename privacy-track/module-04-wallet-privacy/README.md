@@ -1,6 +1,6 @@
 # Module 4: Privacy-Preserving Wallet Development
 
-> 3 sessions — Coin selection, compact block filters, CoinJoin, and the future of on-chain privacy.
+> 3 sessions - Coin selection, compact block filters, CoinJoin, and the future of on-chain privacy.
 
 ---
 
@@ -13,11 +13,11 @@ Even without Silent Payments or Payjoin, the way a wallet constructs a transacti
 ### Topics
 
 **Coin Selection Algorithms**
-- **Largest-first**: simple but creates obvious change outputs — bad for privacy
-- **Branch and bound**: tries to find exact-match combinations (no change) — great for privacy
+- **Largest-first**: simple but creates obvious change outputs - bad for privacy
+- **Branch and bound**: tries to find exact-match combinations (no change) - great for privacy
 - **Random selection**: adds entropy but wastes fees
 - **Privacy-optimized**: avoid combining UTXOs from different sources, prefer spending whole UTXOs
-- The trade-off: fee efficiency vs privacy — you can't always optimize both
+- The trade-off: fee efficiency vs privacy - you can't always optimize both
 - BDK's coin selection module and how to extend it
 
 **Change Output Handling**
@@ -29,13 +29,13 @@ Even without Silent Payments or Payjoin, the way a wallet constructs a transacti
 
 **Fee Fingerprinting and Timing Analysis**
 - Different wallets use different fee estimation methods
-- Bitcoin Core uses `estimatesmartfee` — a recognizable fee curve
+- Bitcoin Core uses `estimatesmartfee` - a recognizable fee curve
 - Some wallets always use round fee rates (5 sat/vB, 10 sat/vB)
 - Transaction broadcast timing can reveal timezone/geography
 - Mempool snooping: observing which node first relays a transaction
 
 **Wallet Fingerprints: nLockTime, nSequence, Version**
-- `nLockTime`: Bitcoin Core sets this to current block height (anti-fee-sniping) — identifiable
+- `nLockTime`: Bitcoin Core sets this to current block height (anti-fee-sniping) - identifiable
 - `nSequence`: different values reveal which wallet created the transaction
 - `version`: most wallets use version 2, but some still use version 1
 - Input ordering: BIP69 (deprecated) vs random vs deterministic
@@ -61,7 +61,7 @@ Even without Silent Payments or Payjoin, the way a wallet constructs a transacti
 
 ### Reading
 
-- [Bitcoin Wiki: Privacy — Wallet Fingerprinting](https://en.bitcoin.it/wiki/Privacy#Wallet_fingerprinting)
+- [Bitcoin Wiki: Privacy - Wallet Fingerprinting](https://en.bitcoin.it/wiki/Privacy#Wallet_fingerprinting)
 - [Bitcoin Optech: Coin Selection](https://bitcoinops.org/en/topics/coin-selection/)
 - [Murch: Coin Selection with Leverage](https://murch.one/erhardt2016coinselection.pdf)
 
@@ -71,16 +71,16 @@ Even without Silent Payments or Payjoin, the way a wallet constructs a transacti
 
 ### Overview
 
-Full nodes offer the best privacy but aren't practical for everyone. Light clients need to query the network for their transactions — but how do they do this without revealing which addresses they own? Compact block filters (BIP157/158) offer the best current solution. This session covers how they work and the projects building them.
+Full nodes offer the best privacy but aren't practical for everyone. Light clients need to query the network for their transactions - but how do they do this without revealing which addresses they own? Compact block filters (BIP157/158) offer the best current solution. This session covers how they work and the projects building them.
 
 ### Topics
 
-**BIP157/158 — How Compact Block Filters Work**
-- The problem: SPV clients (BIP37) tell full nodes exactly which addresses they're watching — terrible for privacy
+**BIP157/158 - How Compact Block Filters Work**
+- The problem: SPV clients (BIP37) tell full nodes exactly which addresses they're watching - terrible for privacy
 - The solution: full nodes create a small "filter" for each block containing all the scripts in that block
-- The filter is a probabilistic data structure — it can tell you "this block MIGHT contain your transaction"
+- The filter is a probabilistic data structure - it can tell you "this block MIGHT contain your transaction"
 - Client downloads filters for every block (small: ~20KB per filter) and checks locally
-- Only downloads the full block when the filter matches — no privacy leak to the serving node
+- Only downloads the full block when the filter matches - no privacy leak to the serving node
 
 **Golomb-Rice Coded Sets (GCS)**
 - The compression algorithm used in BIP158 filters
@@ -90,7 +90,7 @@ Full nodes offer the best privacy but aren't practical for everyone. Light clien
 - The bandwidth trade-off: filter size vs false positive rate
 
 **Kyoto Light Client Project**
-- [rustaceanrob/kyoto](https://github.com/rustaceanrob/kyoto) — Rust implementation
+- [rustaceanrob/kyoto](https://github.com/rustaceanrob/kyoto) - Rust implementation
 - Implements BIP157/158 compact block filter protocol
 - Critical for Silent Payments: light clients need this to scan efficiently
 - Integration with BDK for wallet development
@@ -100,7 +100,7 @@ Full nodes offer the best privacy but aren't practical for everyone. Light clien
 
 | Property | SPV (BIP37) | Compact Filters (BIP157) | Full Node |
 |----------|-------------|-------------------------|-----------|
-| Privacy | Very poor — server knows your addresses | Good — server can't identify your addresses | Perfect — you validate everything locally |
+| Privacy | Very poor - server knows your addresses | Good - server can't identify your addresses | Perfect - you validate everything locally |
 | Bandwidth | Low | Medium (~20KB/block filter) | High (full blocks) |
 | Computation | Minimal | Low (filter matching) | High (full validation) |
 | Trust | Trusts server to provide correct data | Trusts server for filter, verifies blocks | Trustless |
@@ -113,7 +113,7 @@ Full nodes offer the best privacy but aren't practical for everyone. Light clien
 2. Decode the filter and understand its structure
 3. Check if a known address appears in the filter
 4. Calculate the false positive rate: check 1000 random addresses against the filter
-5. Compare the filter size to the full block size — what's the compression ratio?
+5. Compare the filter size to the full block size - what's the compression ratio?
 
 ### Discussion Questions
 
@@ -151,7 +151,7 @@ The final session covers the most powerful privacy tools available today and the
 
 **CoinSwap: Atomic Swaps for Privacy**
 - Unlike CoinJoin, CoinSwap transactions look like normal payments on-chain
-- Alice pays Bob, Bob pays Alice — two separate transactions, atomically linked via hash locks
+- Alice pays Bob, Bob pays Alice - two separate transactions, atomically linked via hash locks
 - Chris Belcher's "Teleport Transactions" implementation
 - Multi-hop CoinSwap: route through multiple intermediaries for stronger privacy
 - The advantage over CoinJoin: no recognizable on-chain pattern
@@ -165,7 +165,7 @@ The final session covers the most powerful privacy tools available today and the
 **The Future: Protocol-Level Privacy**
 - **Cross-Input Signature Aggregation (CISA)**: aggregate all signatures in a transaction into one
   - Makes CoinJoin cheaper (fewer bytes = lower fees)
-  - Economic incentive for privacy — mixing becomes the cheapest option
+  - Economic incentive for privacy - mixing becomes the cheapest option
   - Requires a soft fork
 - **Taproot-enabled privacy**: all spends (single-sig, multisig, HTLC, etc.) look identical
 - **Schnorr signature aggregation**: enables MuSig2, threshold signatures

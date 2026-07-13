@@ -1,4 +1,4 @@
-# Capstone Project — Bitcoin Privacy Developer Track
+# Capstone Project - Bitcoin Privacy Developer Track
 
 > Design, implement, and document a meaningful contribution to Bitcoin's privacy infrastructure.
 
@@ -6,7 +6,7 @@
 
 ## Overview
 
-The capstone is the culmination of the privacy track. You will choose a project that combines what you've learned across all four modules and produce something that matters — code that gets merged, analysis that informs development, or a tool that helps other developers.
+The capstone is the culmination of the privacy track. You will choose a project that combines what you've learned across all four modules and produce something that matters - code that gets merged, analysis that informs development, or a tool that helps other developers.
 
 This is not a homework assignment. It's a portfolio piece that demonstrates you can contribute to Bitcoin's privacy infrastructure at a professional level.
 
@@ -113,12 +113,12 @@ Choose ONE of the following tracks, or propose your own (must be approved by fac
 | **Total** | **100** |
 
 **Example projects:**
-- "Silent Payments Scanning Optimization: A Comparison of Approaches" — benchmark different scanning strategies, analyze trade-offs for mobile vs desktop
-- "Payjoin Adoption Analysis: What Needs to Happen for Critical Mass" — study current adoption, identify barriers, propose solutions
-- "Wallet Privacy Audit: Comparing Fingerprints Across the Top 10 Bitcoin Wallets" — test real wallets and document their privacy properties
-- "The Economics of CoinJoin: How CISA Would Change the Privacy Landscape" — model fee savings and adoption incentives
-- "Compact Block Filters for Silent Payments: Architecture Proposals for Mobile Wallets" — design a practical architecture combining CBF + SP
-- "Bitcoin Privacy in Southeast Asia: Regulatory Landscape and Developer Opportunities" — map the regulatory environment and identify where privacy tools are most needed
+- "Silent Payments Scanning Optimization: A Comparison of Approaches" - benchmark different scanning strategies, analyze trade-offs for mobile vs desktop
+- "Payjoin Adoption Analysis: What Needs to Happen for Critical Mass" - study current adoption, identify barriers, propose solutions
+- "Wallet Privacy Audit: Comparing Fingerprints Across the Top 10 Bitcoin Wallets" - test real wallets and document their privacy properties
+- "The Economics of CoinJoin: How CISA Would Change the Privacy Landscape" - model fee savings and adoption incentives
+- "Compact Block Filters for Silent Payments: Architecture Proposals for Mobile Wallets" - design a practical architecture combining CBF + SP
+- "Bitcoin Privacy in Southeast Asia: Regulatory Landscape and Developer Opportunities" - map the regulatory environment and identify where privacy tools are most needed
 
 ---
 

@@ -1,4 +1,4 @@
-# Code Orange Dev School — Curriculum
+# Code Orange Dev School - Curriculum
 
 > **Free, open-source Bitcoin developer education for Southeast Asia and beyond.**
 
@@ -8,9 +8,9 @@
 
 ## About This Repository
 
-This is the master curriculum repository for [Code Orange Dev School](https://codeorange.dev) — Asia's Bitcoin Developer Pipeline. It contains everything an educator needs to fork this repo and run their own Bitcoin developer cohort, anywhere in the world, in any language.
+This is the master curriculum repository for [Code Orange Dev School](https://codeorange.dev) - Asia's Bitcoin Developer Pipeline. It contains everything an educator needs to fork this repo and run their own Bitcoin developer cohort, anywhere in the world, in any language.
 
-All materials are released under **CC0 1.0 Universal (Public Domain)** — use them, adapt them, translate them, teach with them. No permission needed.
+All materials are released under **CC0 1.0 Universal (Public Domain)** - use them, adapt them, translate them, teach with them. No permission needed.
 
 ---
 
@@ -40,16 +40,16 @@ Bitcoin Dojo (7 weeks) ──> rawBit (10 weeks) ──> Decoding Bitcoin (8 wee
 ### For Educators
 
 1. **Fork this repo** to your own GitHub account or organisation
-2. **Pick a program** — start with Decoding Bitcoin if you have developers, or Sovereign Bitcoiner for general Bitcoiners
-3. **Follow the week-by-week syllabus** — each week has readings, exercises, discussion questions, and assessments
-4. **Adapt for your context** — translate materials, adjust pacing, add local examples
-5. **Run your cohort** — use the Facilitator Guide in each program directory for logistics and best practices
+2. **Pick a program** - start with Decoding Bitcoin if you have developers, or Sovereign Bitcoiner for general Bitcoiners
+3. **Follow the week-by-week syllabus** - each week has readings, exercises, discussion questions, and assessments
+4. **Adapt for your context** - translate materials, adjust pacing, add local examples
+5. **Run your cohort** - use the Facilitator Guide in each program directory for logistics and best practices
 
 ### For Self-Learners
 
 1. **Start with Week 1** of any program
 2. **Complete the readings** before attempting exercises
-3. **Try the exercises** — they're designed to be hands-on, not theoretical
+3. **Try the exercises** - they're designed to be hands-on, not theoretical
 4. **Join our Discord** for peer support: [discord.gg/xd6dmPF9bA](https://discord.gg/xd6dmPF9bA)
 
 ### For Contributors
@@ -126,11 +126,11 @@ curriculum/
 
 This curriculum builds on world-class open-source Bitcoin education:
 
-- [Chaincode Labs Bitcoin Curriculum](https://github.com/chaincodelabs/bitcoin-curriculum) — Protocol development study groups
-- [Bitcoin Dev Project](https://bitcoindevs.xyz/) — Developer onboarding and learning paths
-- [Mastering Bitcoin](https://github.com/bitcoinbook/bitcoinbook) by Andreas Antonopoulos — Foundational textbook
-- [Learn Bitcoin from the Command Line](https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line) — Hands-on CLI tutorials
-- [Bitcoin Optech](https://bitcoinops.org/) — Weekly technical newsletter
+- [Chaincode Labs Bitcoin Curriculum](https://github.com/chaincodelabs/bitcoin-curriculum) - Protocol development study groups
+- [Bitcoin Dev Project](https://bitcoindevs.xyz/) - Developer onboarding and learning paths
+- [Mastering Bitcoin](https://github.com/bitcoinbook/bitcoinbook) by Andreas Antonopoulos - Foundational textbook
+- [Learn Bitcoin from the Command Line](https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line) - Hands-on CLI tutorials
+- [Bitcoin Optech](https://bitcoinops.org/) - Weekly technical newsletter
 
 ---
 

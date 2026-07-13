@@ -1,4 +1,4 @@
-# Facilitator Guide — Bitcoin Privacy Developer Track
+# Facilitator Guide - Bitcoin Privacy Developer Track
 
 > Everything you need to run this track at your own Bitcoin dev school, hackerspace, or study group.
 
@@ -52,7 +52,7 @@ The track is designed for two pacing options:
 | Intensive | 6 weeks | 2x per week, 2-3 hours each | Full-time cohorts, bootcamps |
 | Standard | 12 weeks | 1x per week, 2-3 hours each | Working developers, study groups |
 
-Each session has more material than can be covered in one sitting. This is intentional — it's better to have too much than too little. Prioritize the exercises over the lecture content. Participants learn more by doing than by listening.
+Each session has more material than can be covered in one sitting. This is intentional - it's better to have too much than too little. Prioritize the exercises over the lecture content. Participants learn more by doing than by listening.
 
 ---
 
@@ -67,14 +67,14 @@ Each session has more material than can be covered in one sitting. This is inten
 | 0:00-0:20 | **Intro and context** | Why this track exists. Show the OpenSats blog post on privacy. Ask: "How many of you have reused a Bitcoin address?" |
 | 0:20-0:50 | **Lecture: The four heuristics** | CIOH, change detection, address reuse clustering, timing analysis. Use whiteboard to draw example transactions. |
 | 0:50-1:00 | **Break** | |
-| 1:00-1:45 | **Hands-on: Chain Analysis Lab** | `exercises/chain_analysis_lab.py` — Participants work through Exercises 1-4. Walk around and help. |
+| 1:00-1:45 | **Hands-on: Chain Analysis Lab** | `exercises/chain_analysis_lab.py` - Participants work through Exercises 1-4. Walk around and help. |
 | 1:45-2:15 | **Live demo: OXT.me** | Pick a real mainnet transaction and trace it live. Show how CIOH + change detection reveals the entity. |
 | 2:15-2:30 | **Discussion** | Use the discussion questions from the README. Key insight: these heuristics are assumptions, not facts. Payjoin and CoinJoin exploit this. |
 
 **Facilitator tips:**
 - The chain analysis lab has 8 sample transactions designed to illustrate different patterns. TX 3 is a Payjoin (CIOH is wrong). TX 6 is a CoinJoin. Make sure participants discover this.
 - If participants finish early, have them attempt Exercise 6 (entity tracing across multiple transactions).
-- The reflection questions at the end are important — assign them as homework if you run out of time.
+- The reflection questions at the end are important - assign them as homework if you run out of time.
 
 #### Session 2: Privacy as a Protocol Property (2 hours)
 
@@ -88,13 +88,13 @@ Each session has more material than can be covered in one sitting. This is inten
 | 1:50-2:00 | **Assign essay** | 500-word essay: "What is the most impactful privacy improvement that could be made to Bitcoin today, and why?" Due before Session 3. |
 
 **Facilitator tips:**
-- This session is more discussion-heavy than technical. That's intentional — participants need to internalize WHY privacy matters before diving into HOW.
+- This session is more discussion-heavy than technical. That's intentional - participants need to internalize WHY privacy matters before diving into HOW.
 - If the group is technical and engaged, introduce the concept of "privacy by default vs privacy by choice" and ask them to debate which is better.
 - The essay is a good filter: participants who write thoughtful essays will get the most out of the technical sessions.
 
 ---
 
-### Module 2: Silent Payments — BIP352
+### Module 2: Silent Payments - BIP352
 
 #### Session 3: How Silent Payments Work (2.5 hours)
 
@@ -118,14 +118,14 @@ Each session has more material than can be covered in one sitting. This is inten
 | Time | Activity | Notes |
 |------|----------|-------|
 | 0:00-0:15 | **Review: BIP352 key concepts** | Quick whiteboard recap of ECDH, scan/spend keys, shared secret derivation |
-| 0:15-1:15 | **Coding: Exercises 1-3** | `silent_payments_sender.py` — Generate keypair, derive shared secret, compute output key. Walk around and help. |
+| 0:15-1:15 | **Coding: Exercises 1-3** | `silent_payments_sender.py` - Generate keypair, derive shared secret, compute output key. Walk around and help. |
 | 1:15-1:25 | **Break** | |
 | 1:25-2:15 | **Coding: Exercise 4** | Full Silent Payment simulation. Run tests. Debug together. |
 | 2:15-2:45 | **Code review** | Have 1-2 participants share their screen and walk through their implementation. Discuss edge cases. |
 | 2:45-3:00 | **Discussion** | Why sum all input keys? What about Taproot inputs? What happens with incorrect parity? |
 
 **Facilitator tips:**
-- The pure-Python ECC operations are slow. That's fine — it's for learning, not production.
+- The pure-Python ECC operations are slow. That's fine - it's for learning, not production.
 - Common errors: forgetting `% N` for modular arithmetic, incorrect byte ordering for tagged hashes, confusing x-coordinate-only vs full point serialization.
 - If participants finish early, challenge them to implement label support (BIP352 Section 5).
 
@@ -134,15 +134,15 @@ Each session has more material than can be covered in one sitting. This is inten
 | Time | Activity | Notes |
 |------|----------|-------|
 | 0:00-0:20 | **Lecture: The scanning problem** | "You've built the sender. Now the hard part: how does the receiver find payments?" Calculate mainnet numbers: 300K tx/day × 1 ECDH each. |
-| 0:20-1:00 | **Coding: scanner exercises** | `silent_payments_scanner.py` — scan_transaction(), scan_block() |
+| 0:20-1:00 | **Coding: scanner exercises** | `silent_payments_scanner.py` - scan_transaction(), scan_block() |
 | 1:00-1:10 | **Break** | |
-| 1:10-1:50 | **Coding: benchmark** | Exercise 3 — benchmark scanning performance. Measure tx/s and extrapolate to mainnet. |
+| 1:10-1:50 | **Coding: benchmark** | Exercise 3 - benchmark scanning performance. Measure tx/s and extrapolate to mainnet. |
 | 1:50-2:30 | **Lecture + Discussion: Making it practical** | Compact block filters (preview Module 4), light client trade-offs, Kyoto project |
 | 2:30-3:00 | **Planning next session** | "Next session: you'll contribute to a real Silent Payments implementation." Browse open issues together. Each participant picks a target repo. |
 
 **Facilitator tips:**
 - The benchmark exercise is eye-opening. Participants will see that scanning mainnet takes minutes (not seconds) on a laptop, and much longer on a phone.
-- This naturally motivates Module 4 (compact block filters) — plant that seed now.
+- This naturally motivates Module 4 (compact block filters) - plant that seed now.
 - Spend the last 30 minutes browsing GitHub issues together. This makes Session 6 much more productive.
 
 #### Session 6: Contributing to Silent Payments (2.5 hours)
@@ -162,7 +162,7 @@ Each session has more material than can be covered in one sitting. This is inten
 
 ---
 
-### Module 3: Payjoin — BIP77/78
+### Module 3: Payjoin - BIP77/78
 
 #### Session 7: How Payjoin Breaks Chain Analysis (2.5 hours)
 
@@ -180,9 +180,9 @@ Each session has more material than can be covered in one sitting. This is inten
 | Time | Activity | Notes |
 |------|----------|-------|
 | 0:00-0:20 | **PDK API overview** | Screen-share the rust-payjoin docs |
-| 0:20-1:30 | **Hands-on: regtest Payjoin** | `exercises/payjoin_testnet.md` — Exercises 1-2 |
+| 0:20-1:30 | **Hands-on: regtest Payjoin** | `exercises/payjoin_testnet.md` - Exercises 1-2 |
 | 1:30-1:40 | **Break** | |
-| 1:40-2:30 | **Hands-on: compare normal vs Payjoin** | Exercise 2 — side-by-side comparison |
+| 1:40-2:30 | **Hands-on: compare normal vs Payjoin** | Exercise 2 - side-by-side comparison |
 | 2:30-3:00 | **Discussion questions** | Coin selection for receivers, sender verification checks, mobile UX |
 
 #### Session 9: Contributing to Payjoin (2.5 hours)
@@ -198,7 +198,7 @@ Same structure as Session 6. Code walkthrough of payjoin-rust and BTCPay Server,
 | Time | Activity | Notes |
 |------|----------|-------|
 | 0:00-0:30 | **Lecture: The invisible fingerprints** | nLockTime, nSequence, version, fee estimation, output ordering |
-| 0:30-1:30 | **Coding: Coin Selection Simulator** | `exercises/coin_selection_simulator.py` — Implement 4 algorithms |
+| 0:30-1:30 | **Coding: Coin Selection Simulator** | `exercises/coin_selection_simulator.py` - Implement 4 algorithms |
 | 1:30-1:40 | **Break** | |
 | 1:40-2:30 | **Coding: Comparison analysis** | Run all algorithms against different UTXO sets, analyze privacy scores |
 | 2:30-3:00 | **Discussion** | "If you were building a wallet from scratch for maximum privacy, what defaults would you choose?" |
@@ -209,10 +209,10 @@ Same structure as Session 6. Code walkthrough of payjoin-rust and BTCPay Server,
 |------|----------|-------|
 | 0:00-0:20 | **Lecture: Why SPV is broken for privacy** | BIP37 Bloom filters leak your addresses to the server |
 | 0:20-0:40 | **Lecture: Golomb-Rice coding** | Use whiteboard to work through encoding by hand |
-| 0:40-1:30 | **Coding: Build a filter** | `exercises/compact_block_filters.py` — Exercises 1-3 |
+| 0:40-1:30 | **Coding: Build a filter** | `exercises/compact_block_filters.py` - Exercises 1-3 |
 | 1:30-1:40 | **Break** | |
-| 1:40-2:20 | **Coding: Filter analysis** | Exercise 4 — measure size, FP rate, query time |
-| 2:20-2:50 | **Coding: SP + CBF simulation** | Exercise 5 — how filters make Silent Payments viable on mobile |
+| 1:40-2:20 | **Coding: Filter analysis** | Exercise 4 - measure size, FP rate, query time |
+| 2:20-2:50 | **Coding: SP + CBF simulation** | Exercise 5 - how filters make Silent Payments viable on mobile |
 | 2:50-3:00 | **Preview capstone** | Introduce the capstone project (Module 4 Session 3) |
 
 #### Session 12: CoinJoin, CoinSwap, and the Future (2.5 hours)
@@ -281,7 +281,7 @@ These developers are actively working on the privacy projects covered in this tr
 - Reach out via GitHub, Twitter/X, or Nostr
 - Offer a 30-45 minute slot (video call is fine)
 - Share the curriculum in advance so they know the audience level
-- Ask them to focus on "what needs to be built" — your participants are looking for contribution opportunities
+- Ask them to focus on "what needs to be built" - your participants are looking for contribution opportunities
 
 ---
 
@@ -332,7 +332,7 @@ The track naturally leads into a contribution sprint. Participants should:
 - Add graduates to a dedicated Discord/Telegram channel for ongoing support
 - Share relevant Bitcoin Optech newsletters and PR updates
 - Organize monthly "privacy office hours" where graduates can get help with contributions
-- Track merged PRs — this is the metric that matters for grant renewals
+- Track merged PRs - this is the metric that matters for grant renewals
 
 ### Measuring Success
 

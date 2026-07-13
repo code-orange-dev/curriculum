@@ -5,7 +5,7 @@ Code Orange Dev School is a learning community. We're here to help regular devel
 ## Our standards
 
 **Do:**
-- Be kind, patient, and encouraging — especially to beginners. Everyone started somewhere.
+- Be kind, patient, and encouraging - especially to beginners. Everyone started somewhere.
 - Assume good faith. Ask questions before assuming the worst.
 - Give constructive, specific feedback. Critique the code, not the person.
 - Respect that people contribute across many timezones, languages, and skill levels.
@@ -19,7 +19,7 @@ Code Orange Dev School is a learning community. We're here to help regular devel
 
 ## Scope
 
-This applies to all Code Orange spaces — GitHub repos, Discord, workshops (online and in person), and any space where you represent the community.
+This applies to all Code Orange spaces - GitHub repos, Discord, workshops (online and in person), and any space where you represent the community.
 
 ## Enforcement
 

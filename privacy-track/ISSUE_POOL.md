@@ -1,6 +1,6 @@
 # Curated Issue Pool
 
-**The single source of contribution targets for the Privacy Track.** Participants pick from here — never from random hunting across GitHub. This is the guardrail that lets us ship high volume without becoming noise to maintainers.
+**The single source of contribution targets for the Privacy Track.** Participants pick from here - never from random hunting across GitHub. This is the guardrail that lets us ship high volume without becoming noise to maintainers.
 
 > **Rule:** If an issue isn't in this file (or just got verified by a curator), it is not a valid target for a session. No exceptions.
 
@@ -15,18 +15,18 @@ A curator (a tutor or experienced participant) keeps this list fresh. An issue e
 3. **Beginner-appropriate.** Scoped so someone could plausibly finish it in or shortly after a session. Docs, tests, examples, small fixes.
 4. **Not already claimed.** Nobody else is mid-PR on it.
 
-Re-verify the whole pool **weekly**. Mark anything that goes stale as `RETIRED` (don't delete — the history is useful). Aim for **5–10 live issues per repo** at any time.
+Re-verify the whole pool **weekly**. Mark anything that goes stale as `RETIRED` (don't delete - the history is useful). Aim for **5–10 live issues per repo** at any time.
 
 ---
 
 ## The maintainer-DM sourcing playbook
 
-This is how we turn "we know a few maintainers" into the warmest possible issue pipeline — and into Code Orange's real long-term asset.
+This is how we turn "we know a few maintainers" into the warmest possible issue pipeline - and into Code Orange's real long-term asset.
 
 **The goal:** a handful of maintainers who think of Code Orange as *"the program that sends me prepared contributors,"* and who occasionally point us at issues they'd actually love help on.
 
 **The opening DM (adapt per person):**
-> Hey [name] — I run Code Orange's Bitcoin Privacy Track. We teach curious Bitcoiners and guide each one to a real, well-prepared PR (they run a build/test/CONTRIBUTING checklist before submitting — we're careful not to add noise). [repo] is one of the projects we contribute to. Are there a few issues you'd genuinely welcome outside help on — especially `good-first-issue`-type work? Happy to point our people only at things you actually want touched.
+> Hey [name] - I run Code Orange's Bitcoin Privacy Track. We teach curious Bitcoiners and guide each one to a real, well-prepared PR (they run a build/test/CONTRIBUTING checklist before submitting - we're careful not to add noise). [repo] is one of the projects we contribute to. Are there a few issues you'd genuinely welcome outside help on - especially `good-first-issue`-type work? Happy to point our people only at things you actually want touched.
 
 **Why this works:** it leads with respect for their time, signals we have a quality floor, and asks them to *pull* work toward us rather than us pushing PRs at them.
 
@@ -93,7 +93,7 @@ CONTRIBUTING: _link here_ · Maintainer contact: _DM status here_
 
 ## Retired / merged log
 
-Keep a running record — it's how we report "merged PRs" and spot which repos are working.
+Keep a running record - it's how we report "merged PRs" and spot which repos are working.
 
 | Date | Repo | # | Contributor | Outcome (MERGED/CLOSED) | Notes |
 |---|---|---|---|---|---|

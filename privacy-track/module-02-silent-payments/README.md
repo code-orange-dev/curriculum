@@ -1,6 +1,6 @@
-# Module 2: Silent Payments — BIP352
+# Module 2: Silent Payments - BIP352
 
-> 4 sessions — Understand, implement, and contribute to Bitcoin's reusable address protocol.
+> 4 sessions - Understand, implement, and contribute to Bitcoin's reusable address protocol.
 
 ---
 
@@ -8,7 +8,7 @@
 
 ### Overview
 
-Address reuse is one of Bitcoin's biggest privacy failures. Every time you post a donation address, every payment to it is linked. Silent Payments (BIP352) solve this by allowing a single static address to generate a unique on-chain address for every payment — without any interaction between sender and receiver.
+Address reuse is one of Bitcoin's biggest privacy failures. Every time you post a donation address, every payment to it is linked. Silent Payments (BIP352) solve this by allowing a single static address to generate a unique on-chain address for every payment - without any interaction between sender and receiver.
 
 ### Topics
 
@@ -16,7 +16,7 @@ Address reuse is one of Bitcoin's biggest privacy failures. Every time you post 
 - Posting a Bitcoin address publicly links all payments to your identity
 - Even "fresh address per payment" requires interaction (invoice model)
 - The donation/tip use case: you need one static address, but reuse destroys privacy
-- BIP47 reusable payment codes — the first attempt (requires a notification transaction)
+- BIP47 reusable payment codes - the first attempt (requires a notification transaction)
 
 **Static Payment Codes vs Fresh Addresses**
 - Traditional: receiver generates a new address for each payment (requires online interaction)
@@ -82,7 +82,7 @@ You'll implement a simplified Silent Payments sender in Python. By the end of th
 
 **Construct the Transaction**
 - Build a transaction with your inputs and the Silent Payment output
-- The output looks like any other Taproot output on-chain — no special markers
+- The output looks like any other Taproot output on-chain - no special markers
 - Indistinguishable from normal Taproot transactions
 
 ### Exercise
@@ -135,8 +135,8 @@ Sending is the easy part. Receiving Silent Payments requires scanning every tran
 See [`exercises/silent_payments_scanner.py`](exercises/silent_payments_scanner.py)
 
 **Your Task:**
-1. Implement `scan_transaction()` — check if a transaction contains a Silent Payment to you
-2. Implement `scan_block()` — scan all transactions in a block
+1. Implement `scan_transaction()` - check if a transaction contains a Silent Payment to you
+2. Implement `scan_block()` - scan all transactions in a block
 3. Benchmark: how long does it take to scan 100 blocks on signet?
 4. Implement a basic compact block filter check to skip irrelevant blocks
 5. Compare scanning time with and without the filter optimization
@@ -157,7 +157,7 @@ You've implemented Silent Payments from scratch. Now it's time to contribute to 
 
 ### Topics
 
-**Bitcoin Core PR #28122 — Code Walkthrough**
+**Bitcoin Core PR #28122 - Code Walkthrough**
 - Where Silent Payments lives in the Bitcoin Core codebase
 - The `Sender` class and `GenerateRecipientScriptPubKeys()` method
 - The `Recipient` class and `ScanTxOutputs()` method
@@ -165,7 +165,7 @@ You've implemented Silent Payments from scratch. Now it's time to contribute to 
 - Current status and open review comments
 
 **rust-silentpayments Library**
-- [cygnet3/rust-silentpayments](https://github.com/cygnet3/rust-silentpayments) — standalone Rust library
+- [cygnet3/rust-silentpayments](https://github.com/cygnet3/rust-silentpayments) - standalone Rust library
 - API walkthrough: creating addresses, sending, scanning
 - How it integrates with rust-bitcoin and BDK
 - Open issues and areas needing contribution
@@ -180,8 +180,8 @@ You've implemented Silent Payments from scratch. Now it's time to contribute to 
 
 **Your First PR:**
 1. Pick one of these repositories:
-   - Bitcoin Core (`bitcoin/bitcoin`) — C++
-   - rust-silentpayments (`cygnet3/rust-silentpayments`) — Rust
+   - Bitcoin Core (`bitcoin/bitcoin`) - C++
+   - rust-silentpayments (`cygnet3/rust-silentpayments`) - Rust
    - Any wallet implementing BIP352
 2. Find an open issue labeled "good first issue" or identify an improvement from the code walkthrough
 3. Fork the repo, make your change, write tests

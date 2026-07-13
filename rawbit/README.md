@@ -1,4 +1,4 @@
-# rawBit Study Cohort — 10-Week Program
+# rawBit Study Cohort - 10-Week Program
 
 > **Build raw Bitcoin transactions from scratch using a visual, interactive tool.**
 
@@ -8,9 +8,9 @@
 
 ## Overview
 
-The rawBit Study Cohort is a 10-week hands-on program where participants build raw Bitcoin transactions from scratch using [rawBit](https://github.com/rawBit-io/rawbit) — an open-source visual Bitcoin transaction builder and Script debugger. Participants connect inputs, keys, and scripts on a visual canvas to construct transactions at the byte level, progressing from legacy P2PKH all the way to Taproot.
+The rawBit Study Cohort is a 10-week hands-on program where participants build raw Bitcoin transactions from scratch using [rawBit](https://github.com/rawBit-io/rawbit) - an open-source visual Bitcoin transaction builder and Script debugger. Participants connect inputs, keys, and scripts on a visual canvas to construct transactions at the byte level, progressing from legacy P2PKH all the way to Taproot.
 
-This cohort is the natural next step after [Bitcoin Dojo](../bitcoin-dojo/) — where you learned the cryptographic primitives, here you apply them to build real transactions.
+This cohort is the natural next step after [Bitcoin Dojo](../bitcoin-dojo/) - where you learned the cryptographic primitives, here you apply them to build real transactions.
 
 **rawBit** is created by [@rawBit_io](https://x.com/rawBit_io) and ships with 12 built-in interactive lessons. Code Orange runs a structured study cohort around these lessons with weekly group calls, peer accountability, and mentor support.
 
@@ -36,7 +36,7 @@ This cohort is the natural next step after [Bitcoin Dojo](../bitcoin-dojo/) — 
 ## How It Works
 
 1. **Each week**: 1-2 rawBit lessons assigned + supplementary readings
-2. **Self-study**: Work through the interactive lessons in rawBit — drag, connect, build, inspect
+2. **Self-study**: Work through the interactive lessons in rawBit - drag, connect, build, inspect
 3. **Weekly call**: Group discussion and live debugging of transaction construction
 4. **Challenge exercises**: Build increasingly complex transactions without the guided mode
 5. **Final project**: Construct a complex multi-condition Taproot transaction from scratch
@@ -57,8 +57,8 @@ This cohort is the natural next step after [Bitcoin Dojo](../bitcoin-dojo/) — 
 - Inspecting the raw hex output byte by byte
 
 **Exercises:**
-1. Build a P2PK transaction in rawBit — send coins to a public key and spend them
-2. Build a P2PKH transaction — compare the script structure to P2PK
+1. Build a P2PK transaction in rawBit - send coins to a public key and spend them
+2. Build a P2PKH transaction - compare the script structure to P2PK
 3. Export the raw hex and decode it manually, labelling every field
 
 **Discussion:**
@@ -79,7 +79,7 @@ This cohort is the natural next step after [Bitcoin Dojo](../bitcoin-dojo/) — 
 
 **Exercises:**
 1. Build a 2-of-3 bare multisig transaction in rawBit
-2. Wrap the same multisig in P2SH — compare the output scripts
+2. Wrap the same multisig in P2SH - compare the output scripts
 3. Spend from the P2SH output by providing the redeem script and signatures
 
 ---
@@ -150,9 +150,9 @@ This cohort is the natural next step after [Bitcoin Dojo](../bitcoin-dojo/) — 
 - The witness discount: why witness data is cheaper
 
 **Exercises:**
-1. Build a P2WPKH transaction in rawBit — compare structure to P2PKH
+1. Build a P2WPKH transaction in rawBit - compare structure to P2PKH
 2. Calculate the weight and vbytes of your SegWit transaction
-3. Build the same transaction as legacy P2PKH — compare sizes and fees
+3. Build the same transaction as legacy P2PKH - compare sizes and fees
 4. Verify that the witness data is excluded from the txid calculation
 
 ---
@@ -169,7 +169,7 @@ This cohort is the natural next step after [Bitcoin Dojo](../bitcoin-dojo/) — 
 
 **Exercises:**
 1. Build a P2WSH 2-of-3 multisig in rawBit
-2. Build the same multisig as P2SH — compare witness data vs scriptSig
+2. Build the same multisig as P2SH - compare witness data vs scriptSig
 3. Build a nested SegWit (P2SH-P2WPKH) transaction
 
 ---
@@ -188,7 +188,7 @@ This cohort is the natural next step after [Bitcoin Dojo](../bitcoin-dojo/) — 
 **Exercises:**
 1. Build a Taproot (P2TR) key-path spend in rawBit
 2. Build a Taproot output with a script tree
-3. Spend via the script-path — provide the script, control block, and Merkle proof
+3. Spend via the script-path - provide the script, control block, and Merkle proof
 4. Compare the on-chain footprint of key-path vs script-path
 
 ---
@@ -251,7 +251,7 @@ Graduates are ready to:
 ### During the Cohort
 
 - [ ] Post weekly lesson assignments every Sunday
-- [ ] Host weekly calls — screen-share rawBit for live transaction building
+- [ ] Host weekly calls - screen-share rawBit for live transaction building
 - [ ] Encourage participants to export and share their transaction hex
 - [ ] Pair struggling participants with faster learners
 
@@ -265,7 +265,7 @@ Graduates are ready to:
 
 ## Credits
 
-- **rawBit tool**: [rawBit.io](https://github.com/rawBit-io/rawbit) — Visual Bitcoin TX builder & Script debugger
+- **rawBit tool**: [rawBit.io](https://github.com/rawBit-io/rawbit) - Visual Bitcoin TX builder & Script debugger
 - **Upstream textbook**: [Programming Bitcoin](https://github.com/jimmysong/programmingbitcoin) by Jimmy Song
 - **Partner**: Code Orange Dev School in collaboration with rawBit
 

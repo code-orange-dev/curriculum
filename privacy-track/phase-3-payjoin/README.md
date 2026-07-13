@@ -1,4 +1,4 @@
-# Phase 3: Payjoin (BIP77/78) — Sessions 9-12
+# Phase 3: Payjoin (BIP77/78) - Sessions 9-12
 
 **Objective:** Master Payjoin as a protocol that defeats Common Input Ownership Heuristic (CIOH) by design, understand the full stack from specification to production deployment, and contribute to the Payjoin ecosystem.
 
@@ -6,7 +6,7 @@
 
 ---
 
-## Session 9: BIP77/78 Theory — How Payjoin Defeats Chain Analysis
+## Session 9: BIP77/78 Theory - How Payjoin Defeats Chain Analysis
 
 ### Real-World Scenario
 
@@ -41,12 +41,12 @@ Every Payjoin transaction creates ambiguity at scale. If 10% of transactions are
 
 ### Privacy Tools You'll Use
 
-- **BTCPay Server** (BIP78 receiver) — production-grade merchant payments
-- **Bull Bitcoin Wallet** (BIP77 sender) — mobile Payjoin creation
-- **Sparrow Wallet** (BIP77 sender) — desktop Payjoin with full control
-- **Wasabi Wallet** (planned BIP78 support) — receiver support coming
-- **Payjoin Dev Kit** — reference implementation
-- **bitcoin-cli** — transaction inspection and debugging
+- **BTCPay Server** (BIP78 receiver) - production-grade merchant payments
+- **Bull Bitcoin Wallet** (BIP77 sender) - mobile Payjoin creation
+- **Sparrow Wallet** (BIP77 sender) - desktop Payjoin with full control
+- **Wasabi Wallet** (planned BIP78 support) - receiver support coming
+- **Payjoin Dev Kit** - reference implementation
+- **bitcoin-cli** - transaction inspection and debugging
 
 ### Detailed Hands-On Exercise
 
@@ -181,11 +181,11 @@ This session, you'll build both sender and receiver implementations from scratch
 
 ### Privacy Tools You'll Use
 
-- **Payjoin Development Kit (PDK)** — https://github.com/payjoin/rust-payjoin
-- **Rust language** — stable edition 2021+
-- **Cargo** — dependency management
-- **bitcoin-cli** — transaction inspection
-- **Bitcoin Core (regtest)** — local testing
+- **Payjoin Development Kit (PDK)** - https://github.com/payjoin/rust-payjoin
+- **Rust language** - stable edition 2021+
+- **Cargo** - dependency management
+- **bitcoin-cli** - transaction inspection
+- **Bitcoin Core (regtest)** - local testing
 
 ### Detailed Hands-On Exercise
 
@@ -323,12 +323,12 @@ After a month of Payjoin payments, analysts can't track your money in or out.
 
 ### Privacy Tools You'll Use
 
-- **BTCPay Server** (BIP78 receiver) — production merchant platform
-- **Sparrow Wallet** (BIP77 sender) — desktop wallet integration
-- **Bull Bitcoin Wallet** (BIP77 sender) — mobile wallet
-- **Bitcoin Core** — transaction validation
-- **Mempool.space** — monitor transactions
-- **docker** — containerized deployment
+- **BTCPay Server** (BIP78 receiver) - production merchant platform
+- **Sparrow Wallet** (BIP77 sender) - desktop wallet integration
+- **Bull Bitcoin Wallet** (BIP77 sender) - mobile wallet
+- **Bitcoin Core** - transaction validation
+- **Mempool.space** - monitor transactions
+- **docker** - containerized deployment
 
 ### Detailed Hands-On Exercise
 
@@ -446,7 +446,7 @@ Whether you're a merchant, freelancer, or donation recipient:
 
 ---
 
-## Session 12: Contributing to Payjoin — Ecosystem & Protocol
+## Session 12: Contributing to Payjoin - Ecosystem & Protocol
 
 ### Real-World Scenario
 
@@ -469,12 +469,12 @@ As a Bitcoin privacy developer, you can shape the protocol's future. This sessio
 
 ### Privacy Tools You'll Use
 
-- **payjoin/rust-payjoin** — reference implementation
-- **btcpayserver/btcpayserver** — production receiver
-- **sparrowwallet/sparrow** — production sender
-- **git** — version control
-- **GitHub Issues & PRs** — collaboration
-- **cargo test** — testing framework
+- **payjoin/rust-payjoin** - reference implementation
+- **btcpayserver/btcpayserver** - production receiver
+- **sparrowwallet/sparrow** - production sender
+- **git** - version control
+- **GitHub Issues & PRs** - collaboration
+- **cargo test** - testing framework
 
 ### Detailed Hands-On Exercise
 
@@ -499,14 +499,14 @@ As a Bitcoin privacy developer, you can shape the protocol's future. This sessio
 
 **Part 2: Choose a Contribution**
 
-**Option A: rust-payjoin — Protocol Robustness**
+**Option A: rust-payjoin - Protocol Robustness**
 
 Improve error handling:
 - Add context to PSBT validation errors
 - Example: Instead of "Invalid PSBT", return "Invalid PSBT: input 0 has no previous_output"
 - Write test showing improved error messages
 
-**Option B: btcpayserver — Production Integration**
+**Option B: btcpayserver - Production Integration**
 
 Add monitoring:
 - Track Payjoin success rate

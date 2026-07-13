@@ -5,10 +5,10 @@
 ## Contents
 
 This directory contains:
-- `exercises/` — Hands-on exercises for this week
-- `solutions/` — Reference solutions (try the exercises first!)
-- `slides/` — Presentation slides for facilitators
-- `notes/` — Additional notes and resources
+- `exercises/` - Hands-on exercises for this week
+- `solutions/` - Reference solutions (try the exercises first!)
+- `slides/` - Presentation slides for facilitators
+- `notes/` - Additional notes and resources
 
 ## Quick Links
 

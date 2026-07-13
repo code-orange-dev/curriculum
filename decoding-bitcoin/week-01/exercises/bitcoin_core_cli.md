@@ -1,4 +1,4 @@
-# Decoding Bitcoin — Week 1 Exercises: Bitcoin Core CLI
+# Decoding Bitcoin - Week 1 Exercises: Bitcoin Core CLI
 
 > Code Orange Dev School | [codeorange.dev](https://codeorange.dev)
 
@@ -31,7 +31,7 @@ make -j$(nproc)
 
 ## Exercise 1: Start a Regtest Network and Mine Blocks
 
-Regtest (regression test) is a private blockchain that runs on your machine. You control everything — no need to sync with the real network.
+Regtest (regression test) is a private blockchain that runs on your machine. You control everything - no need to sync with the real network.
 
 ### Tasks
 
@@ -76,7 +76,7 @@ bitcoin-cli -regtest getnewaddress "alice"
 bitcoin-cli -regtest getnewaddress "bob"
 ```
 
-**Question**: What type of addresses are these? (Hint: look at the prefix — `bcrt1q` = P2WPKH, `bcrt1p` = P2TR)
+**Question**: What type of addresses are these? (Hint: look at the prefix - `bcrt1q` = P2WPKH, `bcrt1p` = P2TR)
 
 **2.2** Send 10 BTC to "bob":
 ```bash
@@ -92,11 +92,11 @@ bitcoin-cli -regtest getrawtransaction <txid> true
 ```
 
 **Question**: What are the fields in the decoded transaction? List each one and explain what it does:
-- `txid` — 
-- `version` — 
-- `vin` (inputs) — 
-- `vout` (outputs) — 
-- `locktime` — 
+- `txid` - 
+- `version` - 
+- `vin` (inputs) - 
+- `vout` (outputs) - 
+- `locktime` - 
 
 **Question**: How many outputs does the transaction have? Why are there more than 1? (Hint: change output)
 

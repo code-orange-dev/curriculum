@@ -15,7 +15,7 @@ Phase 1 establishes the technical and threat-modeling foundations for Bitcoin pr
 ### Real-World Scenario
 
 **Maria's Privacy Crisis**  
-Maria runs a small organic coffee shop in Bali. She started accepting Bitcoin in 2023 and promoted her payment address on social media. Within months, a competitor used blockchain explorers to track her revenue: they saw every payment, calculated her sales volume, and could estimate her profit margins. One customer noticed their personal address was linked to Maria's shop address and felt exposed. Maria is now considering closing her Bitcoin payments or finding a private solution. But she still has 1.2 BTC sitting in that address—moving it would broadcast her entire transaction history to chain analysis firms that she suspects are already watching.
+Maria runs a small organic coffee shop in Bali. She started accepting Bitcoin in 2023 and promoted her payment address on social media. Within months, a competitor used blockchain explorers to track her revenue: they saw every payment, calculated her sales volume, and could estimate her profit margins. One customer noticed their personal address was linked to Maria's shop address and felt exposed. Maria is now considering closing her Bitcoin payments or finding a private solution. But she still has 1.2 BTC sitting in that address-moving it would broadcast her entire transaction history to chain analysis firms that she suspects are already watching.
 
 ### Learning Objectives
 
@@ -28,11 +28,11 @@ By the end of Session 1, you will:
 
 ### Privacy Tools You'll Use
 
-- **OXT.me** — Advanced chain analysis and address clustering tool (Bitcoin-only, no KYC required to use)
-- **mempool.space** — Real-time transaction explorer with privacy analysis features
-- **Chainalysis Reactor (demo mode)** — Understanding enterprise surveillance capabilities (public demo)
-- **bitcoin-cli** — Inspecting raw transaction data
-- **Entropy** — Understanding address linking heuristics
+- **OXT.me** - Advanced chain analysis and address clustering tool (Bitcoin-only, no KYC required to use)
+- **mempool.space** - Real-time transaction explorer with privacy analysis features
+- **Chainalysis Reactor (demo mode)** - Understanding enterprise surveillance capabilities (public demo)
+- **bitcoin-cli** - Inspecting raw transaction data
+- **Entropy** - Understanding address linking heuristics
 
 ### Hands-On Exercise: "Identify Yourself"
 
@@ -99,15 +99,15 @@ When you're about to send Bitcoin: go to mempool.space, paste your address, and 
 
 ### Reading List with Links
 
-1. **"How Chainalysis Made Me Paranoid" — Unchained Podcast**  
+1. **"How Chainalysis Made Me Paranoid" - Unchained Podcast**  
    https://podcasts.apple.com/us/podcast/how-chainalysis-made-me-paranoid/id1438148082
    - 45-min audio primer on how surveillance firms work
 
-2. **"Heuristics for Bitcoin Address Clustering" — OXT Research**  
+2. **"Heuristics for Bitcoin Address Clustering" - OXT Research**  
    https://github.com/oxt-research/blockchain-analytics-research/blob/master/clustering_heuristics.md
    - Technical reference for change address identification
 
-3. **"Chain Analysis Fundamentals" — Bitcoin Privacy Institute**  
+3. **"Chain Analysis Fundamentals" - Bitcoin Privacy Institute**  
    https://bitcoinprivacyinstitute.org/fundamentals/
    - Interactive tutorial on linking addresses and pattern recognition
 
@@ -115,7 +115,7 @@ When you're about to send Bitcoin: go to mempool.space, paste your address, and 
    https://go.chainalysis.com/demo-reactor.html
    - See enterprise surveillance tools in action (no login required)
 
-5. **"Transaction Fee Analysis: A Window Into Miner Behavior" — Jameson Lopp**  
+5. **"Transaction Fee Analysis: A Window Into Miner Behavior" - Jameson Lopp**  
    https://blog.lopp.net/transaction-fee-analysis/
    - How fee patterns leak timing information
 
@@ -130,7 +130,7 @@ When you're about to send Bitcoin: go to mempool.space, paste your address, and 
 ### Real-World Scenario
 
 **Developer's Dilemma**  
-You're building a feature in your Bitcoin wallet that shows users whether their transaction is "private." But how do you analyze privacy at the transaction level? You find a transaction in mempool: multiple inputs, multiple outputs, mixed output values. One output is significantly larger—is it change or payment to the merchant? Is the change address on-chain reused? Does the wallet have a time-stamp of when the change address was created? Which heuristic breaks down? A user tests your feature and finds contradictory privacy scores. You realize: you can't evaluate transaction privacy without understanding exactly how that transaction's data structure leaks information.
+You're building a feature in your Bitcoin wallet that shows users whether their transaction is "private." But how do you analyze privacy at the transaction level? You find a transaction in mempool: multiple inputs, multiple outputs, mixed output values. One output is significantly larger-is it change or payment to the merchant? Is the change address on-chain reused? Does the wallet have a time-stamp of when the change address was created? Which heuristic breaks down? A user tests your feature and finds contradictory privacy scores. You realize: you can't evaluate transaction privacy without understanding exactly how that transaction's data structure leaks information.
 
 ### Learning Objectives
 
@@ -143,11 +143,11 @@ By the end of Session 2, you will:
 
 ### Privacy Tools You'll Use
 
-- **bitcoin-cli** — Raw transaction inspection (`getrawtransaction`, `decoderawtransaction`)
-- **Sparrow Wallet** — Transaction inspector with privacy scoring
-- **mempool.space** — Visual transaction dissection
-- **bitcoin-tx** — Transaction creation and inspection utility
-- **mitmproxy** — Observing network-level leaks (optional advanced)
+- **bitcoin-cli** - Raw transaction inspection (`getrawtransaction`, `decoderawtransaction`)
+- **Sparrow Wallet** - Transaction inspector with privacy scoring
+- **mempool.space** - Visual transaction dissection
+- **bitcoin-tx** - Transaction creation and inspection utility
+- **mitmproxy** - Observing network-level leaks (optional advanced)
 
 ### Hands-On Exercise: "Decode the Privacy Leak"
 
@@ -245,7 +245,7 @@ This 10-second review prevents you from accidentally merging addresses or creati
 
 ### Reading List with Links
 
-1. **"The Privacy Implications of Bitcoin Transaction Structure" — Bitcoin Optech**  
+1. **"The Privacy Implications of Bitcoin Transaction Structure" - Bitcoin Optech**  
    https://bitcoinops.org/en/newsletters/2022/04/06/#spend-patterns-and-privacy
    - Technical deep-dive on input/output analysis
 
@@ -253,7 +253,7 @@ This 10-second review prevents you from accidentally merging addresses or creati
    https://www.sparrowwallet.com/docs/transactions.html
    - Complete guide to transaction inspection and privacy scoring
 
-3. **"UTXO Management: A Practical Guide" — Bitcoin Magazine**  
+3. **"UTXO Management: A Practical Guide" - Bitcoin Magazine**  
    https://bitcoinmagazine.com/articles/utxo-management-a-practical-guide
    - Real-world examples of privacy-preserving transaction patterns
 
@@ -261,7 +261,7 @@ This 10-second review prevents you from accidentally merging addresses or creati
    https://mempool.space/docs/faq
    - Learn to read transaction data from the block explorer
 
-5. **"Coin Mixing Explained" — Wasabi Wallet Blog**  
+5. **"Coin Mixing Explained" - Wasabi Wallet Blog**  
    https://blog.wasabiwallet.io/coinjoin/
    - Context for why alternative transaction patterns exist
 
@@ -289,11 +289,11 @@ By the end of Session 3, you will:
 
 ### Privacy Tools You'll Use
 
-- **Sparrow Wallet** — Coin control interface with visual UTXO management
-- **Bitcoin Core** — Coin selection algorithms (`selectcoins`, `fundrawtransaction`)
-- **BTCPay Server** — UTXO selection for merchant payments
-- **OXT.me** — Analyzing historical coin selection patterns
-- **bitcoin-cli** — Programmatic coin selection
+- **Sparrow Wallet** - Coin control interface with visual UTXO management
+- **Bitcoin Core** - Coin selection algorithms (`selectcoins`, `fundrawtransaction`)
+- **BTCPay Server** - UTXO selection for merchant payments
+- **OXT.me** - Analyzing historical coin selection patterns
+- **bitcoin-cli** - Programmatic coin selection
 
 ### Hands-On Exercise: "Engineer the Optimal Spend"
 
@@ -309,7 +309,7 @@ By the end of Session 3, you will:
 **Step 3:** Scenario: You need to send 0.22 BTC to a merchant. Choose your coin selection:
 
 **Option A: Select Friend + Client (0.2 BTC)**  
-- Need to add more to cover 0.22 BTC requirement—force selection of Exchange UTXO too
+- Need to add more to cover 0.22 BTC requirement-force selection of Exchange UTXO too
 - Privacy cost: Links all three sources
 - Fee benefit: Single transaction, lower total fees
 
@@ -408,7 +408,7 @@ When you spend, look at your UTXO list and consciously select coins that minimiz
 
 ### Reading List with Links
 
-1. **"Coin Selection and Wallet Fingerprinting" — Bitcoin Optech**  
+1. **"Coin Selection and Wallet Fingerprinting" - Bitcoin Optech**  
    https://bitcoinops.org/en/newsletters/2022/10/05/#coin-selection-for-privacy
    - Technical analysis of coin selection privacy implications
 
@@ -416,7 +416,7 @@ When you spend, look at your UTXO list and consciously select coins that minimiz
    https://github.com/bitcoin/bitcoin/blob/master/src/wallet/coinselection.cpp
    - Source code comments explaining the algorithms
 
-3. **"UTXO Consolidation: When and Why" — Blockstream Blog**  
+3. **"UTXO Consolidation: When and Why" - Blockstream Blog**  
    https://blockstream.com/2017/12/12/utxo-consolidation/
    - Strategic guide to managing UTXO sets
 
@@ -424,7 +424,7 @@ When you spend, look at your UTXO list and consciously select coins that minimiz
    https://www.sparrowwallet.com/docs/wallets.html#coin-control
    - Complete visual walkthrough of coin selection
 
-5. **"Branch-and-Bound Coin Selection" — Bitcoin Core Docs**  
+5. **"Branch-and-Bound Coin Selection" - Bitcoin Core Docs**  
    https://github.com/bitcoin/bitcoin/blob/master/src/wallet/coinselection.h
    - Algorithm documentation and rationale
 
@@ -452,23 +452,23 @@ By the end of Session 4, you will:
 
 ### Privacy Tools You'll Use
 
-- **Sparrow Wallet** — View-only wallet inspector with script type analysis
-- **Electrum** — Check legacy vs. modern output formats
-- **Bitcoin Core** — Full node with raw transaction inspection
-- **BlueWallet** — Mobile wallet with different fingerprints
-- **Cake Wallet** — Privacy-focused mobile option
-- **mempool.space** — Visualizing transaction patterns
-- **OXT.me** — Clustering and fingerprinting analysis
+- **Sparrow Wallet** - View-only wallet inspector with script type analysis
+- **Electrum** - Check legacy vs. modern output formats
+- **Bitcoin Core** - Full node with raw transaction inspection
+- **BlueWallet** - Mobile wallet with different fingerprints
+- **Cake Wallet** - Privacy-focused mobile option
+- **mempool.space** - Visualizing transaction patterns
+- **OXT.me** - Clustering and fingerprinting analysis
 
 ### Hands-On Exercise: "Identify the Wallet"
 
 **Part 1: Understand Script Types (and Why They Matter)**
 
 Different wallets default to different address types:
-- P2PKH (1...) — Legacy, most obvious script type, high fingerprinting risk
-- P2SH (3...) — Can hide script type, but SegWit-in-P2SH has unique signatures
-- P2WPKH (bc1q...) — Native SegWit, most common modern format
-- P2TR (bc1p...) — Taproot, newest, becomes more common yearly
+- P2PKH (1...) - Legacy, most obvious script type, high fingerprinting risk
+- P2SH (3...) - Can hide script type, but SegWit-in-P2SH has unique signatures
+- P2WPKH (bc1q...) - Native SegWit, most common modern format
+- P2TR (bc1p...) - Taproot, newest, becomes more common yearly
 
 **Step 1:** Go to mempool.space and find a recent transaction with mixed input/output script types:
 - Example: a transaction with both P2PKH and P2WPKH inputs
@@ -624,7 +624,7 @@ This prevents your wallet software from creating a recognizable fingerprint that
    https://github.com/bitcoin/bitcoin/pull/24308
    - Discussion of output randomization in Bitcoin Core
 
-3. **"The Privacy Implications of Wallet Software" — Bitcoin Optech**  
+3. **"The Privacy Implications of Wallet Software" - Bitcoin Optech**  
    https://bitcoinops.org/en/newsletters/2022/06/15/#analyzing-wallet-privacy
    - Analysis of different wallet implementations
 
@@ -636,7 +636,7 @@ This prevents your wallet software from creating a recognizable fingerprint that
    https://github.com/spesmilo/electrum/blob/master/electrum/coinselection.py
    - Source code for Electrum's coin selection (affects fingerprinting)
 
-6. **"Linkability Attacks in Bitcoin" — Monero Research Lab**  
+6. **"Linkability Attacks in Bitcoin" - Monero Research Lab**  
    https://www.monerooutreach.org/
    - Cross-chain analysis techniques relevant to wallet fingerprinting
 

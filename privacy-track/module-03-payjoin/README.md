@@ -1,6 +1,6 @@
-# Module 3: Payjoin — BIP77/78
+# Module 3: Payjoin - BIP77/78
 
-> 3 sessions — Break the most powerful chain analysis heuristic, build with Payjoin Dev Kit, and contribute to payjoin-rust.
+> 3 sessions - Break the most powerful chain analysis heuristic, build with Payjoin Dev Kit, and contribute to payjoin-rust.
 
 ---
 
@@ -8,24 +8,24 @@
 
 ### Overview
 
-The common-input-ownership heuristic is the backbone of chain analysis. Payjoin shatters it. In a Payjoin transaction, both sender and receiver contribute inputs — making it impossible to assume all inputs belong to one entity. This session covers how Payjoin works, its evolution from V1 to V2, and why it's one of the highest-leverage privacy improvements available today.
+The common-input-ownership heuristic is the backbone of chain analysis. Payjoin shatters it. In a Payjoin transaction, both sender and receiver contribute inputs - making it impossible to assume all inputs belong to one entity. This session covers how Payjoin works, its evolution from V1 to V2, and why it's one of the highest-leverage privacy improvements available today.
 
 ### Topics
 
 **The Common-Input-Ownership Heuristic**
 - Why it exists: wallets combine UTXOs automatically when spending
 - How chain analysis firms use it: "all inputs in a transaction belong to the same wallet"
-- Accuracy: extremely high for normal transactions — the foundation of clustering
+- Accuracy: extremely high for normal transactions - the foundation of clustering
 - The weakness: it's an assumption, not a rule. Payjoin exploits this.
 
-**Payjoin V1 (BIP78) — Synchronous**
+**Payjoin V1 (BIP78) - Synchronous**
 - Original proposal: sender creates a PSBT, sends it to receiver's endpoint
 - Receiver adds their own input(s) and adjusts outputs
 - Sender verifies, signs, and broadcasts
 - Limitation: receiver must run an always-on server (the `pj=` endpoint in BIP21 URI)
 - This made V1 impractical for most users
 
-**Payjoin V2 (BIP77) — Asynchronous**
+**Payjoin V2 (BIP77) - Asynchronous**
 - The breakthrough: outsource receiver's server to an untrusted "Payjoin Directory"
 - Receiver posts an encrypted request to the directory
 - Sender picks it up, adds their contribution, posts back
@@ -42,7 +42,7 @@ The common-input-ownership heuristic is the backbone of chain analysis. Payjoin 
 6. Receiver signs their inputs and returns the modified PSBT
 7. Sender verifies: their output values haven't decreased, no new outputs were added
 8. Sender signs their inputs and broadcasts the final transaction
-9. On-chain: looks like a normal multi-input transaction — but CIOH is broken
+9. On-chain: looks like a normal multi-input transaction - but CIOH is broken
 
 ### Hands-On Exercise
 
@@ -89,7 +89,7 @@ Payjoin Dev Kit (PDK) is a Rust library that makes it straightforward to integra
 
 ### Topics
 
-**Payjoin Dev Kit (PDK) — Rust Library Overview**
+**Payjoin Dev Kit (PDK) - Rust Library Overview**
 - Repository: [payjoin/rust-payjoin](https://github.com/payjoin/rust-payjoin)
 - Architecture: sender module, receiver module, directory client
 - Key types: `Sender`, `Receiver`, `Request`, `Response`
@@ -161,10 +161,10 @@ You've built with Payjoin. Now contribute to it. This session walks through the 
 
 **Your First Payjoin PR:**
 1. Pick one repository:
-   - [payjoin/rust-payjoin](https://github.com/payjoin/rust-payjoin) — Rust
-   - [btcpayserver/btcpayserver](https://github.com/btcpayserver/btcpayserver) — C#
+   - [payjoin/rust-payjoin](https://github.com/payjoin/rust-payjoin) - Rust
+   - [btcpayserver/btcpayserver](https://github.com/btcpayserver/btcpayserver) - C#
    - Any wallet integrating BIP77/78
-2. Browse open issues — look for "good first issue", documentation improvements, or test coverage gaps
+2. Browse open issues - look for "good first issue", documentation improvements, or test coverage gaps
 3. Fork, implement, write tests
 4. Submit your PR
 

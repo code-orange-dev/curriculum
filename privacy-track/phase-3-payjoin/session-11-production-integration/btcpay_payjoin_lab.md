@@ -138,7 +138,7 @@ bitcoin-cli -regtest getrawtransaction $TXID true
 **YOUR TASK**: Analyze the final transaction:
 1. How many inputs does it have?
 2. Can you tell which input belongs to the sender and which to the receiver?
-3. Apply the common-input-ownership heuristic — what would a chain analyst conclude?
+3. Apply the common-input-ownership heuristic - what would a chain analyst conclude?
 4. Is that conclusion correct?
 
 ---

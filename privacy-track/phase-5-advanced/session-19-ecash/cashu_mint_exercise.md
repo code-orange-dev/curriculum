@@ -269,7 +269,7 @@ Create a detailed table showing information flow:
 
 **Question:** Can a sophisticated mint operator link minting to redemption by analyzing timing or amounts?
 
-**Answer:** Partially—if amounts and timing are unique, some correlation is possible. This is why:
+**Answer:** Partially-if amounts and timing are unique, some correlation is possible. This is why:
 - **Mixing/coinjoin-style protocols** combine tokens across users
 - **Fedimint** uses distributed threshold signatures (no single operator)
 - Users should **split and recombine** tokens to avoid fingerprinting
@@ -343,7 +343,7 @@ Compute: C' = k * B'  (scalar multiplication with private key)
 Send to User: C'
 ```
 
-**Note:** The mint signs blindly—it has no idea what it's actually signing.
+**Note:** The mint signs blindly-it has no idea what it's actually signing.
 
 #### Step 4: User Unblinds the Signature
 
