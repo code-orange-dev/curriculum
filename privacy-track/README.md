@@ -1,3 +1,33 @@
+# Privacy Track
+
+**Season One starts October/November - 12 biweekly 90-min sessions. [Full session guide with facilitator prep →](./SESSIONS.md)**
+
+**Month 1**
+- Session 1: Chain Analysis
+- Session 2: Wallet Fingerprinting
+
+**Month 2**
+- Session 3: Coin Selection & UTXO Management
+- Session 4: Silent Payments
+
+**Month 3**
+- Session 5: Payjoin
+- Session 6: Light Clients (Floresta & Kyoto)
+
+**Month 4**
+- Session 7: P2P Privacy & Node Fingerprinting
+- Session 8: ASmap & Network Attacks
+
+**Month 5**
+- Session 9: CoinJoin (JoinMarket)
+- Session 10: OpenSwap (formerly CoinSwap)
+
+**Month 6**
+- Session 11: Lightning Privacy
+- Session 12: Contribution Sprint
+
+---
+
 # Code Orange - Bitcoin Privacy Track
 
 **A drop-in, drop-out program where every session ends with a real contribution to a Bitcoin privacy project.**

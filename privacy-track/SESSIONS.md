@@ -1,283 +1,207 @@
 # The Privacy Sessions - Biweekly Cypherpunk Hangouts
 
-**90 minutes. Every two weeks. Hands-on, discussion-driven, contribution-first.**
+**90 min. Every 2 weeks. Hands-on, discussion-driven, contribution-first.**
 
-- Not a lecture series. A hangout for privacy-minded, cypherpunk Bitcoiners
-- Every session: get hands dirty with a real privacy tool, then review a real open PR together, live
-- You leave every session having done something that matters on a real repo
-- Drop in any session. No prerequisites, no sequence, no registration guilt
-- Cameras optional. Curiosity mandatory. Testnet always
+- A hangout for privacy-minded, cypherpunk Bitcoiners, not a lecture series
+- Every session: use a real privacy tool, then review a real open PR together, live
+- Drop in any session. No prerequisites, no sequence. Testnet always, cameras optional
+
+## Season One Schedule
+
+**Month 1**
+- Session 1: Chain Analysis
+- Session 2: Wallet Fingerprinting
+
+**Month 2**
+- Session 3: Coin Selection & UTXO Management
+- Session 4: Silent Payments
+
+**Month 3**
+- Session 5: Payjoin
+- Session 6: Light Clients (Floresta & Kyoto)
+
+**Month 4**
+- Session 7: P2P Privacy & Node Fingerprinting
+- Session 8: ASmap & Network Attacks
+
+**Month 5**
+- Session 9: CoinJoin (JoinMarket)
+- Session 10: OpenSwap (formerly CoinSwap)
+
+**Month 6**
+- Session 11: Lightning Privacy
+- Session 12: Contribution Sprint
 
 ---
 
-## Season One at a glance - 12 sessions, 6 months, every 2 weeks
+## The Format - same 6 beats, every session
 
-Starting November 2026 (or October - shift everything up one month). 90 minutes per session.
-
-| Month | Session | Topic |
+| Beat | Time | What happens |
 |---|---|---|
-| Month 1 (Nov) | S1 | Chain Analysis |
-| Month 1 (Nov) | S2 | Wallet Fingerprinting |
-| Month 2 (Dec) | S3 | Coin Selection & UTXO Management |
-| Month 2 (Dec) | S4 | Silent Payments |
-| Month 3 (Jan) | S5 | Payjoin |
-| Month 3 (Jan) | S6 | Light Clients (Floresta & Kyoto) |
-| Month 4 (Feb) | S7 | P2P Privacy & Node Fingerprinting |
-| Month 4 (Feb) | S8 | ASmap & Network Attacks |
-| Month 5 (Mar) | S9 | CoinJoin (JoinMarket) |
-| Month 5 (Mar) | S10 | OpenSwap (formerly CoinSwap) |
-| Month 6 (Apr) | S11 | Lightning Privacy |
-| Month 6 (Apr) | S12 | Contribution Sprint |
+| 🩸 Cold Open | 10 | True surveillance story. Sets stakes, starts the argument |
+| 🕳 Rabbit Hole | 15 | The concept, plain language, one analogy |
+| 🛠 Hands-On | 30 | Everyone does it live on their own machine |
+| 🔍 Review Circle | 20 | Read a live PR together. Someone posts a real review comment before it ends |
+| 📜 Cypherpunk Corner | 10 | Read a short primary text aloud. Argue |
+| 🎯 Bounty Board | 5 | Claim homework. Sats for completions |
+
+**Facilitator basics (every session):**
+- You're a host, not a professor. Don't know? Say so, read the code together
+- Prep takes ~30 min: pick 2-3 small live PRs for the Review Circle + 3-5 bounty items, verify open that morning
+- Track one metric: reviews + PRs posted by the room. Post to the [PR dashboard](https://github.com/code-orange-dev/PR-tracking-dashboard)
+- Testnet/signet only. No real balances on screen. Pseudonyms welcome
 
 ---
 
-## The Format - same rhythm every session
+## S1 · Chain Analysis - "You Are Being Watched"
 
-| Segment | Time | What happens |
-|---|---|---|
-| 🩸 The Cold Open | 10 min | True surveillance story. Real people deanonymized, traced, robbed, or arrested via chain analysis. Sets stakes, sparks the first argument |
-| 🕳 The Rabbit Hole | 15 min | Tonight's concept in plain language plus one analogy. Whiteboard energy, no slide walls |
-| 🛠 Hands-On | 30 min | Everyone does the thing live on their own machine. Facilitator screen-shares, room follows, chaos welcome |
-| 🔍 The Review Circle | 20 min | Open a live PR on a privacy repo. Read the diff together. Ask: what changes, what could break, what would I ask the author? At least one person posts a real review comment before the segment ends |
-| 📜 Cypherpunk Corner | 10 min | Read a short primary text aloud. Argue about it |
-| 🎯 The Bounty Board | 5 min | Claim homework: a curated review, issue, or tiny PR. Sats bounties for completions |
+**You leave with:** the 5 surveillance heuristics + your first diff read.
+**Prep:** make 3 testnet txs beforehand (for the game) · pick a real deanonymization case on mempool.space · pick 2 PRs ([mempool](https://github.com/mempool/mempool) or [BDK](https://github.com/bitcoindevkit/bdk_wallet)) · print Hughes quote
 
-**The one metric:** review comments + PRs posted by the room per session. Goes straight on the [PR dashboard](https://github.com/code-orange-dev/PR-tracking-dashboard).
+- 🩸 Walk a real deanonymization live: one address reuse, whole life exposed
+- 🕳 The 5 heuristics: common-input-ownership, address reuse, round amounts, change detection, wallet fingerprinting. Analogy: binoculars at a market
+- 🛠 **HUNT EACH OTHER:** room plays analyst on your 3 planted txs. Find change, guess wallet, trace money. Sats for first correct trace
+- 🔍 Learn to read a diff. One brave soul comments
+- 📜 Hughes, *A Cypherpunk's Manifesto* (1993): "Privacy is the power to selectively reveal oneself"
+- 🎯 Run the 5 heuristics on your own old tx. Share what you leaked (voluntarily)
 
-**Facilitator rule:** you are the host of a hangout, not a professor. Don't know something? Say so and read the code together. That IS the lesson.
+## S2 · Wallet Fingerprinting - "Your Wallet Has Handwriting"
 
----
+**You leave with:** ability to identify a wallet from raw hex.
+**Prep:** install 3-4 wallets (Sparrow, Electrum, Cake, bdk-cli) · start a shared fingerprint-table doc · pick 2 [rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin) tx-construction PRs
 
-# SEASON ONE - 12 Sessions (Oct/Nov start, ~6 months)
+- 🩸 Two identical-looking txs on screen. By night's end the room tells them apart. So does Chainalysis
+- 🕳 The tells: nLockTime, RBF flags, input ordering (BIP69 or not), version bytes
+- 🛠 **BUILD THE FINGERPRINT TABLE:** everyone makes a testnet tx with a different wallet, dump hex, compare, fill the table. It grows every season
+- 🔍 rust-bitcoin PR: "does this change what a tx looks like on-chain?"
+- 📜 Whitepaper section 10: the original privacy model and where it broke
+- 🎯 Add a wallet row to the table, or file a fingerprint docs issue upstream
 
----
+## S3 · Coin Selection & UTXO Management - "Coins Have Memories"
 
-## S1 · "You Are Being Watched" - Chain Analysis Night
+**You leave with:** labeled UTXOs + fear of careless merging.
+**Prep:** Sparrow on testnet with a funded wallet · the frozen-funds story · 2 [BDK](https://github.com/bitcoindevkit/bdk_wallet) coin-selection PRs · one merged Code Orange BDK PR to show
 
-**You leave with:** the 5 surveillance heuristics in your bones, and your first diff read.
+- 🩸 Exchange freezes a user for where coins were 3 hops ago
+- 🕳 UTXOs = coins with memories. Coin selection = choosing which past life to reveal. Labels are self-defense
+- 🛠 **BREAK IT ON PURPOSE:** label every UTXO, freeze one, force selections. Then merge two labeled identities and watch the damage
+- 🔍 BDK PRs. Show Muhammad's merged audit fixes: normal people do this
+- 📜 Hal Finney on privacy expectations
+- 🎯 BDK docs/test issue, or async review of one open PR
 
-- 🩸 **Cold Open:** walk a real deanonymization on mempool.space, live. One address reuse, whole life exposed
-- 🕳 **Rabbit Hole:** the 5 heuristics analysts use
-  - common-input-ownership, address reuse, round amounts, change detection, wallet fingerprinting
-  - analogy: watching strangers at a market through binoculars
-- 🛠 **Hands-On: HUNT EACH OTHER**
-  - facilitator posts 3 testnet transactions made before the session
-  - room plays analyst: find the change, guess the wallet, trace the money
-  - first correct trace wins sats
-- 🔍 **Review Circle:** [mempool](https://github.com/mempool/mempool) or [BDK](https://github.com/bitcoindevkit/bdk_wallet) open PR. Tonight's goal: learn to read a diff, one brave soul posts a comment
-- 📜 **Cypherpunk Corner:** Eric Hughes, *A Cypherpunk's Manifesto* (1993). "Privacy is the power to selectively reveal oneself to the world"
-- 🎯 **Bounty:** run the 5 heuristics on one of your own old transactions. Report what you leaked (voluntarily!)
+## S4 · Silent Payments - "One Address to Rule Them All"
 
----
+**You leave with:** an SP payment sent + a failed trace.
+**Prep:** SP-capable wallet ready (Cake or tooling) · a public donation address to scrape live · 2 PRs from [shroud](https://github.com/CypherCommons/shroud) or [rust-silentpayments](https://github.com/cygnet3/rust-silentpayments)
 
-## S2 · "Your Wallet Has Handwriting" - Fingerprinting Night
+- 🩸 Scrape a podcaster's static donation address: whole financial history. Then an SP address: nothing
+- 🕳 BIP352, paint-mixing analogy: sender's secret color + your public color = address only you detect. Catch: receiver must scan
+- 🛠 **FAIL TO SURVEIL:** pay each other via SP on testnet, then try to link payments on-chain. The failure is the demo
+- 🔍 shroud is our own community's wallet (Chaitika). Author may be in the call
+- 📜 BIP352 motivation section. Read like scripture, argue like heretics
+- 🎯 Test shroud and file a bug/UX issue, or review an SP PR
 
-**You leave with:** the ability to tell which wallet made a transaction from raw hex.
+## S5 · Payjoin - "Paying Together"
 
-- 🩸 **Cold Open:** two identical-looking transactions on screen. By night's end the room can tell them apart. So can Chainalysis
-- 🕳 **Rabbit Hole:** wallet "handwriting"
-  - nLockTime values, RBF signaling, input ordering (BIP69 or not), version bytes
-- 🛠 **Hands-On: BUILD THE FINGERPRINT TABLE**
-  - everyone makes a testnet tx with a different wallet (Sparrow, Electrum, Cake, bdk-cli)
-  - dump raw hex, compare side by side
-  - build the room's shared fingerprint table, keep it forever, grow it every season
-- 🔍 **Review Circle:** [rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin) PR touching tx construction. Ask: does this change what a tx looks like on-chain?
-- 📜 **Cypherpunk Corner:** Satoshi's whitepaper, section 10 (Privacy). The original model and exactly where it broke
-- 🎯 **Bounty:** add a wallet row to the fingerprint table, or file one fingerprint docs issue upstream
+**You leave with:** a payjoin done in pairs + a poisoned heuristic.
+**Prep:** payjoin-cli working on signet (test it yourself first!) · 1 pre-picked [rust-payjoin](https://github.com/payjoin/rust-payjoin) PR for swarm review · good-first-issue list open
 
----
+- 🩸 The analyst's crown jewel (all inputs = one owner) and the tx type that poisons it for everyone
+- 🕳 BIP78 sync, BIP77 async. Analogy: both people put cash on the restaurant table
+- 🛠 **PAYJOIN IN PAIRS:** one sends, one receives, swap roles. Inspect the tx: point at the lie it tells
+- 🔍 Friendliest repo we know: 4 Code Orange contributors merged (Arowolo, Vaan, Mwihoti). Swarm-review one PR
+- 📜 Adam Back: privacy must be default and boring to win
+- 🎯 Everyone claims one rust-payjoin good-first-issue. Docs count
 
-## S3 · "Coins Have Memories" - UTXO & Coin Control Night
+## S6 · Light Clients (Floresta & Kyoto) - "Don't Trust, Verify - Privately"
 
-**You leave with:** labeled UTXOs and a visceral fear of merging them carelessly.
+**You leave with:** your own node syncing, wallet pointed at it.
+**Prep:** build [Floresta](https://github.com/vinteumorg/Floresta) yourself first, note the gotchas · sats for the race · 2 Floresta/[Kyoto](https://github.com/rustaceanrob/kyoto) PRs
 
-- 🩸 **Cold Open:** the frozen-funds story. Exchange blocks a user because of where their coins were 3 hops ago
-- 🕳 **Rabbit Hole:**
-  - UTXOs are physical coins with memories
-  - coin selection = choosing which of your past lives to reveal
-  - labels are self-defense
-- 🛠 **Hands-On: BREAK IT ON PURPOSE**
-  - Sparrow on testnet: label every UTXO, freeze one, force a specific coin selection
-  - then deliberately merge two labeled identities and watch the damage on-chain
-- 🔍 **Review Circle:** [BDK](https://github.com/bitcoindevkit/bdk_wallet) coin selection PRs
-  - show one merged Code Orange PR here (Muhammad's audit fixes) as proof that normal people do this
-- 📜 **Cypherpunk Corner:** Hal Finney's early posts on privacy expectations
-- 🎯 **Bounty:** curated BDK docs/test issue, or async review of one open coin-selection PR
+- 🩸 What your light wallet tells the server: every address, IP, balance, timing
+- 🕳 Someone else's node = stranger knows your net worth. Filters (BIP157/158) + Utreexo. Analogy: fetch the catalog vs telling the librarian everything
+- 🛠 **NODE RACE:** build and run Floresta live. First sync wins sats. Connect a wallet to YOUR node
+- 🔍 Floresta: welcoming maintainers, real good-first-issue culture
+- 📜 "Don't trust, verify": what it actually demands of us
+- 🎯 Floresta good-first-issue, or turn tonight's setup pain into a docs PR
 
----
+## S7 · P2P Privacy & Node Fingerprinting - "The Network Sees You"
 
-## S4 · "One Address to Rule Them All" - Silent Payments Night
+**You leave with:** your node traffic inspected, then Tor-routed.
+**Prep:** Wireshark installed + a node you can capture · Tor configured · 2 [peer-observer](https://github.com/peer-observer/peer-observer) PRs · May manifesto quote
 
-**You leave with:** a silent payment sent and a failed attempt to trace one.
+- 🩸 Research tracing txs to originating IPs via listener networks. ISP identity glued to your coins
+- 🕳 How txs propagate, who listens, Dandelion++, Tor, BIP324. Broadcast privacy is unsolved
+- 🛠 **WIRETAP YOURSELF:** Wireshark your node plaintext vs BIP324. Then route over Tor, compare what an observer sees
+- 🔍 peer-observer: our own Razor has 4 merged PRs here. Review with "what does this detect?" glasses
+- 📜 May, *Crypto Anarchist Manifesto* (1988)
+- 🎯 peer-observer issue, or write up your Tor setup as a guide
 
-- 🩸 **Cold Open:** scrape a podcaster's static donation address live, show the room their entire financial history. Then show a silent payments address: nothing
-- 🕳 **Rabbit Hole:** BIP352 via the paint-mixing analogy
-  - sender's secret color + your public color = an address only you can detect
-  - no interaction, no reuse, no trail. Catch: the receiver must scan
-- 🛠 **Hands-On: FAIL TO SURVEIL EACH OTHER**
-  - generate SP addresses, pay each other on testnet
-  - then try to link the payments on-chain. The failure is the demo
-- 🔍 **Review Circle:** [shroud](https://github.com/CypherCommons/shroud) (Chaitika's SP wallet, our own community) or [rust-silentpayments](https://github.com/cygnet3/rust-silentpayments)
-  - the PR author might literally be in the call
-- 📜 **Cypherpunk Corner:** BIP352 motivation section. Read the spec like scripture, argue like heretics
-- 🎯 **Bounty:** test shroud, file a real bug or UX issue, or review an open SP PR
+## S8 · ASmap & Network Attacks - "Surrounded"
 
----
+**You leave with:** a map of your node's network exposure + a diversification plan.
+**Prep:** a running Bitcoin Core node with peers · AS-lookup tool ready · asmap docs · 1-2 asmap/peer-selection PRs or peer-observer detection work
 
-## S5 · "Paying Together" - Payjoin Night
+- 🩸 The eclipse attack as a heist: replace everyone a node talks to, show it a fake world
+- 🕳 The internet = autonomous systems. One operator on all your connections can watch or isolate you. ASmap spreads peers across networks. Analogy: never send all messengers out the same gate
+- 🛠 **MAP YOUR EXPOSURE:** pull your peer list, look up each AS, count peers sharing one network. Enable asmap, compare diversity before/after
+- 🔍 Core asmap/peer-selection PRs, or peer-observer
+- 📜 Debate: "the network layer is Bitcoin's soft underbelly." Overblown or underrated?
+- 🎯 Publish your AS-diversity check as a guide, or review an asmap PR
 
-**You leave with:** a payjoin completed in pairs and a poisoned surveillance heuristic.
+## S9 · CoinJoin (JoinMarket) - "Mixing Without Trust"
 
-- 🩸 **Cold Open:** the analyst's crown-jewel assumption (all inputs = one owner) and the transaction type that quietly poisons it for everyone, even non-users
-- 🕳 **Rabbit Hole:** BIP78 sync payjoin, BIP77 async payjoin
-  - analogy: both people put cash on the restaurant table before paying
-- 🛠 **Hands-On: PAYJOIN IN PAIRS**
-  - payjoin-cli on signet, one sends, one receives, swap roles
-  - inspect the final tx together: point at the lie it tells analysts
-- 🔍 **Review Circle:** [rust-payjoin](https://github.com/payjoin/rust-payjoin)
-  - friendliest repo we know: 4 Code Orange contributors already merged (Arowolo, Vaan, Mwihoti)
-  - swarm-review tonight's pre-picked open PR
-- 📜 **Cypherpunk Corner:** Adam Back on why privacy tech must be default and boring to win
-- 🎯 **Bounty:** everyone claims one rust-payjoin good-first-issue. Docs count
+**You leave with:** a dissected real CoinJoin + a post-mix hygiene checklist.
+**Prep:** pick a historical CoinJoin tx to autopsy · Samourai case summary · [JoinMarket](https://github.com/JoinMarket-Org) PRs · debate prompts
 
----
+- 🩸 The Samourai prosecution: what exactly is being fought over
+- 🕳 Identical-envelopes-in-a-box analogy. Equal outputs, coordinator risk, JoinMarket's maker/taker market as the trustless answer
+- 🛠 **AUTOPSY A COINJOIN:** count the anonymity set, then find the post-mix mistakes that unmixed people's coins. Privacy is a practice, not a purchase
+- 🔍 JoinMarket ecosystem PRs, or coinjoin-detection code. Know thy enemy
+- 📜 DEBATE: "Using a mixer: moral act, neutral act, or red flag?" Steelman all three
+- 🎯 Write the post-mix hygiene checklist as a repo doc, or review a PR
 
-## S6 · "Don't Trust, Verify - Privately" - Light Clients Night (Floresta & Kyoto)
+## S10 · OpenSwap - "The Swap That Leaves No Trace"
 
-**You leave with:** your own node syncing and your wallet pointed at it.
+**You leave with:** an atomic swap on regtest + a coin whose history isn't yours.
+**Prep:** run the [openswap](https://github.com/citadel-foss/openswap) regtest framework yourself first (makerd + taker) · Belcher's CoinSwap design post · good-first-issue list
 
-- 🩸 **Cold Open:** what your light wallet tells the server: every address, your IP, your balance, your timing. You are the product
-- 🕳 **Rabbit Hole:**
-  - someone else's node = a stranger knows your net worth
-  - full node vs compact block filters (BIP157/158) vs Utreexo
-  - analogy: fetch the catalog and look it up yourself vs telling the librarian everything you read
-- 🛠 **Hands-On: NODE RACE**
-  - build and run [Floresta](https://github.com/vinteumorg/Floresta) live, light enough for a laptop
-  - first synced node wins sats
-  - connect a wallet to YOUR node before the segment ends
-- 🔍 **Review Circle:** Floresta open PRs (welcoming maintainers, real good-first-issue culture) or [Kyoto](https://github.com/rustaceanrob/kyoto)
-- 📜 **Cypherpunk Corner:** "Don't trust, verify." Trace the phrase, then ask what it demands of us in practice
-- 🎯 **Bounty:** Floresta good-first-issue, or turn tonight's setup pain into a docs PR
+- 🩸 Following the money works because money has one trail. Tonight we cut it - on-chain it's two boring unrelated payments
+- 🕳 OpenSwap (formerly CoinSwap): trustless atomic swaps. Gift-card-swap analogy: trackers now follow a card that was never yours. vs CoinJoin: swaps don't even look like mixing. Makers earn fees, takers pay, fidelity bonds stop Sybils, Tor multi-hop hides the route. Extends Belcher's teleport-transactions, now Taproot+MuSig2
+- 🛠 **SWAP WITH A STRANGER:** pairs run makerd + taker on regtest, complete a swap, inspect both tx chains. Challenge: prove a swap happened at all. Struggle
+- 🔍 openswap: young repo, active good-first-issue label, reviews genuinely matter
+- 📜 Belcher's original CoinSwap post: the vision, then how far the code came
+- 🎯 openswap good-first-issue, or write tonight's walkthrough as docs
 
----
+## S11 · Lightning Privacy - "Lightning Doesn't Fix This"
 
-## S7 · "The Network Sees You" - P2P Privacy Night
+**You leave with:** a probed channel, a traced hop, a blinded path that beat both.
+**Prep:** regtest/signet LN setup with 3+ nodes · BOLT11 invoice + BOLT12 offer ready · [LDK](https://github.com/lightningdevkit/rust-lightning)/CLN offers PRs
 
-**You leave with:** your node traffic inspected and rerouted over Tor.
+- 🩸 "Just use Lightning for privacy." Then show balance probing + a traced payment
+- 🕳 Hides: amounts from chain. Leaks: channels are public UTXOs, balances probeable, invoices link identity. Fix in progress: BOLT12 + blinded paths
+- 🛠 **LEAK COMPARISON:** pay a BOLT11 invoice, list what each hop learned. Then BOLT12 with blinded path, compare line by line
+- 🔍 LDK/ldk-node BOLT12 PRs (Gradale's territory) or Core Lightning offers
+- 📜 Debate: "Layer 2 inherits layer 1's sins"
+- 🎯 LDK/CLN docs or test issue on offers/blinded paths
 
-- 🩸 **Cold Open:** research tracing transactions to originating IPs via listener nodes. Your ISP identity glued to your coins
-- 🕳 **Rabbit Hole:**
-  - how transactions propagate and who is listening (companies run listener networks)
-  - Dandelion++, Tor, BIP324 encrypted transport, and why broadcast privacy is still unsolved
-- 🛠 **Hands-On: WIRETAP YOURSELF**
-  - Wireshark your own node's traffic, plaintext vs BIP324 encrypted
-  - then route the node over Tor and compare what an observer sees
-- 🔍 **Review Circle:** [peer-observer](https://github.com/peer-observer/peer-observer)
-  - 0xB10C's monitoring tool where our own Razor has 4 merged PRs
-  - review with "what does this let us detect?" glasses
-- 📜 **Cypherpunk Corner:** Tim May, *The Crypto Anarchist Manifesto* (1988). "The State will of course try to slow the spread of this technology..."
-- 🎯 **Bounty:** peer-observer issue, or document your Tor node setup as a guide
-
----
-
-## S8 · "Surrounded" - ASmap & Network Attacks Night
-
-**You leave with:** a map of which networks your node's connections flow through, and a plan to diversify them.
-
-- 🩸 **Cold Open:** the eclipse attack, explained as a heist: replace everyone a node talks to with your own actors, then show it a fake world
-- 🕳 **Rabbit Hole:**
-  - the internet is carved into autonomous systems (ASes), and your node's peers all route through them
-  - if one network operator sits on all your connections, they can watch or isolate you
-  - ASmap makes your node spread connections across independent networks
-  - analogy: never send all your messengers out the same gate; one bribed guard sees everything
-- 🛠 **Hands-On: MAP YOUR EXPOSURE**
-  - pull your node's peer list, look up each peer's AS
-  - count how many peers share one network. That number is your exposure
-  - enable/inspect asmap on Bitcoin Core and compare peer diversity before and after
-- 🔍 **Review Circle:** asmap tooling and peer-selection PRs in Bitcoin Core, or [peer-observer](https://github.com/peer-observer/peer-observer) detection work
-- 📜 **Cypherpunk Corner:** debate - "the network layer is Bitcoin's soft underbelly." Overblown or underrated?
-- 🎯 **Bounty:** run the AS-diversity check on your node and publish the method as a guide, or review an open asmap/peer-selection PR
-
----
-
-## S9 · "Mixing Without Trust" - CoinJoin Night (JoinMarket)
-
-**You leave with:** a dissected real CoinJoin and a post-mix hygiene checklist.
-
-- 🩸 **Cold Open:** the Samourai prosecution. What exactly is being fought over when mixing meets the state
-- 🕳 **Rabbit Hole:**
-  - CoinJoin via the identical-envelopes-in-a-box analogy
-  - why equal outputs matter, why coordinators are the weak point
-  - JoinMarket's maker/taker market as the trustless answer
-- 🛠 **Hands-On: AUTOPSY A COINJOIN**
-  - dissect a real historical CoinJoin on-chain
-  - count the anonymity set, then find the post-mix spending mistakes that unmixed people's coins
-  - lesson: privacy is a practice, not a purchase
-- 🔍 **Review Circle:** [JoinMarket](https://github.com/JoinMarket-Org) ecosystem PRs, or coinjoin-detection code in analysis tools. Know thy enemy
-- 📜 **Cypherpunk Corner:** DEBATE NIGHT. "Using a mixer: moral act, neutral act, or red flag?" Steelman all three
-- 🎯 **Bounty:** write the room's post-mix hygiene checklist as a repo doc, or review an open JoinMarket PR
-
----
-
-## S10 · "The Swap That Leaves No Trace" - OpenSwap Night
-
-**You leave with:** a completed atomic swap on regtest and a coin whose history isn't yours.
-
-- 🩸 **Cold Open:** following the money works because the money has one trail. Tonight we cut the trail entirely - and on-chain it looks like two boring, unrelated payments
-- 🕳 **Rabbit Hole:** [OpenSwap](https://github.com/citadel-foss/openswap) - the project formerly known as CoinSwap
-  - trustless atomic swaps: you and a stranger trade coins, nobody can steal, nobody has to trust
-  - analogy: swapping identical-value gift cards with a stranger. Anyone tracking your card now follows a card that was never yours
-  - vs CoinJoin: a CoinJoin is one visible group transaction; a swap looks like normal separate payments - harder to even detect
-  - the design: makers earn fees providing liquidity, takers pay to swap, fidelity bonds stop Sybils, multi-hop routing over Tor means no maker sees the full route
-  - lineage: extends Chris Belcher's teleport-transactions into production code, now with Taproot+MuSig2 contracts
-- 🛠 **Hands-On: SWAP WITH A STRANGER**
-  - spin up the regtest test framework, run makerd + taker in pairs
-  - complete a swap, then inspect both chains of transactions on the explorer
-  - challenge: try to prove a swap happened at all. Struggle. That's the point
-- 🔍 **Review Circle:** [openswap](https://github.com/citadel-foss/openswap) open PRs and its active good-first-issue label - a young repo where reviews genuinely matter
-- 📜 **Cypherpunk Corner:** Chris Belcher's original CoinSwap design post - read the vision, then look at how far the code has come
-- 🎯 **Bounty:** openswap good-first-issue, or write up tonight's swap walkthrough as a docs contribution
-
----
-
-## S11 · "Lightning Doesn't Fix This" - Lightning Privacy Night
-
-**You leave with:** a probed channel, a traced hop, and a blinded path that beat both.
-
-- 🩸 **Cold Open:** "just use Lightning for privacy." Then show a balance-probing attack and a payment traced through a hop
-- 🕳 **Rabbit Hole:** what LN hides vs leaks
-  - hides: amounts from the chain
-  - leaks: channels are public UTXOs, balances are probeable, invoices link identity
-  - the fix in progress: BOLT12 offers + blinded paths
-- 🛠 **Hands-On: LEAK COMPARISON**
-  - on regtest/signet LN: pay a BOLT11 invoice, list what each hop learned
-  - then a BOLT12 offer with a blinded path, compare the leak surface line by line
-- 🔍 **Review Circle:** [LDK](https://github.com/lightningdevkit/rust-lightning) / ldk-node BOLT12 PRs (Gradale's territory) or Core Lightning offers PRs
-- 📜 **Cypherpunk Corner:** "Layer 2 inherits layer 1's sins." Attack or defend
-- 🎯 **Bounty:** LDK/CLN docs or test issue around offers and blinded paths
-
----
-
-## S12 · "Ship It" - Contribution Sprint Finale
+## S12 · Contribution Sprint - "Ship It"
 
 **You leave with:** something real submitted upstream, tonight.
+**Prep:** the season scoreboard (names + numbers on screen) · curated board of verified-open issues across all repos · sats budget · Hughes closing quote
 
-- 🩸 **Cold Open:** the season scoreboard. Every review, issue, and PR the room shipped, names on screen, dashboard live
-- 🕳 **Rabbit Hole:** none. Tonight we work
-- 🛠 **Hands-On (60 min): THE SPRINT**
-  - pick from the curated board: rust-payjoin, shroud, Floresta, Kyoto, BDK, openswap, peer-observer
-  - pair up: draft PRs, post reviews, file issues, live
-  - facilitators float, sats flow
-- 🔍 **Review Circle:** review each other's draft PRs before they go upstream. The quality floor in action
-- 📜 **Cypherpunk Corner:** Hughes' closing lines, read AFTER the sprint, not before: "Cypherpunks write code... we're going to write it." It lands differently once you just did
-- 🎯 **Bounty:** vote Season Two topics
+- 🩸 The scoreboard: every review, issue, PR the room shipped. Names on screen
+- 🛠 **THE SPRINT (60 min):** pick from the board (rust-payjoin, shroud, Floresta, Kyoto, BDK, openswap, peer-observer), pair up, ship live. Facilitators float, sats flow
+- 🔍 Review each other's drafts before they go upstream. Quality floor in action
+- 📜 Hughes' closing lines, read AFTER the sprint: "Cypherpunks write code... we're going to write it"
+- 🎯 Vote Season Two topics
 
 ---
 
 ## Season Two candidates (room votes at S12)
 
-- Ecash night: Fedimint and Cashu (Chaumian blind signatures, our Bali federation)
-- The Exit: BTCPay Server, merchant privacy, selling and spending privately
+- Ecash: Fedimint and Cashu (blind signatures, our Bali federation)
+- The Exit: BTCPay Server and merchant privacy
 - BIP324 encrypted transport deep-dive
 - Mempool privacy and RBF
 - Nostr key hygiene for Bitcoiners
@@ -286,28 +210,8 @@ Starting November 2026 (or October - shift everything up one month). 90 minutes 
 
 ---
 
-## Operating notes
+## Why these repos
 
-- **Repos chosen because we already have standing there**
-  - rust-payjoin (4 CO contributors merged), shroud (Chaitika), peer-observer (Razor), BDK (Vaan, Muhammad), Floresta, LDK (Gradale, Psychemist)
-  - newcomers see our own people's merged code in every repo: the "people like me do this" effect
-- **Review > PR for newcomers**
-  - a thoughtful review comment takes 20 minutes, needs no Rust, and maintainers are starved for reviewers
-  - "I tested this on signet, works, one question about X" is a real contribution
-  - PRs follow naturally by S4-S6
-- **Curate before every session (30 min, non-negotiable)**
-  - 2-3 live open PRs pre-picked for the Review Circle: small diffs, active authors, friendly repos
-  - 3-5 bounty items, verified still open that morning
-  - perfect Educator Fellow duty
-- **Quality floor still applies**
-  - anything upstream passes the [PR checklist](./PR_CHECKLIST.md)
-  - reviews are kind, specific, honest. We are the program that sends prepared people
-- **Opsec is modeled, not preached**
-  - testnet/signet always, no real balances on screen, pseudonyms welcome, cameras optional
-- **Every session is standalone**
-  - open with 60 seconds of framing so a first-timer is never lost
-- **Track and celebrate**
-  - every review and PR goes on the [PR dashboard](https://github.com/code-orange-dev/PR-tracking-dashboard)
-  - public proof of work, the Code Orange way
+rust-payjoin (4 CO contributors merged) · shroud (Chaitika) · peer-observer (Razor, 4 merged) · BDK (Vaan, Muhammad) · Floresta · Kyoto · openswap · LDK (Gradale, Psychemist). Newcomers see our own people's merged code in every repo. Anything upstream passes the [PR checklist](./PR_CHECKLIST.md).
 
 *Privacy isn't something you wait for. It's something you ship.* 🟠
