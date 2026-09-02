@@ -10,6 +10,27 @@
 
 ---
 
+## Season One at a glance - 12 sessions, 6 months, every 2 weeks
+
+Starting November 2026 (or October - shift everything up one month). 90 minutes per session.
+
+| Month | Session | Topic |
+|---|---|---|
+| Month 1 (Nov) | S1 | Chain Analysis |
+| Month 1 (Nov) | S2 | Wallet Fingerprinting |
+| Month 2 (Dec) | S3 | Coin Selection & UTXO Management |
+| Month 2 (Dec) | S4 | Silent Payments |
+| Month 3 (Jan) | S5 | Payjoin |
+| Month 3 (Jan) | S6 | Light Clients (Floresta & Kyoto) |
+| Month 4 (Feb) | S7 | P2P Privacy & Node Fingerprinting |
+| Month 4 (Feb) | S8 | ASmap & Network Attacks |
+| Month 5 (Mar) | S9 | CoinJoin (JoinMarket) |
+| Month 5 (Mar) | S10 | OpenSwap (formerly CoinSwap) |
+| Month 6 (Apr) | S11 | Lightning Privacy |
+| Month 6 (Apr) | S12 | Contribution Sprint |
+
+---
+
 ## The Format - same rhythm every session
 
 | Segment | Time | What happens |
@@ -121,7 +142,7 @@
 
 ---
 
-## S6 · "Don't Trust, Verify - Privately" - Run Your Node Night
+## S6 · "Don't Trust, Verify - Privately" - Light Clients Night (Floresta & Kyoto)
 
 **You leave with:** your own node syncing and your wallet pointed at it.
 
@@ -159,7 +180,27 @@
 
 ---
 
-## S8 · "Mixing Without Trust" - CoinJoin Night
+## S8 · "Surrounded" - ASmap & Network Attacks Night
+
+**You leave with:** a map of which networks your node's connections flow through, and a plan to diversify them.
+
+- 🩸 **Cold Open:** the eclipse attack, explained as a heist: replace everyone a node talks to with your own actors, then show it a fake world
+- 🕳 **Rabbit Hole:**
+  - the internet is carved into autonomous systems (ASes), and your node's peers all route through them
+  - if one network operator sits on all your connections, they can watch or isolate you
+  - ASmap makes your node spread connections across independent networks
+  - analogy: never send all your messengers out the same gate; one bribed guard sees everything
+- 🛠 **Hands-On: MAP YOUR EXPOSURE**
+  - pull your node's peer list, look up each peer's AS
+  - count how many peers share one network. That number is your exposure
+  - enable/inspect asmap on Bitcoin Core and compare peer diversity before and after
+- 🔍 **Review Circle:** asmap tooling and peer-selection PRs in Bitcoin Core, or [peer-observer](https://github.com/peer-observer/peer-observer) detection work
+- 📜 **Cypherpunk Corner:** debate - "the network layer is Bitcoin's soft underbelly." Overblown or underrated?
+- 🎯 **Bounty:** run the AS-diversity check on your node and publish the method as a guide, or review an open asmap/peer-selection PR
+
+---
+
+## S9 · "Mixing Without Trust" - CoinJoin Night (JoinMarket)
 
 **You leave with:** a dissected real CoinJoin and a post-mix hygiene checklist.
 
@@ -178,25 +219,28 @@
 
 ---
 
-## S9 · "Cash, Digitally" - Ecash Night
+## S10 · "The Swap That Leaves No Trace" - OpenSwap Night
 
-**You leave with:** tokens minted, sent, melted, and a 1982 paper that predicted it all.
+**You leave with:** a completed atomic swap on regtest and a coin whose history isn't yours.
 
-- 🩸 **Cold Open:** our own Bali Fedimint federation. Restaurants, drivers, street vendors. Some of us live on this
-- 🕳 **Rabbit Hole:** Chaumian blind signatures
-  - analogy: the mint signs through a carbon-paper envelope, validating what it cannot see
-  - honest tradeoff stated plainly: custody risk in exchange for perfect payer privacy
-- 🛠 **Hands-On: RUN A MINT**
-  - spin up a Cashu mint on testnet, everyone mints, sends, melts
-  - try to surveil each other's payments and fail
-  - compare with an on-chain payment made the same minute
-- 🔍 **Review Circle:** [Cashu](https://github.com/cashubtc) (Dayvvo contributed to cashu-ts) or [Fedimint](https://github.com/fedimint/fedimint) open PRs
-- 📜 **Cypherpunk Corner:** David Chaum, *Blind Signatures for Untraceable Payments* (1982). This fight is older than most of the room
-- 🎯 **Bounty:** Cashu/Fedimint good-first-issue, or file UX feedback from tonight's mint chaos
+- 🩸 **Cold Open:** following the money works because the money has one trail. Tonight we cut the trail entirely - and on-chain it looks like two boring, unrelated payments
+- 🕳 **Rabbit Hole:** [OpenSwap](https://github.com/citadel-foss/openswap) - the project formerly known as CoinSwap
+  - trustless atomic swaps: you and a stranger trade coins, nobody can steal, nobody has to trust
+  - analogy: swapping identical-value gift cards with a stranger. Anyone tracking your card now follows a card that was never yours
+  - vs CoinJoin: a CoinJoin is one visible group transaction; a swap looks like normal separate payments - harder to even detect
+  - the design: makers earn fees providing liquidity, takers pay to swap, fidelity bonds stop Sybils, multi-hop routing over Tor means no maker sees the full route
+  - lineage: extends Chris Belcher's teleport-transactions into production code, now with Taproot+MuSig2 contracts
+- 🛠 **Hands-On: SWAP WITH A STRANGER**
+  - spin up the regtest test framework, run makerd + taker in pairs
+  - complete a swap, then inspect both chains of transactions on the explorer
+  - challenge: try to prove a swap happened at all. Struggle. That's the point
+- 🔍 **Review Circle:** [openswap](https://github.com/citadel-foss/openswap) open PRs and its active good-first-issue label - a young repo where reviews genuinely matter
+- 📜 **Cypherpunk Corner:** Chris Belcher's original CoinSwap design post - read the vision, then look at how far the code has come
+- 🎯 **Bounty:** openswap good-first-issue, or write up tonight's swap walkthrough as a docs contribution
 
 ---
 
-## S10 · "Lightning Doesn't Fix This" - Lightning Privacy Night
+## S11 · "Lightning Doesn't Fix This" - Lightning Privacy Night
 
 **You leave with:** a probed channel, a traced hop, and a blinded path that beat both.
 
@@ -214,26 +258,6 @@
 
 ---
 
-## S11 · "The Exit" - Selling & Spending Privately Night
-
-**You leave with:** a BTCPay store running with payjoin enabled, end to end.
-
-- 🩸 **Cold Open:** KYC breach dumps: names, addresses, balances, leaked and sold. The $5-wrench threat model is not hypothetical
-- 🕳 **Rabbit Hole:** the full lifecycle, and the rule that privacy fails at the weakest link
-  - earn: silent payments
-  - hold: your node + coin control
-  - spend: payjoin, ecash
-  - exit: P2P, merchant self-custody
-- 🛠 **Hands-On: OPEN A STORE**
-  - deploy BTCPay Server (or use the shared instance), enable payjoin
-  - roleplay merchant and customer, complete a private sale
-  - bonus: point it at your Floresta node from S6
-- 🔍 **Review Circle:** [BTCPay Server](https://github.com/btcpayserver/btcpayserver) privacy/payjoin PRs
-- 📜 **Cypherpunk Corner:** the room writes its own manifesto, one sentence per person, live doc, kept forever
-- 🎯 **Bounty:** BTCPay docs issue, or bring a friend's privacy setup to roast next session
-
----
-
 ## S12 · "Ship It" - Contribution Sprint Finale
 
 **You leave with:** something real submitted upstream, tonight.
@@ -241,7 +265,7 @@
 - 🩸 **Cold Open:** the season scoreboard. Every review, issue, and PR the room shipped, names on screen, dashboard live
 - 🕳 **Rabbit Hole:** none. Tonight we work
 - 🛠 **Hands-On (60 min): THE SPRINT**
-  - pick from the curated board: rust-payjoin, shroud, Floresta, BDK, Cashu, peer-observer
+  - pick from the curated board: rust-payjoin, shroud, Floresta, Kyoto, BDK, openswap, peer-observer
   - pair up: draft PRs, post reviews, file issues, live
   - facilitators float, sats flow
 - 🔍 **Review Circle:** review each other's draft PRs before they go upstream. The quality floor in action
@@ -252,8 +276,8 @@
 
 ## Season Two candidates (room votes at S12)
 
-- CoinSwap and Teleport transactions
-- ASmap and eclipse attacks
+- Ecash night: Fedimint and Cashu (Chaumian blind signatures, our Bali federation)
+- The Exit: BTCPay Server, merchant privacy, selling and spending privately
 - BIP324 encrypted transport deep-dive
 - Mempool privacy and RBF
 - Nostr key hygiene for Bitcoiners
