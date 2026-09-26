@@ -1,5 +1,5 @@
 """
-Bitcoin Dojo — Week 1 Exercises: Finite Fields
+Bitcoin Dojo — Week 1 REFERENCE SOLUTION: Finite Fields
 Code Orange Dev School | codeorange.dev
 
 Based on Programming Bitcoin by Jimmy Song (Chapter 1)
@@ -42,12 +42,12 @@ class FieldElement:
         """Two field elements are equal if they have the same num and prime."""
         # YOUR CODE HERE
         # Hint: check that both num and prime match
-        pass
+        return other is not None and self.num == other.num and self.prime == other.prime
 
     def __ne__(self, other):
         """Two field elements are not equal if __eq__ returns False."""
         # YOUR CODE HERE
-        pass
+        return not (self == other)
 
     def __add__(self, other):
         """Add two field elements: (a + b) mod p"""
@@ -55,7 +55,7 @@ class FieldElement:
             raise TypeError("Cannot add two numbers in different Fields")
         # YOUR CODE HERE
         # Hint: (self.num + other.num) % self.prime
-        pass
+        return self.__class__((self.num + other.num) % self.prime, self.prime)
 
     def __sub__(self, other):
         """Subtract two field elements: (a - b) mod p"""
@@ -63,14 +63,14 @@ class FieldElement:
             raise TypeError("Cannot subtract two numbers in different Fields")
         # YOUR CODE HERE
         # Hint: (self.num - other.num) % self.prime
-        pass
+        return self.__class__((self.num - other.num) % self.prime, self.prime)
 
     def __mul__(self, other):
         """Multiply two field elements: (a * b) mod p"""
         if self.prime != other.prime:
             raise TypeError("Cannot multiply two numbers in different Fields")
         # YOUR CODE HERE
-        pass
+        return self.__class__((self.num * other.num) % self.prime, self.prime)
 
     def __pow__(self, exponent):
         """Raise a field element to a power: (a ** exp) mod p
@@ -82,7 +82,8 @@ class FieldElement:
         # YOUR CODE HERE
         # Hint: n = exponent % (self.prime - 1)
         #       then use Python's built-in pow(self.num, n, self.prime)
-        pass
+        n = exponent % (self.prime - 1)
+        return self.__class__(pow(self.num, n, self.prime), self.prime)
 
     def __rmul__(self, coefficient):
         """PROVIDED: lets you write 3 * element. Week 2's elliptic-curve
@@ -101,7 +102,7 @@ class FieldElement:
         # YOUR CODE HERE
         # Hint: use self * (other ** (self.prime - 2))
         # Or compute directly: (self.num * pow(other.num, self.prime - 2, self.prime)) % self.prime
-        pass
+        return self * (other ** (self.prime - 2))
 
 
 # ============================================================
@@ -146,28 +147,29 @@ def verify_field_properties(prime):
     print(f"  Closure (addition): {a} + {b} = {result} ... PASS")
 
     # 2. Commutativity of addition
-    # assert a + b == b + a
+    assert a + b == b + a
     # print(f"  Commutativity (addition): PASS")
 
     # 3. Associativity of addition
-    # assert (a + b) + c == a + (b + c)
+    assert (a + b) + c == a + (b + c)
 
     # 4. Additive identity
-    # assert a + zero == a
+    assert a + zero == a
 
     # 5. Multiplicative identity
-    # assert a * one == a
+    assert a * one == a
 
     # 6. Additive inverse
-    # neg_a = FieldElement((prime - a_num) % prime, prime)
-    # assert a + neg_a == zero
+    neg_a = FieldElement((prime - a_num) % prime, prime)
+    assert a + neg_a == zero
 
     # 7. Multiplicative inverse (for non-zero elements)
-    # if a_num != 0:
-    #     a_inv = a ** (prime - 2)
-    #     assert a * a_inv == one
+    if a_num != 0:
+        a_inv = a ** (prime - 2)
+        assert a * a_inv == one
+    print("  Commutativity, associativity, identities, inverses ... PASS")
 
-    # Uncomment the above and add print statements
+    
 
     return all_passed
 
@@ -196,16 +198,9 @@ def demonstrate_composite_failure():
     # For each element a in {1, 2, ..., 14}, try to find b such that (a*b) % 15 == 1
     # Print which elements have no inverse
     #
-    # for a in range(1, modulus):
-    #     found_inverse = False
-    #     for b in range(1, modulus):
-    #         if (a * b) % modulus == 1:
-    #             found_inverse = True
-    #             break
-    #     if not found_inverse:
-    #         print(f"  {a} has NO multiplicative inverse mod {modulus}")
-
-    pass
+    for a in range(1, modulus):
+        if not any((a * b) % modulus == 1 for b in range(1, modulus)):
+            print(f"  {a} has NO multiplicative inverse mod {modulus}")
 
 
 # ============================================================
@@ -229,16 +224,11 @@ def bitcoin_field_element():
 
     # YOUR CODE HERE
     # Create two field elements and perform operations
-    # a = FieldElement(42, P)
-    # b = FieldElement(99, P)
-    # print(f"  {a} + {b} = {a + b}")
-    # print(f"  {a} * {b} = {a * b}")
-    # print(f"  {a} / {b} = {a / b}")
-    # Verify: (a / b) * b should equal a
-    # print(f"  (a / b) * b = {(a / b) * b}")
-    # assert (a / b) * b == a, "Division verification failed!"
-
-    pass
+    a = FieldElement(42, P)
+    b = FieldElement(99, P)
+    print(f"  a + b = {(a + b).num}")
+    print(f"  a / b, times b, gives back a: {(a / b) * b == a}")
+    assert (a / b) * b == a, "Division verification failed!"
 
 
 # ============================================================

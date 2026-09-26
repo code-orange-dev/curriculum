@@ -43,6 +43,24 @@ This is not a lecture course. Participants study independently, then defend thei
 
 ---
 
+## Exercises and self-checks
+
+Every week has an exercise file to fill in and a checker that grades it. Run everything from the `bitcoin-dojo/` folder with plain Python 3.8+ (no installs):
+
+| Week | Fill in | Grade with | Checked against |
+|---|---|---|---|
+| 1 | `week-01/exercises/finite_fields.py` | `python3 week-01/exercises/finite_fields.py` | Programming Bitcoin ch. 1 |
+| 2 | `week-02/exercises/elliptic_curves.py` | `python3 week-02/exercises/elliptic_curves.py` | Programming Bitcoin ch. 2-3 (uses your Week 1 FieldElement if it works) |
+| 3 | `week-03/exercises/keys_addresses.py` | `python3 week-03/check.py` | BIP173's example key, the book's ch. 4 answers |
+| 4 | `week-04/exercises/transactions.py` | `python3 week-04/check.py` | Real mainnet txids (incl. Satoshi to Hal Finney, block 170) |
+| 5 | `week-05/exercises/script_lab.py` | `python3 week-05/check.py` | A real 2013 signature verified with your sighash, ECDSA and Script interpreter |
+| 6 | `week-06/exercises/segwit_lab.py` | `python3 week-06/check.py` | A real segwit transaction's txid, weight and BIP143 signature |
+| 7 | `week-07/exercises/capstone.md` | - | Your own signet transaction |
+
+Unfinished functions show as "not implemented yet", so you can go one at a time. Reference solutions are in each week's `solutions/` folder (`python3 week-0N/check.py --solution`). Try it yourself first! Shared helpers live in `lib/dojo.py`, and the real transactions are in `data/transactions.json`.
+
+---
+
 ## Week-by-Week Syllabus
 
 ### Week 1: Finite Fields
@@ -201,6 +219,8 @@ Each participant presents:
 3. Their chosen next step: which project, which Good First Issue, which fellowship
 
 **Next Steps for Graduates:**
+- Do the [Week 7 capstone](week-07/exercises/capstone.md): verify your own signet transaction with your own code
+- Continue into the [Privacy Track](../privacy-track/): its Silent Payments lab builds directly on this week-by-week math
 - Join the [rawBit Study Cohort](../rawbit/) to build raw transactions with an interactive visual tool
 - Start the [Decoding Bitcoin](../decoding-bitcoin/) cohort for deeper protocol work
 - Pick a Good First Issue from Bitcoin Core, rust-bitcoin, BDK, or LDK

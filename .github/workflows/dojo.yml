@@ -1,0 +1,42 @@
+name: Bitcoin Dojo
+
+on:
+  push:
+    branches: [main]
+    paths: ["bitcoin-dojo/**", ".github/workflows/dojo.yml"]
+  pull_request:
+    paths: ["bitcoin-dojo/**", ".github/workflows/dojo.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  dojo:
+    runs-on: ubuntu-22.04   # still has Python 3.8 builds
+    strategy:
+      matrix:
+        python: ["3.8", "3.12"]   # the Dojo promises Python 3.8+
+    defaults:
+      run:
+        working-directory: bitcoin-dojo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Reference solutions pass every check
+        run: |
+          python3 week-01/solutions/finite_fields.py | tee /dev/stderr | grep -q "7/7 tests passing"
+          python3 week-02/solutions/elliptic_curves.py | tee /dev/stderr | grep -q "7/7 checks passing"
+          for w in 3 4 5 6; do python3 week-0$w/check.py --solution; done
+
+      - name: Unfinished exercises report "not implemented", never crash
+        run: |
+          python3 week-01/exercises/finite_fields.py
+          python3 week-02/exercises/elliptic_curves.py || true
+          for w in 3 4 5 6; do
+            out=$(python3 week-0$w/check.py || true)
+            echo "$out" | tail -2
+            if echo "$out" | grep -q "crashed\|Traceback"; then echo "::error::week $w stub crashed"; exit 1; fi
+          done
