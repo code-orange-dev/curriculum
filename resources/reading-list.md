@@ -18,7 +18,7 @@
 
 - [Bitcoin Optech Newsletter](https://bitcoinops.org/) - Weekly technical updates
 - [Bitcoin Core PR Review Club](https://bitcoincore.reviews/) - Weekly PR review sessions
-- [Bitcoin Dev Mailing List](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/) - Protocol development discussion
+- [Bitcoin Dev Mailing List](https://groups.google.com/g/bitcoindev) - Protocol development discussion (moved from the Linux Foundation list in 2024)
 
 ## BIPs (Bitcoin Improvement Proposals)
 
