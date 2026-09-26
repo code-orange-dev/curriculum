@@ -1,10 +1,10 @@
 # Bitcoin Privacy Glossary
 
-> Technical terms used throughout the Privacy Developer Track. Entries are ordered by when they first appear in the curriculum.
+> Terms used in [The Privacy Sessions](../SESSIONS.md), grouped by the session where they first come up.
 
 ---
 
-## Module 1: Chain Analysis
+## S4-S5: Chain analysis, fingerprinting, coin selection
 
 **Common-Input-Ownership Heuristic (CIOH):** The assumption that all inputs in a Bitcoin transaction belong to the same entity. This is the most powerful heuristic used by chain analysis firms and is correct for the vast majority of normal transactions. Payjoin specifically exploits this assumption by having both sender and receiver contribute inputs.
 
@@ -22,7 +22,7 @@
 
 ---
 
-## Module 2: Silent Payments
+## S1-S3: Silent Payments
 
 **Silent Payments (BIP352):** A protocol that allows a receiver to publish a single static payment code from which senders can derive unique on-chain addresses for each payment. No interaction between sender and receiver is required. Each payment goes to a different address that only the receiver can detect.
 
@@ -34,7 +34,13 @@
 
 **Shared secret:** The point on the elliptic curve that both sender and receiver can independently compute via ECDH. In BIP352, this is derived from the sender's input keys and the receiver's scan key, then used to tweak the spend key to produce a unique output address.
 
-**Tweak:** A scalar derived from the shared secret that is added to the receiver's spend key to produce the output public key. Different tweaks for different output indices allow multiple Silent Payment outputs in the same transaction.
+**Tweak:** BIP352 uses the word in two places. (1) The output tweak `t_k`, a scalar derived from the shared secret and added to the receiver's spend key to produce output `k`. (2) The per-transaction *tweak data* `input_hash * A_sum`, which does not depend on any receiver's keys - so an indexer can precompute it for every transaction and serve it to light clients, who finish the ECDH with their own scan key.
+
+**K_max:** The BIP352 limit of 2323 outputs to the same scan key in one transaction. Senders must refuse to exceed it and scanners stop looking beyond it, which caps the work a malicious transaction can force on a receiver.
+
+**Eligible input:** An input whose public key BIP352 can read from the spending transaction (P2TR key path or non-NUMS script path, P2WPKH, P2SH-P2WPKH, P2PKH with a compressed key). Only eligible inputs are summed into `A_sum`; sender and receiver must agree exactly on this set.
+
+**Tweak indexer / index server:** A server that computes tweak data for every block so SP light clients don't have to fetch every transaction's prevouts. Examples: BlindBit Oracle, Shroud's indexer. A *remote scanner* (e.g. Frigate) instead receives the user's scan key and scans for them - faster, but the server sees incoming payments.
 
 **Tagged hash:** A domain-separated hash function defined in BIP340: `SHA256(SHA256(tag) || SHA256(tag) || data)`. Used throughout Silent Payments to prevent cross-protocol attacks. The tags "BIP0352/Inputs" and "BIP0352/SharedSecret" are used for input hashing and tweak derivation respectively.
 
@@ -44,7 +50,7 @@
 
 ---
 
-## Module 3: Payjoin
+## S6: Payjoin
 
 **Payjoin:** A collaborative transaction protocol where both sender and receiver contribute inputs. This breaks CIOH because a chain analyst cannot assume all inputs belong to the same entity. Defined in BIP78 (V1) and BIP77 (V2).
 
@@ -64,11 +70,11 @@
 
 ---
 
-## Module 4: Wallet Privacy
+## S5, S7, S9: Wallet privacy, light clients, CoinJoin and swaps
 
 **Coin selection:** The algorithm a wallet uses to choose which UTXOs to spend in a transaction. Different algorithms (largest-first, branch-and-bound, random) have different privacy and fee implications.
 
-**Branch and bound:** A coin selection algorithm that searches for a combination of UTXOs whose total value exactly matches the target amount plus fees, eliminating the need for a change output. Used by Bitcoin Core as the preferred selection method.
+**Branch and bound:** A coin selection algorithm that searches for a combination of UTXOs whose total value exactly matches the target amount plus fees, eliminating the need for a change output. Bitcoin Core runs several algorithms (BnB, CoinGrinder, Knapsack, Single Random Draw) and keeps the result with the lowest waste.
 
 **Waste metric:** A measure of the total cost of a coin selection result, including: fees paid in this transaction, cost of creating a change output, and future cost of spending the change. Minimizing waste optimizes for both fee efficiency and privacy.
 
@@ -76,7 +82,7 @@
 
 **Compact block filter (BIP158):** A probabilistic data structure that summarizes all the scriptPubKeys in a block. A light client downloads these small filters (~20KB each) and checks if any of their addresses might be in the block, without revealing which addresses they're watching to the serving node.
 
-**Golomb-Rice coding:** The compression algorithm used in BIP158 filters. It efficiently encodes sorted lists of values where deltas between consecutive values follow a geometric distribution. The parameter P=19 gives a false positive rate of approximately 1/784,931.
+**Golomb-Rice coding:** The compression algorithm used in BIP158 filters. It efficiently encodes sorted lists of values where deltas between consecutive values follow a geometric distribution. BIP158 uses Rice parameter P=19 with M=784,931, giving each queried item a false positive rate of about 1/784,931.
 
 **False positive:** When a compact block filter indicates a block might contain a relevant transaction when it actually doesn't. The client downloads the full block and discovers no match. BIP158's false positive rate is designed to be low enough that this wastes minimal bandwidth.
 
@@ -92,9 +98,9 @@
 
 **CoinSwap:** A privacy technique where two parties atomically swap UTXOs. Unlike CoinJoin, the two transactions look like normal payments on-chain - there is no recognizable multi-party pattern. Uses hash time-locked contracts (HTLCs) or adaptor signatures for atomic execution.
 
-**Teleport Transactions:** Chris Belcher's implementation of CoinSwap for Bitcoin. Supports multi-hop swaps through intermediaries for stronger privacy. Currently in development, funded by OpenSats.
+**Teleport Transactions / OpenSwap:** Chris Belcher's CoinSwap implementation (Teleport) continued as [openswap](https://github.com/citadel-foss/openswap) (formerly "coinswap"): a maker/taker market for multi-hop atomic swaps over Tor, with fidelity bonds against Sybils, moving to Taproot + MuSig2.
 
-**JoinMarket NG:** The next generation of JoinMarket, a decentralized CoinJoin marketplace where "makers" provide liquidity (UTXOs for mixing) and "takers" pay a fee to mix their coins. Uses fidelity bonds to prevent Sybil attacks.
+**JoinMarket:** A decentralized CoinJoin marketplace where "makers" provide liquidity (UTXOs for mixing) and "takers" pay a fee to mix their coins. Uses fidelity bonds to prevent Sybil attacks.
 
 **Fidelity bond:** Bitcoin locked in a time-locked output that proves a JoinMarket maker has "skin in the game." Larger and longer-locked bonds make Sybil attacks (where an adversary runs many maker nodes to de-anonymize takers) prohibitively expensive.
 
@@ -106,7 +112,35 @@
 
 **nSequence:** A per-input field originally intended for transaction replacement. Its value varies by wallet software, serving as another fingerprint. Modern wallets use 0xFFFFFFFD (signals RBF) or 0xFFFFFFFE (final, no RBF).
 
-**Dust limit:** The minimum value a transaction output must have to be considered "standard" by Bitcoin Core's relay policy (currently 546 satoshis for P2WPKH). Outputs below this limit are uneconomical to spend and may reveal information about the wallet's coin selection algorithm.
+**Dust limit:** The minimum value a transaction output must have to be considered "standard" by Bitcoin Core's relay policy (at the default dust relay fee: 546 sats for P2PKH, 294 for P2WPKH, 330 for P2TR). Outputs below this limit are uneconomical to spend and may reveal information about the wallet's coin selection algorithm.
+
+---
+
+## S8: Network privacy
+
+**BIP324 (v2 P2P transport):** Encrypts connections between Bitcoin nodes. Stops passive observers (your ISP, a coffee-shop Wi-Fi) from reading or cheaply fingerprinting Bitcoin traffic. It does not hide what you send from the peer you send it to.
+
+**Private broadcast (`-privatebroadcast`):** Bitcoin Core 31 option: transactions submitted via `sendrawtransaction` (not yet wallet sends) are sent only via short-lived Tor or I2P connections, one transaction per connection, so recipients never learn your IP and can't link two of your transactions by connection.
+
+**ASmap:** A map from IP address to Autonomous System (the network operator). With `-asmap=1` (embedded data since Core 31, off by default) Core spreads peers across operators instead of IP ranges, making eclipse attacks by a single large hoster or ISP harder.
+
+**Eclipse attack:** Surrounding a node so every peer it talks to is controlled by the attacker, who can then hide blocks, watch its transactions, or feed it a fake view of the chain.
+
+**Dandelion++:** A proposed propagation scheme that relays a new transaction along a random single path before broadcasting it widely, hiding the origin. Not deployed in Bitcoin Core; private broadcast over Tor/I2P addresses the same leak differently.
+
+---
+
+## S10-S11: Lightning and ecash
+
+**Probing:** Sending payments that are designed to fail in order to learn how much balance sits on each side of a channel.
+
+**Blinded path:** A Lightning route whose final hops are encrypted by the receiver, so the sender can pay without learning the receiver's node or channels. Used by BOLT12 offers.
+
+**BOLT12 offer:** A reusable Lightning payment request. Unlike a BOLT11 invoice it doesn't reveal the receiver's node ID and it supports blinded paths.
+
+**Blind signature:** A signature on a message the signer can't see. Ecash mints (Cashu, Fedimint) blind-sign tokens so they can't link a token's issuance to its redemption.
+
+**Cashu / Fedimint:** Chaumian ecash for Bitcoin. Cashu uses a single mint operator. Fedimint uses a federation of guardians with threshold custody. Both offer strong privacy from the operator in exchange for custodial trust.
 
 ---
 
