@@ -14,13 +14,13 @@ If you find a technical error (wrong BIP reference, incorrect code, broken link)
 
 The exercises are designed to be challenging but achievable. If you completed one and found it too easy, too hard, or unclear, submit a PR with improvements. Include a note explaining what you changed and why.
 
-### Add a new exercise
+### Add a new lab
 
-New exercises are welcome, especially for:
-- Module 1 (chain analysis): real-world transaction analysis using mainnet data
-- Module 3 (Payjoin): exercises using the Payjoin Dev Kit in Rust
-- Module 4 (wallet privacy): CoinJoin simulation, timing analysis exercises
-- Any module: exercises in Rust (current exercises are Python-heavy)
+New labs are welcome, especially:
+- A wallet-fingerprinting lab built on **real** transaction hex from the S4 fingerprint table (not invented wallet behavior)
+- A payjoin lab that runs against `payjoin-cli` on regtest
+- Rust versions of the Python labs
+- Season Two topics (see [SESSIONS.md](./SESSIONS.md))
 
 ### Translate the curriculum
 
@@ -28,7 +28,7 @@ If you want to translate this curriculum into another language, create a new dir
 
 ### Add reference implementations
 
-If you've completed the exercises and want to share your solutions as reference implementations, add them to `exercises/solutions/` in the relevant module. Name them clearly (e.g., `chain_analysis_lab_solution.py`).
+Solutions live next to their lab in `labs/<lab>/solutions/`. If the lab has a grader (like `labs/silent-payments/run_vectors.py`), your solution must pass it.
 
 ---
 
@@ -47,19 +47,27 @@ If you've completed the exercises and want to share your solutions as reference 
 - Python exercises: Python 3.8+, minimal dependencies, clear docstrings, type hints
 - Rust exercises: stable Rust, idiomatic style, well-commented
 - All exercises must include: clear instructions, type signatures, test cases, and reflection questions
-- Never include complete solutions in the exercise files - only hints, pseudocode, and test cases
+- Never include complete solutions in the exercise files: only hints, pseudocode and tests. Solutions go in `solutions/`
 
 ### File structure
 
 ```
-module-XX-topic/
-├── README.md              # Session-by-session breakdown
-├── exercises/
-│   ├── exercise_name.py   # Coding exercise
-│   ├── exercise_name.md   # Non-coding exercise (analysis, discussion)
-│   └── solutions/         # Reference implementations (optional)
-└── resources/             # Additional reading, diagrams, data files
+privacy-track/
+├── README.md, SESSIONS.md       # overview and the 12 session plans
+├── FACILITATOR_GUIDE.md         # how to run any session
+├── ISSUE_POOL.md, PR_CHECKLIST.md
+├── labs/<topic>/
+│   ├── README.md                # what you build, how to run it
+│   ├── *.py                     # exercise files with YOUR CODE HERE markers
+│   └── solutions/               # reference implementations (optional)
+└── resources/                   # glossary, reading list
 ```
+
+### Accuracy rules
+
+- Every factual claim about a wallet, BIP or PR should be checkable. Link the source
+- Prefer official test vectors over hand-made test data. When a lab simplifies the spec, say so in its README
+- Exercise files must run without errors when nothing is implemented yet (skip unimplemented parts gracefully)
 
 ---
 

@@ -19,9 +19,9 @@ All materials are released under **CC0 1.0 Universal (Public Domain)** - use the
 ### Recommended Learning Path
 
 ```
-Bitcoin Dojo (7 weeks) ──> rawBit (10 weeks) ──> Decoding Bitcoin (8 weeks)
-        │                                                │
-        └── Sovereign Bitcoiner (5-10 weeks)             └── Open-source contribution
+Bitcoin Dojo (7 weeks) ──> rawBit (10 weeks) ──> Decoding Bitcoin (8 weeks) ──> Open-source contribution
+        │                                                                          ▲
+        └── Sovereign Bitcoiner (5-10 weeks)       Privacy Track (drop-in, biweekly) ─┘
 ```
 
 | Program | Duration | Level | Directory |
@@ -30,6 +30,7 @@ Bitcoin Dojo (7 weeks) ──> rawBit (10 weeks) ──> Decoding Bitcoin (8 wee
 | **rawBit Study Cohort** | 10 weeks | Intermediate | [`/rawbit/`](./rawbit/) |
 | **Decoding Bitcoin** | 8 weeks | Intermediate-Advanced | [`/decoding-bitcoin/`](./decoding-bitcoin/) |
 | **Sovereign Bitcoiner Crash Course** | 5-10 weeks | Beginner-Intermediate | [`/sovereign-bitcoiner/`](./sovereign-bitcoiner/) |
+| **Privacy Track** | 12 biweekly sessions, drop-in | Intermediate | [`/privacy-track/`](./privacy-track/) |
 | **Vibe Coding on Nostr** | Monthly workshops | All levels | [`/nostr-workshops/`](./nostr-workshops/) |
 | **Workshop Modules** | Single session | Varies | [`/workshops/`](./workshops/) |
 
@@ -96,6 +97,9 @@ curriculum/
 │   ├── week-06-psbt/
 │   ├── week-07-bitcoin-core/
 │   └── week-08-contributing/
+├── privacy-track/                     # The Privacy Sessions: 12 drop-in sessions + labs
+│   ├── README.md, SESSIONS.md         # Overview and session plans (starts with Silent Payments)
+│   └── labs/                          # Offline Python labs (BIP352 vectors, chain analysis, ...)
 ├── sovereign-bitcoiner/               # 5-10 week crash course
 │   ├── README.md
 │   ├── week-01-philosophy/
