@@ -120,7 +120,7 @@
 
 **BIP324 (v2 P2P transport):** Encrypts connections between Bitcoin nodes. Stops passive observers (your ISP, a coffee-shop Wi-Fi) from reading or cheaply fingerprinting Bitcoin traffic. It does not hide what you send from the peer you send it to.
 
-**Private broadcast (`-privatebroadcast`):** Bitcoin Core 31 option: your own transactions are sent only via short-lived Tor or I2P connections, one transaction per connection, so recipients never learn your IP and can't link two of your transactions by connection.
+**Private broadcast (`-privatebroadcast`):** Bitcoin Core 31 option: transactions submitted via `sendrawtransaction` (not yet wallet sends) are sent only via short-lived Tor or I2P connections, one transaction per connection, so recipients never learn your IP and can't link two of your transactions by connection.
 
 **ASmap:** A map from IP address to Autonomous System (the network operator). With `-asmap=1` (embedded data since Core 31, off by default) Core spreads peers across operators instead of IP ranges, making eclipse attacks by a single large hoster or ISP harder.
 

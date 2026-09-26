@@ -17,9 +17,9 @@ We open with Silent Payments because it's happening now. Bitcoin Core merged the
 | 2 | S3 | Silent Payments III: Review Club | Bitcoin Core / libsecp256k1 SP PRs |
 | 2 | S4 | Think Like the Adversary: Chain Analysis & Fingerprinting | [chain-analysis lab](./labs/chain-analysis/), real wallets |
 | 3 | S5 | Coin Selection & Change | [coin-selection lab](./labs/coin-selection/), Sparrow, BDK |
-| 3 | S6 | Payjoin | payjoin-cli on signet, rust-payjoin |
+| 3 | S6 | Payjoin | [payjoin lab](./labs/payjoin/): payjoin-cli on regtest |
 | 4 | S7 | Light Clients & Your Own Node | [filters lab](./labs/compact-block-filters/), Kyoto, Floresta |
-| 4 | S8 | The Network Sees You: Tor, BIP324, Private Broadcast, ASmap | Bitcoin Core 31 |
+| 4 | S8 | The Network Sees You: Tor, BIP324, Private Broadcast, ASmap | [network lab](./labs/network-privacy/): Bitcoin Core 31 |
 | 5 | S9 | Breaking the Trail: CoinJoin & OpenSwap | JoinMarket, openswap regtest |
 | 5 | S10 | Lightning Privacy | BOLT11 vs BOLT12 on regtest |
 | 6 | S11 | Ecash: Cashu & Fedimint | a signet mint |
@@ -121,11 +121,11 @@ This session replaces the usual beats with the Review Club format:
 ## S6 · Payjoin: "Paying Together"
 
 **You leave with:** a payjoin done in pairs and a broken heuristic.
-**Prep:** `payjoin-cli` working on signet (test it yourself first!) · 1 pre-picked [rust-payjoin](https://github.com/payjoin/rust-payjoin) PR for swarm review · beginner-issue list open
+**Prep:** run the [payjoin lab](./labs/payjoin/) end to end yourself (nigiri + `payjoin-cli` on regtest) · 1 pre-picked [rust-payjoin](https://github.com/payjoin/rust-payjoin) PR for swarm review · beginner-issue list open
 
 - 🩸 The analyst's crown jewel (all inputs belong to one owner) and the transaction type that poisons it for everyone, including people who never use it
 - 🕳 BIP78 (sync, the receiver runs a server) vs BIP77 (async, via an untrusted directory with OHTTP). **Analogy:** both people put cash on the restaurant table. Where it ships today: [payjoin.org](https://payjoin.org) lists wallets
-- 🛠 **PAYJOIN IN PAIRS:** one person sends, one receives, then swap roles. Inspect the tx and point at the lie it tells
+- 🛠 **PAYJOIN IN PAIRS** ([payjoin lab](./labs/payjoin/)): one person sends, one receives, then swap roles. Then play analyst: trace each input back to its wallet and point at the lie the transaction tells
 - 🔍 The friendliest repo we know: 4 Code Orange contributors have merged here (Arowolo, Vaan, Mwihoti). Swarm-review one PR
 - 📜 Adam Back: privacy has to be default and boring to win
 - 🎯 A rust-payjoin beginner issue from the [pool](./ISSUE_POOL.md). Docs count ([#865 `cargo doc` improvements](https://github.com/payjoin/rust-payjoin/issues/865))
@@ -145,14 +145,14 @@ This session replaces the usual beats with the Review Club format:
 ## S8 · The Network Sees You: "Tor, BIP324, Private Broadcast, ASmap"
 
 **You leave with:** your node's traffic inspected, your broadcasts made private, and a map of your network exposure.
-**Prep:** Bitcoin Core **31.x** with Tor configured · Wireshark · an AS-lookup tool · read the 31.0 release notes on `-privatebroadcast` and embedded asmap · 2 [peer-observer](https://github.com/peer-observer/peer-observer) PRs · the May quote
+**Prep:** run the [network lab](./labs/network-privacy/) end to end on signet (Bitcoin Core **31.x** + Tor + Wireshark) · read the 31.0 release notes on `-privatebroadcast` and embedded asmap · 2 [peer-observer](https://github.com/peer-observer/peer-observer) PRs · the May quote
 
 - 🩸 Research tracing transactions to originating IPs through listener networks: your ISP identity glued to your coins. Then the eclipse attack as a heist: replace everyone a node talks to and show it a fake world
 - 🕳 How transactions propagate, who's listening, and the three layers of defense that shipped:
   - **BIP324** encrypted transport (hides content from your ISP, not from peers)
-  - **`-privatebroadcast`** (Core 31): your own transactions go out only via short-lived Tor/I2P connections, one tx per connection
+  - **`-privatebroadcast`** (Core 31): transactions submitted with `sendrawtransaction` go out only via short-lived Tor/I2P connections, one tx per connection. Wallet sends aren't covered yet; open follow-ups like [#34533](https://github.com/bitcoin/bitcoin/pull/34533) work on that
   - **`-asmap=1`** (Core 31, embedded map, off by default): spread your peers across networks so no single operator surrounds you. **Analogy:** never send all your messengers out the same gate
-- 🛠 **WIRETAP YOURSELF:** Wireshark plaintext v1 vs BIP324. Enable `-privatebroadcast`, send a signet tx, inspect `getprivatebroadcastinfo`. Pull `getpeerinfo`, count peers sharing one AS, enable `-asmap=1`, compare diversity
+- 🛠 **WIRETAP YOURSELF** ([network lab](./labs/network-privacy/)): Wireshark plaintext v1 vs BIP324. Enable `-privatebroadcast`, build a signet tx in the wallet and broadcast it with `sendrawtransaction` (in Core 31, wallet sends don't use private broadcast), then watch `getprivatebroadcastinfo`. Count peers sharing one AS, enable `-asmap=1`, compare diversity
 - 🔍 peer-observer: our own Razor has 4 merged PRs here, so review with "what does this detect?" glasses. Or an open private-broadcast follow-up in Core (e.g. [#34322](https://github.com/bitcoin/bitcoin/pull/34322), [#34533](https://github.com/bitcoin/bitcoin/pull/34533))
 - 📜 May, *The Crypto Anarchist Manifesto* (1988). Debate: "the network layer is Bitcoin's soft underbelly." Overblown or underrated?
 - 🎯 A peer-observer beginner issue · or publish your AS-diversity check as a guide · or a tested-on-platform report on a private-broadcast PR

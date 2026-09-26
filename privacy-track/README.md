@@ -43,14 +43,16 @@ Anyone can join the sessions. People who keep coming back and produce proof of w
 
 ## Labs
 
-All labs run offline with plain Python 3.8+. No installs.
+The Python labs run offline with plain Python 3.8+ and need no installs. The payjoin and network labs are step-by-step guides using real software.
 
 | Lab | Session | What you build |
 |---|---|---|
 | [silent-payments](./labs/silent-payments/) | S1, S2 | A BIP352 sender and scanner graded against the 28 official test vectors, plus a scanning-cost benchmark |
 | [chain-analysis](./labs/chain-analysis/) | S4 | The core heuristics (CIOH, change detection, clustering) on sample transactions |
 | [coin-selection](./labs/coin-selection/) | S5 | Four selection algorithms, scored on fees vs privacy |
+| [payjoin](./labs/payjoin/) | S6 | An async payjoin on regtest, then catch the common-input heuristic lying (guide: needs Docker + Rust) |
 | [compact-block-filters](./labs/compact-block-filters/) | S7 | A simplified BIP158 filter: Golomb-Rice coding, matching, false positives |
+| [network-privacy](./labs/network-privacy/) | S8 | BIP324 in Wireshark, `-privatebroadcast`, ASmap peer diversity (guide: needs Bitcoin Core 31 + Tor) |
 
 ```bash
 git clone https://github.com/code-orange-dev/curriculum
