@@ -1,0 +1,49 @@
+name: Labs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  labs:
+    runs-on: ubuntu-22.04   # still has Python 3.8 builds
+    strategy:
+      matrix:
+        python: ["3.8", "3.12"]   # labs promise Python 3.8+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Silent Payments reference solutions pass all BIP352 vectors
+        working-directory: privacy-track/labs/silent-payments
+        run: |
+          python3 run_vectors.py send --solution
+          python3 run_vectors.py receive --solution
+
+      - name: Unimplemented exercises are skipped, not crashed
+        working-directory: privacy-track/labs/silent-payments
+        run: |
+          for side in send receive; do
+            out=$(python3 run_vectors.py $side || true)
+            echo "$out" | tail -3
+            if echo "$out" | grep -q "crashed"; then echo "::error::$side stub crashed"; exit 1; fi
+          done
+          python3 scan_benchmark.py 20
+
+      - name: Other labs run end to end
+        run: |
+          for lab in chain-analysis/chain_analysis_lab.py coin-selection/coin_selection_simulator.py compact-block-filters/compact_block_filters.py; do
+            (cd privacy-track/labs/$(dirname $lab) && python3 $(basename $lab) > /dev/null)
+          done
+
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/check_links.py
