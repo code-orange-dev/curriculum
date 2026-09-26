@@ -82,7 +82,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 **Readings:**
 - Mastering Bitcoin, Chapter 6 (Transactions)
 - [Learn Bitcoin from the Command Line: Chapter 4](https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line)
-- [Bitcoin Optech: Transaction Structure](https://bitcoinops.org/en/topics/transaction-format/)
+- [learnmeabitcoin: Transaction Structure](https://learnmeabitcoin.com/technical/transaction/)
 
 **Exercises:**
 1. Create a raw transaction using `createrawtransaction`, sign it with `signrawtransactionwithwallet`, and broadcast with `sendrawtransaction`
@@ -130,7 +130,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 **Readings:**
 - Mastering Bitcoin, Chapter 12 (SegWit)
 - [BIP 141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki), [BIP 143](https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki)
-- [Bitcoin Optech: SegWit](https://bitcoinops.org/en/topics/segwit/)
+- [Bitcoin Optech: Segregated Witness](https://bitcoinops.org/en/topics/segregated-witness/)
 
 **Exercises:**
 1. Create and compare legacy (P2PKH) vs native SegWit (P2WPKH) transactions on regtest - compare sizes and fees
