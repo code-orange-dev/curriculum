@@ -8,7 +8,7 @@
 
 ## Overview
 
-The Sovereign Bitcoiner Crash Course takes curious Bitcoiners and transforms them into fully self-sovereign node operators, miners, and privacy advocates. Every graduate leaves with deployed, working systems - a running full node, a BTCPay server, a multisig inheritance plan, and the knowledge to defend their Bitcoin stack against both digital and physical threats.
+The Sovereign Bitcoiner Crash Course is a hands-on course for Bitcoiners who want to run their own stack. Participants work towards setting up a full node, a BTCPay server and a multisig inheritance plan, and learn how to defend their setup against digital and physical threats.
 
 ## Prerequisites
 

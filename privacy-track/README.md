@@ -21,14 +21,14 @@ This track teaches those problems one at a time, with the code open on screen, a
 
 ## Why start with Silent Payments
 
-Because it's landing right now. Bitcoin Core merged the BIP352 core logic in September 2026 ([#35301](https://github.com/bitcoin/bitcoin/pull/35301)), libsecp256k1 v0.8.0 ships a `silentpayments` module, and wallets like Dana, Cake, BlueWallet, Sparrow and our own community's [Shroud](https://github.com/CypherCommons/shroud) are shipping support. Sending and receiving in Core are in review. Participants can build the protocol from scratch (S1-S2) and then review the real implementation while it's still open (S3).
+Because it's landing right now. As of September 2026, Bitcoin Core has merged the BIP352 core logic ([#35301](https://github.com/bitcoin/bitcoin/pull/35301)), libsecp256k1 v0.8.0 ships a `silentpayments` module, and several wallets already support sending or receiving (see [Optech's Silent Payments topic](https://bitcoinops.org/en/topics/silent-payments/) for the current list). Sending and receiving in Core are in review. Participants can build the protocol from scratch (S1-S2) and then review the real implementation while it's still open (S3).
 
 ## How it works
 
 - **Online, global, drop-in.** Every session stands alone. You'll never be lost because you missed last time
 - **Hands-on every time.** You build or run something on your own machine: a Silent Payments sender graded against the official BIP352 vectors, a node, a payjoin, a swap
 - **Review-first.** Every session reads a real open PR together. We learn to build, test and explain other people's work, which is how contributors earn trust
-- **Proof of work, not attendance.** You leave with a concrete next step: a finished lab, a tested PR, a reproduced bug, a doc fix, or a PR from the [curated pool](./ISSUE_POOL.md)
+- **Proof of work, not attendance.** You leave with a concrete next step: a finished lab, a tested PR, a reproduced bug, a doc fix, or a PR on an issue you've checked is still open ([how to find one](./ISSUE_POOL.md))
 
 ## Where it fits
 
@@ -66,7 +66,7 @@ python3 run_vectors.py send
 
 1. **Do the hands-on yourself first.** Every session in [SESSIONS.md](./SESSIONS.md) has a prep line. If you can do it, you can host it
 2. **Teach the why, then show where it lives in code.** The repo's own docs handle the how
-3. **Protect the relationship with maintainers.** Contributions come from the [curated pool](./ISSUE_POOL.md) and pass the [PR checklist](./PR_CHECKLIST.md). Review comments go upstream only when they're genuinely useful. The privacy world is small, and a reputation for noise closes doors for everyone after us
+3. **Protect the relationship with maintainers.** Every target is checked on the day ([how](./ISSUE_POOL.md)) and every PR passes the [PR checklist](./PR_CHECKLIST.md). Review comments go upstream only when they're genuinely useful. The privacy world is small, and a reputation for noise closes doors for everyone after us
 
 Full guide: [FACILITATOR_GUIDE.md](./FACILITATOR_GUIDE.md).
 
@@ -77,7 +77,7 @@ Enter at any rung. There's no pressure to climb.
 1. **Engage:** build a repo, read the code, join its chat
 2. **Test:** build someone's PR, run it, report exactly what you did and saw
 3. **Fix:** docs, error messages, small clarity improvements
-4. **Cover:** add tests. Maintainers love it, and it teaches you the code
+4. **Cover:** add tests. It's useful to maintainers, and it teaches you the code
 5. **Review:** explain a PR, challenge an assumption, find an edge case
 6. **Build:** fix a real bug or implement a scoped feature, then see it through review
 7. **Lead:** curate the pool, host a session, mentor newcomers
@@ -97,7 +97,7 @@ In the order that matters (details in the program's [MEASUREMENT.md](https://git
 |---|---|
 | [SESSIONS.md](./SESSIONS.md) | The 12 sessions: beats, prep, hands-on, PRs, follow-ups |
 | [FACILITATOR_GUIDE.md](./FACILITATOR_GUIDE.md) | Running a session: checklist, Review Circle rules, troubleshooting |
-| [ISSUE_POOL.md](./ISSUE_POOL.md) | Verified contribution targets, mapped to sessions |
+| [ISSUE_POOL.md](./ISSUE_POOL.md) | How to find a current contribution target: live searches per session |
 | [PR_CHECKLIST.md](./PR_CHECKLIST.md) | Run before anything goes upstream |
 | [resources/](./resources/) | Glossary and per-session reading list |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Improving this track |

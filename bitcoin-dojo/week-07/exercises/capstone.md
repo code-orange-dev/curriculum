@@ -29,6 +29,6 @@ If every signature verifies, you have independently validated a real Bitcoin tra
 
 ## 4. Next step: pick one
 
-- **Keep building on these exact skills:** the [Privacy Track](../../../privacy-track/) Silent Payments lab uses the same curve math, tagged hashes and taproot keys. It's graded against the official BIP352 test vectors, and it's where many Code Orange contributors started
+- **Keep building on these exact skills:** the [Privacy Track](../../../privacy-track/) Silent Payments lab uses the same curve math, tagged hashes and taproot keys. It's graded against the official BIP352 test vectors.
 - **Go deeper on transactions:** [rawBit](../../../rawbit/) or [Decoding Bitcoin](../../../decoding-bitcoin/)
-- **Contribute:** pick an issue from the Privacy Track's [curated issue pool](../../../privacy-track/ISSUE_POOL.md) and run the [PR checklist](../../../privacy-track/PR_CHECKLIST.md) before submitting
+- **Contribute:** find a current beginner issue with the Privacy Track's [live searches](../../../privacy-track/ISSUE_POOL.md) and run the [PR checklist](../../../privacy-track/PR_CHECKLIST.md) before submitting

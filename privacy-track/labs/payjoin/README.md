@@ -51,7 +51,7 @@ Feed this transaction's shape into your `apply_cioh` and `detect_change_output` 
 
 ## Proof of work (pick one)
 
-- A rust-payjoin beginner issue from the [issue pool](../../ISSUE_POOL.md). Docs count
+- A rust-payjoin beginner issue ([how to find one](../../ISSUE_POOL.md)). Docs count
 - Something in the quick start confused you? Fix the docs upstream, following the [PR checklist](../../PR_CHECKLIST.md)
 - Test an open rust-payjoin PR on your platform and post a precise test report
 

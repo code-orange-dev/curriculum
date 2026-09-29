@@ -267,7 +267,7 @@ Graduates are ready to:
 
 - **rawBit tool**: [rawBit.io](https://github.com/rawBit-io/rawbit) - Visual Bitcoin TX builder & Script debugger
 - **Upstream textbook**: [Programming Bitcoin](https://github.com/jimmysong/programmingbitcoin) by Jimmy Song
-- **Partner**: Code Orange Dev School in collaboration with rawBit
+- **Built on**: rawBit's open-source lessons ([rawBit-io/rawbit](https://github.com/rawBit-io/rawbit)), run as a study cohort by Code Orange Dev School
 
 ---
 

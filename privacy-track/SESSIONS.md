@@ -6,7 +6,7 @@
 - Every session: use or build a real privacy tool, then study a real open PR together
 - Drop in any session. Each one re-teaches what it needs. Signet, testnet or regtest only, cameras optional
 
-We open with Silent Payments because it's happening now. Bitcoin Core merged the BIP352 core logic in September 2026 ([#35301](https://github.com/bitcoin/bitcoin/pull/35301)), libsecp256k1 shipped a `silentpayments` module in v0.8.0, and sending ([#35302](https://github.com/bitcoin/bitcoin/pull/35302)) and receiving ([#32966](https://github.com/bitcoin/bitcoin/pull/32966)) are in review. Participants can learn the protocol, build it, and review it while the work is still going on.
+We open with Silent Payments because it's happening now. As of September 2026: Bitcoin Core merged the BIP352 core logic ([#35301](https://github.com/bitcoin/bitcoin/pull/35301)), libsecp256k1 shipped a `silentpayments` module in v0.8.0, and sending ([#35302](https://github.com/bitcoin/bitcoin/pull/35302)) and receiving ([#32966](https://github.com/bitcoin/bitcoin/pull/32966)) are in review. Participants can learn the protocol, build it, and review it while the work is still going on.
 
 ## Season One Schedule
 
@@ -59,9 +59,9 @@ We open with Silent Payments because it's happening now. Bitcoin Core merged the
   - Walk through: `B_scan` / `B_spend`, sum of input keys, input hash (why paying the same person twice gives two different addresses), `t_k`, the x-only taproot output
   - The catch, which is S2's topic: the receiver has to *scan*
 - 🛠 **BUILD THE SENDER** ([send.py](./labs/silent-payments/send.py)): 5 small functions, graded against the 28 official vectors. Pair people up, and let the room race to 28/28. Anyone who finishes early reads `txin.py` and explains to the room why P2WSH multisig inputs don't count
-- 🔍 [bitcoin/bitcoin#36338](https://github.com/bitcoin/bitcoin/pull/36338) *BIP-352: fix P2PKH pubkey extraction from malleated scriptSig*. It's small, it's live, and it maps directly onto lab vector 21. Questions for the room: what did the old code do, and what would happen to a payment if sender and receiver disagreed here?
+- 🔍 [bitcoin/bitcoin#36338](https://github.com/bitcoin/bitcoin/pull/36338) *BIP-352: fix P2PKH pubkey extraction from malleated scriptSig* (open as of September 2026; check before the session). It's small and it maps directly onto lab vector 21. Questions for the room: what did the old code do, and what would happen to a payment if sender and receiver disagreed here?
 - 📜 BIP352 "Motivation". Read it like scripture, argue about it like heretics: does SP make the reuse problem go away, or just move it somewhere else?
-- 🎯 Finish the lab to 28/28 · or test Dana/Shroud on signet and file one well-documented bug or UX issue · or read [bdk-sp#55](https://github.com/bitcoindevkit/bdk-sp/issues/55) and check whether vector 27 covers it
+- 🎯 Finish the lab to 28/28 · or test an SP wallet on signet (e.g. Dana) and file one well-documented bug or UX issue after checking it isn't already reported
 
 ## S2 · Silent Payments II: "Finding Your Money"
 
@@ -71,14 +71,14 @@ We open with Silent Payments because it's happening now. Bitcoin Core merged the
 - 🩸 "Your phone has to do *what*?" Receiving SP means checking every eligible transaction on the chain. Run the benchmark live, then scale it: a year offline equals X hours of catch-up
 - 🕳 Three ways to scan, each with its own privacy trade-off:
   1. **Your own full node** (Bitcoin Core receiving PR, kernel-node): private, but heavy
-  2. **Download tweaks** from an indexer (BlindBit Oracle, Shroud's indexer, Dana): the server only learns that you're an SP user, and you do the ECDH yourself. Pair this with BIP158 filters so you don't reveal which outputs matched (bridge to S7)
+  2. **Download tweaks** from an indexer (e.g. BlindBit Oracle, used by Dana): the server only learns that you're an SP user, and you do the ECDH yourself. Pair this with BIP158 filters so you don't reveal which outputs matched (bridge to S7)
   3. **Hand your scan key to a server** (Frigate, with ephemeral keys held in RAM): fast and GPU-accelerated, but the server can see your incoming payments
   - **Analogy:** (1) you sort all the mail at the post office yourself; (2) the post office gives you a stamp for each letter and you test them at home; (3) you give the postman a key that opens only your letters, which saves time, and he can read them
   - Labels: one wallet, many distinguishable addresses, still one scan
 - 🛠 **BUILD THE SCANNER** ([receive.py](./labs/silent-payments/receive.py)): tweak, scan loop, then labels and spend keys as stretch goals. The grader catches the two classic bugs (checking outputs by position, stopping after the first match). Finish with `scan_benchmark.py` and compare laptops
-- 🔍 [bitcoin-core/secp256k1#1912](https://github.com/bitcoin-core/secp256k1/pull/1912) *silentpayments: add light client API*. Which of our three models is this API for? Or, from our own community: [Shroud](https://github.com/CypherCommons/shroud) (Chaitika's wallet) and [kernel-node#50](https://github.com/kernel-node/kernel-node/pull/50) (Peter's SP scanning, merged)
+- 🔍 [bitcoin-core/secp256k1#1912](https://github.com/bitcoin-core/secp256k1/pull/1912) *silentpayments: add light client API* (open as of September 2026; if it has merged, read the merged diff and its review thread). Which of our three models is this API for?
 - 📜 Satoshi, whitepaper §10 "Privacy": "keeping public keys anonymous." How far did we drift, and does SP bring us back?
-- 🎯 [shroud#132](https://github.com/CypherCommons/shroud/issues/132): unit tests for its Rust BIP-352 scanner (you just learned what to test) · or run BlindBit Oracle on signet and write up the setup · or take on [danawallet#466](https://github.com/cygnet3/danawallet/issues/466) (the output-ambiguity research issue) if you finished the labels stretch
+- 🎯 Run BlindBit Oracle on signet and write up the setup · or pick a scanning-related `good first issue` in an SP library such as [rust-silentpayments](https://github.com/cygnet3/rust-silentpayments/issues) or [bdk-sp](https://github.com/bitcoindevkit/bdk-sp/issues), after checking it's still open and unclaimed
 
 ## S3 · Silent Payments III: Review Club, "Silent Payments Land in Core"
 
@@ -114,9 +114,9 @@ This session replaces the usual beats with the Review Club format:
 - 🩸 An exchange freezes a user because of where their coins were 3 hops ago
 - 🕳 UTXOs are coins with memories, and coin selection chooses which past life to reveal. Algorithms (largest-first, BnB, random) trade fees against privacy. Changeless transactions, labels as self-defense, BIP329 label export
 - 🛠 **BREAK IT ON PURPOSE:** label every UTXO, freeze one, force selections. Then merge two labeled identities and watch the damage. Then run the [coin-selection lab](./labs/coin-selection/) and try to beat BnB on privacy without losing on fees
-- 🔍 BDK coin-selection PRs. Show [Muhammad's merged audit fixes](https://github.com/bitcoindevkit/bdk_wallet/pull/471): normal people do this
+- 🔍 BDK coin-selection PRs. Show a small merged fix such as [bdk_wallet#471](https://github.com/bitcoindevkit/bdk_wallet/pull/471): contributions like this are within reach
 - 📜 Hal Finney on privacy expectations
-- 🎯 A BDK beginner issue from the [pool](./ISSUE_POOL.md) · or a test report on an open coin-selection PR
+- 🎯 A BDK beginner issue ([how to find one](./ISSUE_POOL.md)) · or a test report on an open coin-selection PR
 
 ## S6 · Payjoin: "Paying Together"
 
@@ -126,9 +126,9 @@ This session replaces the usual beats with the Review Club format:
 - 🩸 The analyst's crown jewel (all inputs belong to one owner) and the transaction type that poisons it for everyone, including people who never use it
 - 🕳 BIP78 (sync, the receiver runs a server) vs BIP77 (async, via an untrusted directory with OHTTP). **Analogy:** both people put cash on the restaurant table. Where it ships today: [payjoin.org](https://payjoin.org) lists wallets
 - 🛠 **PAYJOIN IN PAIRS** ([payjoin lab](./labs/payjoin/)): one person sends, one receives, then swap roles. Then play analyst: trace each input back to its wallet and point at the lie the transaction tells
-- 🔍 The friendliest repo we know: 4 Code Orange contributors have merged here (Arowolo, Vaan, Mwihoti). Swarm-review one PR
+- 🔍 Swarm-review one open rust-payjoin PR together
 - 📜 Adam Back: privacy has to be default and boring to win
-- 🎯 A rust-payjoin beginner issue from the [pool](./ISSUE_POOL.md). Docs count ([#865 `cargo doc` improvements](https://github.com/payjoin/rust-payjoin/issues/865))
+- 🎯 A rust-payjoin [`good first issue`](https://github.com/payjoin/rust-payjoin/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) that's still open and unclaimed. Docs count
 
 ## S7 · Light Clients & Your Own Node: "Don't Trust, Verify, Privately"
 
@@ -140,7 +140,7 @@ This session replaces the usual beats with the Review Club format:
 - 🛠 **NODE RACE:** build and run Floresta live, and the first to sync wins sats. Connect a wallet to YOUR node. Faster finishers: the filters lab
 - 🔍 Floresta: welcoming maintainers and a real good-first-issue culture
 - 📜 "Don't trust, verify": what it actually asks of us
-- 🎯 A Floresta beginner issue ([#799 RPC docs](https://github.com/getfloresta/Floresta/issues/799) is ideal after tonight) · or turn tonight's setup pain into a docs PR
+- 🎯 A Floresta [`good first issue`](https://github.com/getfloresta/Floresta/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) that's still open and unclaimed · or turn tonight's setup pain into a docs PR
 
 ## S8 · The Network Sees You: "Tor, BIP324, Private Broadcast, ASmap"
 
@@ -153,7 +153,7 @@ This session replaces the usual beats with the Review Club format:
   - **`-privatebroadcast`** (Core 31): transactions submitted with `sendrawtransaction` go out only via short-lived Tor/I2P connections, one tx per connection. Wallet sends aren't covered yet; open follow-ups like [#34533](https://github.com/bitcoin/bitcoin/pull/34533) work on that
   - **`-asmap=1`** (Core 31, embedded map, off by default): spread your peers across networks so no single operator surrounds you. **Analogy:** never send all your messengers out the same gate
 - 🛠 **WIRETAP YOURSELF** ([network lab](./labs/network-privacy/)): Wireshark plaintext v1 vs BIP324. Enable `-privatebroadcast`, build a signet tx in the wallet and broadcast it with `sendrawtransaction` (in Core 31, wallet sends don't use private broadcast), then watch `getprivatebroadcastinfo`. Count peers sharing one AS, enable `-asmap=1`, compare diversity
-- 🔍 peer-observer: our own Razor has 4 merged PRs here, so review with "what does this detect?" glasses. Or an open private-broadcast follow-up in Core (e.g. [#34322](https://github.com/bitcoin/bitcoin/pull/34322), [#34533](https://github.com/bitcoin/bitcoin/pull/34533))
+- 🔍 A peer-observer PR, reviewed with "what does this detect?" glasses. Or a private-broadcast follow-up in Core (open as of September 2026: [#34322](https://github.com/bitcoin/bitcoin/pull/34322), [#34533](https://github.com/bitcoin/bitcoin/pull/34533))
 - 📜 May, *The Crypto Anarchist Manifesto* (1988). Debate: "the network layer is Bitcoin's soft underbelly." Overblown or underrated?
 - 🎯 A peer-observer beginner issue · or publish your AS-diversity check as a guide · or a tested-on-platform report on a private-broadcast PR
 
@@ -177,7 +177,7 @@ This session replaces the usual beats with the Review Club format:
 - 🩸 "Just use Lightning for privacy." Then show balance probing and a traced payment
 - 🕳 What it hides: amounts from the chain. What it leaks: channels are public UTXOs, balances can be probed, invoices link identities, and your node pubkey is a fingerprint. Fixes in progress: BOLT12 offers, blinded paths, unannounced channels, splicing
 - 🛠 **LEAK COMPARISON:** pay a BOLT11 invoice and list what each hop learned. Then pay a BOLT12 offer with a blinded path and compare line by line
-- 🔍 ldk-node BOLT12 interop tests or Core Lightning offers (Gradale's territory)
+- 🔍 An ldk-node or Core Lightning PR about BOLT12 offers or blinded paths
 - 📜 Debate: "Layer 2 inherits layer 1's sins"
 - 🎯 An LDK/CLN docs or test issue on offers/blinded paths
 
@@ -196,10 +196,10 @@ This session replaces the usual beats with the Review Club format:
 ## S12 · Contribution Sprint: "Ship It"
 
 **You leave with:** something real submitted upstream tonight, whether that's code, a test report or a review that passed the checklist.
-**Prep:** the season scoreboard (reviews, test reports, issues and PRs, with names on screen if people opted in) · a curated board of verified-open issues from the [pool](./ISSUE_POOL.md) · sats budget · the Hughes closing quote
+**Prep:** the season scoreboard (reviews, test reports, issues and PRs, with names on screen if people opted in) · a board of issues found via [ISSUE_POOL.md](./ISSUE_POOL.md) and checked that morning · sats budget · the Hughes closing quote
 
 - 🩸 The scoreboard: everything the room shipped this season, including the reviews and test reports, not just PRs
-- 🛠 **THE SPRINT (60 min):** pick from the board (SP scanner tests for Shroud, rust-payjoin, Floresta, Kyoto, BDK, peer-observer, JoinMarket, openswap, cdk), pair up, and ship it live. Facilitators float and sats flow
+- 🛠 **THE SPRINT (60 min):** pick from the board (rust-payjoin, Floresta, Kyoto, BDK, peer-observer, JoinMarket, openswap, cdk), pair up, and ship it live. Facilitators float and sats flow
 - 🔍 Everyone reviews someone else's draft against the [PR checklist](./PR_CHECKLIST.md) before it goes upstream
 - 📜 Hughes' closing lines, read AFTER the sprint: "Cypherpunks write code"
 - 🎯 Vote on Season Two topics. Strong contributors: talk to us about the [Review Club and fellowship](https://github.com/code-orange-dev/fellowships)
@@ -208,7 +208,7 @@ This session replaces the usual beats with the Review Club format:
 
 ## Season Two candidates (the room votes at S12)
 
-- BIP324 deep-dive: build a v2 transport handshake (Razor's [bip324-mitm](https://github.com/RazorBest/bip324-mitm) as a reference)
+- BIP324 deep-dive: build a v2 transport handshake
 - BIP375/BIP374: Silent Payments with PSBTs and hardware wallets (DLEQ proofs)
 - Stratum V2 and miner privacy
 - Mempool privacy, RBF and fee fingerprinting
@@ -221,6 +221,6 @@ This session replaces the usual beats with the Review Club format:
 
 ## Why these repos
 
-Newcomers see our own people's merged code in almost every repo. rust-payjoin (4 CO contributors merged) · Shroud (Chaitika) · kernel-node and Bitcoin Core SP (Peter) · peer-observer (Razor, 4 merged) · BDK (Vaan, Muhammad) · LDK and Core Lightning (Gradale, Psychemist) · Floresta · Kyoto · openswap · JoinMarket · cdk. Anything that goes upstream passes the [PR checklist](./PR_CHECKLIST.md). Live targets are in the [issue pool](./ISSUE_POOL.md).
+They're actively maintained, privacy-relevant, and have beginner-labelled issues or reviewable PRs: rust-payjoin · Floresta · Kyoto · BDK · peer-observer · LDK and Core Lightning · openswap · JoinMarket · cdk · Silent Payments libraries. Anything that goes upstream passes the [PR checklist](./PR_CHECKLIST.md). How to find a current target: [ISSUE_POOL.md](./ISSUE_POOL.md).
 
 *Privacy isn't something you wait for. It's something you ship.* 🟠

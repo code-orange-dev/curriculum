@@ -1,6 +1,6 @@
 # Silent Payments Lab (BIP352)
 
-Build a working Silent Payments sender and scanner in plain Python, then check it against the **official BIP352 test vectors**: the same 28 cases Bitcoin Core, libsecp256k1, rust-silentpayments, BDK and every SP wallet test against. When your code passes all of them, it's compatible with real wallets.
+Build a working Silent Payments sender and scanner in plain Python, then check it against the **official BIP352 test vectors**: the cases published with the BIP (Bitcoin Core, for example, includes them in its unit tests). When your code passes all of them, it follows the spec on every case they cover.
 
 No dependencies. Python 3.8+. Works offline.
 
@@ -56,5 +56,5 @@ This is teaching code: slow and not constant-time. **Never paste real keys into 
 - [BIP352](https://github.com/bitcoin/bips/blob/master/bip-0352.mediawiki) and its [reference.py](https://github.com/bitcoin/bips/blob/master/bip-0352/reference.py): compare your code line by line
 - [libsecp256k1 `silentpayments` module](https://github.com/bitcoin-core/secp256k1) (merged July 2026, PR #1765) and the light-client API follow-up (#1912)
 - [Bitcoin Core tracking issue #28536](https://github.com/bitcoin/bitcoin/issues/28536): BIP352 core logic merged in #35301; sending (#35302) and receiving (#32966) in review
-- [rust-silentpayments](https://github.com/cygnet3/rust-silentpayments), [bdk-sp](https://github.com/bitcoindevkit/bdk-sp), [BlindBit Oracle](https://github.com/setavenger/blindbit-oracle), [Frigate](https://github.com/sparrowwallet/frigate), [Dana wallet](https://github.com/cygnet3/danawallet), [Shroud](https://github.com/CypherCommons/shroud)
+- [rust-silentpayments](https://github.com/cygnet3/rust-silentpayments), [bdk-sp](https://github.com/bitcoindevkit/bdk-sp), [BlindBit Oracle](https://github.com/setavenger/blindbit-oracle), [Frigate](https://github.com/sparrowwallet/frigate), [Dana wallet](https://github.com/cygnet3/danawallet)
 - [Bitcoin Optech: Silent Payments](https://bitcoinops.org/en/topics/silent-payments/): history and news

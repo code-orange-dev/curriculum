@@ -20,17 +20,17 @@
 → No technical background needed
 
 ### "I understand Bitcoin but haven't coded on it"
-→ Join the **Bitcoin Dojo** (7 weeks, Chaincode BOSS Challenge)
-→ Or join **rawBit** (10 weeks, elliptic curves to Taproot)
+→ Join the **Bitcoin Dojo** (7 weeks, Programming Bitcoin)
+→ Or join **rawBit** (10 weeks, raw transactions from P2PKH to Taproot)
 → You'll write your first Bitcoin scripts and understand the protocol
 
 ### "I can code and want to contribute to Bitcoin"
 → Join **Decoding Bitcoin** (8 weeks, transaction deep dive)
-→ Or jump into the **Privacy Track** (24 sessions, chain analysis through CoinSwap)
+→ Or drop into the **Privacy Track** (12 biweekly sessions, Silent Payments through ecash)
 → You'll submit your first PR to a real Bitcoin project
 
 ### "I'm already contributing and want funding"
-→ Apply for a **Developer Fellowship** ($500/mo, 6 months)
+→ Apply for a **Developer Fellowship** ($512/mo, 6 months)
 → Pick a project, get a mentor, ship code: fellowship@codeorange.dev
 → Details: https://github.com/code-orange-dev/fellowships
 
@@ -72,18 +72,18 @@ All our curriculum is CC0-licensed. You can use, adapt, and improve it.
 
 ## Your First Bitcoin Open-Source PR
 
-Not sure where to start contributing to Bitcoin itself? Here are beginner-friendly projects our community contributes to:
+Not sure where to start contributing to Bitcoin itself? Here are some projects that label beginner-friendly issues:
 
 | Project | Language | Good First Issues |
 |---------|----------|-------------------|
 | [rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin) | Rust | Documentation, tests, small fixes |
 | [BDK](https://github.com/bitcoindevkit/bdk) | Rust | Wallet tooling, tests |
-| [Floresta](https://github.com/Davidson-Souza/Floresta) | Rust | Light client node, good first issues labeled |
+| [Floresta](https://github.com/getfloresta/Floresta) | Rust | Light client node, good first issues labeled |
 | [BlueWallet](https://github.com/BlueWallet/BlueWallet) | React Native | Translations, UI improvements |
 | [BTCPay Server](https://github.com/btcpayserver/btcpayserver) | C# | Merchant payments, documentation |
 | [peer-observer](https://github.com/peer-observer/peer-observer) | Rust | P2P network monitoring |
 
-**Pro tip**: Start by reading the project's CONTRIBUTING.md, then look for issues labeled `good first issue` or `help wanted`. Our Discord has a #contribution-help channel where you can ask questions.
+**Pro tip**: Start by reading the project's CONTRIBUTING.md, then look for issues labeled `good first issue` or `help wanted`. You can also ask in the Code Orange Discord.
 
 ---
 
