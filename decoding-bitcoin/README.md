@@ -8,9 +8,7 @@
 
 ## Overview
 
-Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 weeks, participants self-study Bitcoin protocol fundamentals - transactions, Script, Taproot, PSBTs - and learn how to contribute to Bitcoin open-source software through structured peer-learning sessions with experienced mentors.
-
-**Our 2nd cohort produced 12 graduates who are now actively contributing to Bitcoin open-source projects** - with merged and approved PRs across Bitcoin Core, rust-bitcoin, BDK, rust-payjoin, peer-observer, LDK, and BlueWallet.
+Decoding Bitcoin is an 8-week developer study cohort. Over 8 weeks, participants self-study Bitcoin protocol fundamentals - transactions, Script, Taproot, PSBTs - and learn how to contribute to Bitcoin open-source software through structured peer-learning sessions with experienced mentors.
 
 ## Prerequisites
 
@@ -28,7 +26,7 @@ Decoding Bitcoin is Code Orange Dev School's flagship developer program. Over 8 
 | **Weekly sessions** | 2x per week - group discussion + TA office hours |
 | **Group size** | 10-20 participants, split into study groups of 4-5 |
 | **Assessments** | 2 technical questions per week + final contribution project |
-| **Mentors** | Experienced Bitcoin developers and Code Orange alumni |
+| **Mentors** | Volunteer mentors and teaching assistants |
 
 ## How It Works
 

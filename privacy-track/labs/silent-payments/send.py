@@ -2,7 +2,7 @@
 Session 1 lab - build a Silent Payments SENDER (BIP352)
 
 Fill in the five functions below, then grade yourself against the official
-BIP352 test vectors (the same ones Bitcoin Core and every wallet use):
+BIP352 test vectors (the official ones published with the BIP):
 
     python3 run_vectors.py send
 

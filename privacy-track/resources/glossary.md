@@ -40,7 +40,7 @@
 
 **Eligible input:** An input whose public key BIP352 can read from the spending transaction (P2TR key path or non-NUMS script path, P2WPKH, P2SH-P2WPKH, P2PKH with a compressed key). Only eligible inputs are summed into `A_sum`; sender and receiver must agree exactly on this set.
 
-**Tweak indexer / index server:** A server that computes tweak data for every block so SP light clients don't have to fetch every transaction's prevouts. Examples: BlindBit Oracle, Shroud's indexer. A *remote scanner* (e.g. Frigate) instead receives the user's scan key and scans for them - faster, but the server sees incoming payments.
+**Tweak indexer / index server:** A server that computes tweak data for every block so SP light clients don't have to fetch every transaction's prevouts. Example: BlindBit Oracle. A *remote scanner* (e.g. Frigate) instead receives the user's scan key and scans for them - faster, but the server sees incoming payments.
 
 **Tagged hash:** A domain-separated hash function defined in BIP340: `SHA256(SHA256(tag) || SHA256(tag) || data)`. Used throughout Silent Payments to prevent cross-protocol attacks. The tags "BIP0352/Inputs" and "BIP0352/SharedSecret" are used for input hashing and tweak derivation respectively.
 

@@ -12,7 +12,7 @@ You're a host, not a professor. You need to be one session ahead of the room, ha
 
 - [ ] Do the session's hands-on end to end on a clean machine. Write down every gotcha
 - [ ] Pick 1-2 live PRs for the Review Circle. Good picks are small, privacy-relevant, active in the last month, and have a clear "how would you test this?" angle. For S3 (Review Club), announce the PR a week ahead and ask people to build it
-- [ ] Pull 3-5 targets from [ISSUE_POOL.md](./ISSUE_POOL.md) for the Proof-of-Work Board
+- [ ] Use the live searches in [ISSUE_POOL.md](./ISSUE_POOL.md) to find 3-5 targets for the Proof-of-Work Board, and check each one the morning of the session
 - [ ] Post the session announcement with: the topic, what to install, the lab link, and "drop-ins welcome"
 
 ## The morning of
@@ -56,7 +56,7 @@ These come from the program's [Review Club playbook](https://github.com/code-ora
 
 **"My build failed."** Keep a pre-built binary or a shared regtest box around. Setup pain belongs in a breakout room, and afterwards it makes a great docs PR.
 
-**"I can't find anything to contribute."** A test report on an open PR is a contribution. So are docs. So is a reproduction of an open bug. The [pool](./ISSUE_POOL.md) is curated for exactly this.
+**"I can't find anything to contribute."** A test report on an open PR is a contribution. So are docs. So is a reproduction of an open bug. [ISSUE_POOL.md](./ISSUE_POOL.md) links live searches and test targets for every session.
 
 **"Bitcoin Core is intimidating."** Start with the SP lab, which uses the exact vectors in `src/test/data/bip352_send_and_receive_vectors.json`. Then read `src/common/bip352.cpp`, which is short. That's a much gentler entry to Core than most.
 
@@ -80,7 +80,7 @@ Builders working on this season's topics. Invite one per month. Offer 30 minutes
 ## After the season
 
 - Run S12 as a sprint, then hold a retro: which sessions produced proof of work, which labs broke, and which PRs got reviewed
-- Update [ISSUE_POOL.md](./ISSUE_POOL.md) and move merged/closed entries to the log
+- Record what people actually shipped (with links) in the program's tracking
 - Invite repeat contributors into the Review Club and the [fellowship](https://github.com/code-orange-dev/fellowships) pipeline
 - Measure retention at 3, 6 and 12 months, per the program's [MEASUREMENT.md](https://github.com/code-orange-dev/code-orange-dev/blob/main/privacy-contributor-program/MEASUREMENT.md)
 

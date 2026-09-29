@@ -2,13 +2,13 @@
 
 **Run this before every pull request goes upstream. No exceptions.**
 
-This is the ten-minute step that turns a maybe-PR into a merge, and it's the reason maintainers welcome Code Orange instead of muting it. A facilitator should make sure every participant runs it before hitting "Create pull request" or "Comment".
+This is the ten-minute step that makes a PR worth a maintainer's time. A facilitator should make sure every participant runs it before hitting "Create pull request" or "Comment".
 
 ---
 
 ## Before you start coding
 
-- [ ] The issue is from [`ISSUE_POOL.md`](./ISSUE_POOL.md), marked LIVE and type BUILD (not random, not already claimed).
+- [ ] You checked the issue today with the steps in [`ISSUE_POOL.md`](./ISSUE_POOL.md): still open, no PR already fixing it, unassigned, still wanted.
 - [ ] You commented on the issue (or checked it's unassigned) so two people don't do the same work.
 - [ ] You read the repo's **CONTRIBUTING.md**. Each repo has its own rules - follow theirs over any general habit.
 
@@ -26,7 +26,7 @@ This is the ten-minute step that turns a maybe-PR into a merge, and it's the rea
 
 - [ ] Watch for review comments and respond promptly and politely.
 - [ ] Expect change requests - that's normal and is part of contributing, not a rejection.
-- [ ] When it merges (or closes), log it in the ISSUE_POOL outcomes log.
+- [ ] When it merges (or closes), record the outcome with its link in the program's tracking.
 
 ---
 

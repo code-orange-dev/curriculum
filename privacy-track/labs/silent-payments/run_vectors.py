@@ -7,9 +7,9 @@ Grade your Silent Payments code against the official BIP352 test vectors.
     python3 run_vectors.py send --solution   # run the reference solution instead
     python3 run_vectors.py send -v           # show got/expected on failure
 
-The vectors are the ones Bitcoin Core, libsecp256k1, rust-silentpayments and
-every other implementation test against. Passing them all means your code
-interoperates with real wallets.
+The vectors are the official ones published with BIP352 (Bitcoin Core, for
+example, includes them in its unit tests). Passing them all means your code
+follows the spec on every case they cover.
 """
 
 import argparse
@@ -188,7 +188,7 @@ def main():
     total = passed + failed + todo
     print(f"\n{passed}/{total} vectors passing  ({time.time() - start:.1f}s)")
     if passed == total:
-        print("All green. Your code agrees with every BIP352 implementation. 🟠")
+        print("All green: your code passes every official BIP352 test vector. 🟠")
     sys.exit(0 if failed == 0 and todo == 0 else 1)
 
 

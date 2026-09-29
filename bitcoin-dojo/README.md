@@ -8,11 +8,9 @@
 
 ## Overview
 
-Bitcoin Dojo is a 7-week study cohort run in partnership with [Chaincode Labs](https://chaincode.com/) as part of the [BOSS Challenge](https://learning.chaincode.com/) (Building Open Source Software). Participants build Bitcoin's cryptographic primitives from scratch using Jimmy Song's [Programming Bitcoin](https://github.com/jimmysong/programmingbitcoin) - covering finite fields, elliptic curves, ECDSA, key generation, address encoding, and transaction construction.
+Bitcoin Dojo is a 7-week study cohort. Participants build Bitcoin's cryptographic primitives from scratch using Jimmy Song's [Programming Bitcoin](https://github.com/jimmysong/programmingbitcoin) - covering finite fields, elliptic curves, ECDSA, key generation, address encoding, and transaction construction.
 
 This is not a lecture course. Participants study independently, then defend their understanding in weekly group calls where they explain answers to assigned questions. The goal: turn developers into Bitcoiners who are ready to contribute to open-source projects.
-
-**Our first cohort had 49 registrants and produced 21 graduates**, many of whom are now pursuing Good First Issues across Bitcoin Core, rust-bitcoin, BDK, and other projects.
 
 ## Prerequisites
 
@@ -28,9 +26,7 @@ This is not a lecture course. Participants study independently, then defend thei
 | **Time commitment** | 6-10 hours per week (self-study + calls) |
 | **Weekly calls** | Mondays 11:00 UTC via Discord |
 | **Textbook** | [Programming Bitcoin](https://github.com/jimmysong/programmingbitcoin) by Jimmy Song |
-| **Partner** | [Chaincode Labs](https://chaincode.com/) BOSS Challenge |
-| **Registrants (Cohort 1)** | 49 |
-| **Graduates (Cohort 1)** | 21 |
+| **Related program** | Chaincode Labs' [BOSS Challenge](https://learning.chaincode.com/) (separate, run by Chaincode) |
 
 ## How It Works
 
@@ -233,8 +229,7 @@ Each participant presents:
 
 ### Before the Cohort
 
-- [ ] Confirm partnership with Chaincode Labs / BOSS Challenge (if applicable)
-- [ ] Open registration (target: 40-50 registrants, expect ~50% completion rate)
+- [ ] Open registration
 - [ ] Set up Discord channel with weekly topic threads
 - [ ] Ensure all participants have Python 3 installed
 - [ ] Clone Jimmy Song's [programmingbitcoin repo](https://github.com/jimmysong/programmingbitcoin)
@@ -255,20 +250,6 @@ Each participant presents:
 - [ ] Track graduate contributions over 3-6 months
 - [ ] Feed data into PR Tracking Dashboard
 - [ ] Invite top graduates to TA for the next cohort
-
----
-
-## Outcomes (Cohort 1: Feb-Apr 2026)
-
-| Metric | Value |
-|--------|-------|
-| Registrants | 49 |
-| Graduates | 21 |
-| Completion rate | ~43% |
-| Partner | Chaincode Labs (BOSS Challenge) |
-| Graduates pursuing Good First Issues | Multiple |
-| Graduates joining rawBit cohort | In progress |
-| Graduates joining Code Orange workshops | In progress |
 
 ---
 

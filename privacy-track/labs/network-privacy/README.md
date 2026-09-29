@@ -93,7 +93,7 @@ With asmap on, Core buckets peers by AS instead of by IP range, and `getpeerinfo
 ## Proof of work (pick one)
 
 - Write up your AS-diversity numbers from before and after, as a short guide for your community
-- Test an open private-broadcast follow-up PR on your platform and post a precise test report (see the [issue pool](../../ISSUE_POOL.md) and [PR checklist](../../PR_CHECKLIST.md))
+- Test an open private-broadcast follow-up PR on your platform and post a precise test report (see [how to find one](../../ISSUE_POOL.md) and the [PR checklist](../../PR_CHECKLIST.md))
 - Take a [peer-observer](https://github.com/peer-observer/peer-observer) beginner issue
 
 ## References

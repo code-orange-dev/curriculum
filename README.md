@@ -8,7 +8,7 @@
 
 ## About This Repository
 
-This is the master curriculum repository for [Code Orange Dev School](https://codeorange.dev) - Asia's Bitcoin Developer Pipeline. It contains everything an educator needs to fork this repo and run their own Bitcoin developer cohort, anywhere in the world, in any language.
+This is the master curriculum repository for [Code Orange Dev School](https://codeorange.dev), a Bitcoin-only developer education program. It contains everything an educator needs to fork this repo and run their own Bitcoin developer cohort, anywhere in the world, in any language.
 
 All materials are released under **CC0 1.0 Universal (Public Domain)** - use them, adapt them, translate them, teach with them. No permission needed.
 
@@ -128,7 +128,7 @@ curriculum/
 
 ## Upstream Resources
 
-This curriculum builds on world-class open-source Bitcoin education:
+This curriculum builds on these open-source Bitcoin education resources:
 
 - [Chaincode Labs Bitcoin Curriculum](https://github.com/chaincodelabs/bitcoin-curriculum) - Protocol development study groups
 - [Bitcoin Dev Project](https://bitcoindevs.xyz/) - Developer onboarding and learning paths
