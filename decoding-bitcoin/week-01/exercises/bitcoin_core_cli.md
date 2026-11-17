@@ -24,7 +24,7 @@ sudo apt-get install build-essential libtool autotools-dev automake pkg-config \
 make -j$(nproc)
 
 # Start regtest
-./src/bitcoind -regtest -daemon
+./src/bitcoind -regtest -fallbackfee=0.0001 -txindex -daemon
 ```
 
 ---
@@ -37,8 +37,13 @@ Regtest (regression test) is a private blockchain that runs on your machine. You
 
 **1.1** Start bitcoind in regtest mode:
 ```bash
-bitcoind -regtest -daemon
+bitcoind -regtest -fallbackfee=0.0001 -txindex -daemon
 ```
+
+The two extra options are needed for the later exercises to work on a fresh regtest node:
+
+- `-fallbackfee=0.0001` - a new regtest chain has no fee data, so without a fallback fee `sendtoaddress` (Exercises 2 and 5) fails with "Fee estimation failed. Fallbackfee is disabled."
+- `-txindex` - lets `getrawtransaction` find confirmed transactions (Exercise 3). Without it you get "No such mempool transaction" once the transaction is in a block.
 
 **1.2** Check that the node is running:
 ```bash
