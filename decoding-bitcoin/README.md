@@ -89,6 +89,10 @@ Each `slides/slides.md` is a [Marp](https://marp.app/) deck: plain markdown that
 
 Speaker notes are written as `<!-- comments -->` under each slide and show up in Marp's presenter view.
 
+### Regtest labs
+
+Every week's bitcoin-cli lab was run end to end on Bitcoin Core 29.0 (regtest) in November 2026, and the numbers in `solutions/` are measured, not estimated. Signatures can be 1 byte shorter now and then, so your sizes may differ by a byte. Running a newer version and something changed? Please open an issue or a pull request.
+
 ### Python labs
 
 Weeks 3 and 4 have small Python labs graded against real mainnet transactions. Run them from this folder with plain Python 3.8+ (no installs):

@@ -47,6 +47,8 @@ What to write down: the version number, the number of inputs and outputs, the lo
 
 ## Hands-on lab (bitcoin-cli, regtest)
 
+> Tested on Bitcoin Core 29.0 (regtest), November 2026.
+
 You need Bitcoin Core v29 or newer. If you have not installed it yet, follow [`week-01/exercises/bitcoin_core_cli.md`](../../week-01/exercises/bitcoin_core_cli.md). Some steps use `jq` to pick fields out of JSON. Install it with `sudo apt install jq` (Linux) or `brew install jq` (macOS).
 
 The lab keeps values in shell variables like `$TXID`. If you open a new terminal, set them again.
@@ -244,12 +246,12 @@ bitcoin-cli -regtest -datadir="$HOME/regtest-node2" -rpcport=18554 getpeerinfo |
 bitcoin-cli -regtest -datadir="$HOME/regtest-node2" -rpcport=18554 getblockcount
 ```
 
-Send a new payment from Alice on node 1, then compare `getrawmempool` on both nodes after a few seconds. Then disconnect the nodes (`disconnectnode 127.0.0.1:18444` on node 2), send another payment, and compare again.
+Send a new payment from Alice on node 1, then compare `getrawmempool` on both nodes after a few seconds. Then disconnect the nodes (`disconnectnode 127.0.0.1:18444` on node 2), send another payment, and compare again. When you are done, stop node 2 with `bitcoin-cli -regtest -datadir="$HOME/regtest-node2" -rpcport=18554 stop`.
 
 **Question:** When are the two mempools the same, and when are they different? Why can't there be one global mempool?
 
 ### C. Mempool limits
 
-Run `bitcoin-cli -regtest help getmempoolinfo` and read about `maxmempool` and `mempoolminfee`. Read `bitcoind -help | grep -A2 maxmempool`.
+Run `bitcoin-cli -regtest help getmempoolinfo` and read about `maxmempool` and `mempoolminfee`. Read `bitcoind -help | grep -A1 -- -maxmempool=`.
 
 **Question:** What does a node do when its mempool is full? How does that change the minimum fee it accepts?

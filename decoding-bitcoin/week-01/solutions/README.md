@@ -93,13 +93,13 @@ These are guesses (heuristics), not facts. Chain analysis companies use the same
 
 ### Short lab in this folder
 
-**Step 1.** `bitcoind -version` prints something like `Bitcoin Core daemon version v29.0.0`. Anything v29 or newer is fine.
+**Step 1.** `bitcoind -version` prints something like `Bitcoin Core daemon version v29.0` (and `bitcoin-cli -version` prints `Bitcoin Core RPC client version v29.0`). Anything v29 or newer is fine.
 
 **Step 2.** `chain` is `regtest`, `blocks` is `0` on a new node, and `difficulty` is about `4.66e-10`. Regtest has a minimum difficulty that never adjusts, so almost any hash is below the target and a laptop finds a valid block at once.
 
 **Step 3.** Each regtest block pays 50 BTC to the miner (the regtest subsidy halves every 150 blocks, so the first 150 blocks pay 50). A coinbase output can only be spent 100 blocks later (coinbase maturity), and the wallet counts it as spendable at 101 confirmations. After 101 blocks, only the reward from block 1 has matured. `getbalances` shows `trusted: 50` and `immature: 5000` (100 more rewards of 50 BTC).
 
-**Step 4.** The two SHA-256 outputs share no visible pattern: this is the avalanche effect. Without `-n`, `echo` adds a newline character, so you hash `satoshi\n`, which gives a totally different result. Tools that disagree about one invisible byte is a very common bug when people check hashes.
+**Step 4.** The two SHA-256 outputs share no visible pattern: this is the avalanche effect. Without `-n`, `echo` adds a newline character, so you hash `satoshi\n`, which gives a totally different result. Tools that disagree about one invisible byte is a very common bug when people check hashes. For reference: SHA-256 of `satoshi` is `da2876b3eb31edb4436fa4650673fc6f01f90de2f1793c4ec332b2387b09726f`, of `satoshj` is `ee4fd5ccc0696b1816c4d946503989c4b7dd2c6e6cea5ac9dad0486c89f60e46` (not one hex character matches in the same position), and the double SHA-256 of `satoshi` is `d3e291220ccc90141e6ada2fc9740a0a1dcc6aadf1c47c65c9243d49b2d7a326`. The avalanche stretch task prints `134 of 256 bits differ` for these two inputs.
 
 **Step 5.** `previousblockhash` points to the previous block, and `merkleroot` commits to all the transactions in this block. Blocks are linked by the double SHA-256 hash of the 80-byte header: each header contains the hash of the one before it.
 
@@ -121,11 +121,13 @@ These are guesses (heuristics), not facts. Chain analysis companies use the same
 - `vout`: the outputs. Each has a `value` in BTC, an index `n`, and a `scriptPubKey` (the locking script) with the address.
 - `locktime`: the earliest block height (or time) when the transaction can be mined. Bitcoin Core usually sets it to the current block height (anti fee sniping).
 
-You will also see `hash` (the wtxid), `size`, `vsize` and `weight`.
+You will also see `hash` (the wtxid), `size`, `vsize` and `weight`. For this one-input, two-output P2WPKH transaction they are `size` 222, `vsize` 141 and `weight` 561 (the signature can be 1 byte shorter now and then, which changes these by 1). At the default fallback fee of 10 sat/vB the fee is 1,410 sats, so the change output is 39.99998590 BTC. `locktime` is 101, the current height.
+
+Because "bob" is an address in your own wallet, `gettransaction` shows `amount` 0 and lists the 10 BTC twice in `details`, once as `send` and once as `receive`. Only the fee really left the wallet.
 
 There are normally 2 outputs: 10 BTC to bob, and the change back to a new address in your wallet. The input was a 50 BTC coinbase output, and a UTXO must be spent completely, so whatever is not paid out (minus the fee) has to come back as change.
 
-**2.5** `confirmations` changes from 0 to 1, and new fields appear: `blockhash`, `blockheight`, `blockindex` and `blocktime`. The transaction has also left the mempool.
+**2.5** `confirmations` changes from 0 to 1, and new fields appear: `blockhash`, `blockheight` (102), `blockindex` (1, because the coinbase is index 0) and `blocktime`. `bip125-replaceable` changes from `yes` to `no`, because a confirmed transaction can no longer be replaced. The transaction has also left the mempool.
 
 **3.3** The first bytes of a typical wallet transaction read:
 
@@ -143,18 +145,18 @@ That is 4 + 1 + 1 + 1 + 13 bytes of the txid = 20 bytes. Week 3 continues from h
 **4.3**
 
 - The block from step 2.4 has 2 transactions: the coinbase and your payment. (If you mined other blocks, an empty block has only 1.)
-- The coinbase is always the first transaction. It has one input that does not spend a real UTXO (its prevout txid is all zeros) and creates new coins: the block subsidy plus all fees in the block.
+- The coinbase is always the first transaction. It has one input that does not spend a real UTXO (`getblock` shows it as a `coinbase` field instead of a `txid` and `vout`) and creates new coins: the block subsidy plus all fees in the block. In this block its first output is 50.00001410 BTC: 50 BTC subsidy plus the 1,410 sat fee of your payment. It also has a second output of 0 BTC with type `nulldata` (an OP_RETURN): the SegWit witness commitment, which commits to the wtxids of the block.
 - `previousblockhash` is the hash of the block before. Block 0 has no previous block, so the field is missing in `getblock` output (inside the header, the 32 bytes are all zeros).
 - `merkleroot` is the root of a Merkle tree of all txids in the block: hash pairs of txids with double SHA-256, then hash pairs of those results, until one hash is left. It lets the 80-byte header commit to every transaction.
 - `bits` is the compact encoding of the target (`207fffff` on regtest, the easiest allowed). `nonce` is the number miners change to get a header hash below the target. On regtest a very small nonce is usually enough.
 
 **4.4** The genesis block is hardcoded in the software, not mined by your node. It has no previous block, and its coinbase output cannot be spent: it is not in the UTXO set. On regtest its hash is `0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206`, which differs from mainnet because the time, nonce and bits differ. The coinbase transaction is the same as mainnet, with the same "The Times 03/Jan/2009" message, so the merkle root is also the same: `4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b`.
 
-**5.2** The count depends on what you did. After the earlier steps you have mature coinbase outputs, the 10 BTC "bob" output and the change output. Your wallet shows a balance by adding up UTXOs; each payment you received and each change output is a separate coin, so you have several.
+**5.2** The count depends on what you did. If you followed the steps above exactly (102 blocks mined, one payment), you have 3 UTXOs worth 99.99998590 BTC in total: one mature 50 BTC coinbase output (from block 2; block 1's reward was spent in 2.2), the 10 BTC "bob" output and the 39.99998590 BTC change output. Your wallet shows a balance by adding up UTXOs; each payment you received and each change output is a separate coin, so you have several.
 
-**5.3** At least 2 inputs, because no single UTXO is worth 75 BTC or more. The wallet had to combine coins (for example a 50 BTC coinbase output and the change output) to pay 75 BTC plus the fee.
+**5.3** At least 2 inputs, because no single UTXO is worth 75 BTC or more. The wallet had to combine coins (for example a 50 BTC coinbase output and the change output) to pay 75 BTC plus the fee. Coin selection has some randomness: in our test run the wallet used all 3 UTXOs (vsize 276, fee 2,760 sats at 10 sat/vB), leaving 24.99995830 BTC change.
 
-**5.4** The UTXOs used as inputs are gone from `listunspent`. New ones appeared: the 75 BTC output (if you sent it to one of your own addresses, it is in your wallet), the new change output, and one more mature coinbase output, because mining another block made one more reward reach 100 confirmations.
+**5.4** The UTXOs used as inputs are gone from `listunspent`. New ones appeared: the 75 BTC output (if you sent it to one of your own addresses, it is in your wallet), the new change output, and one more mature coinbase output, because mining another block made one more reward reach the 101 confirmations the wallet waits for. In our run there were 3 UTXOs again: the 75 BTC "alice" output, the 24.99995830 BTC change and the newly matured 50 BTC coinbase from block 3.
 
 ## Bonus questions
 

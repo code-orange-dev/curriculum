@@ -72,7 +72,7 @@ curriculum/
 │   └── week-01/ ... week-07/          # exercises/, solutions/ and a check.py grader per week
 ├── rawbit/                            # 10-week raw transaction building cohort
 │   ├── README.md                      # Program overview, syllabus & facilitator guide
-│   └── week-01/ ... week-10/          # exercises/ and solutions/ (placeholders for now)
+│   └── week-01/ ... week-10/          # Week page; exercises/ and solutions/ still to come
 ├── decoding-bitcoin/                  # 10-week study cohort on Decoding Bitcoin (bitcoindevs.xyz)
 │   ├── README.md                      # Syllabus, schedule & facilitator guide
 │   ├── after-the-cohort.md            # Bitcoin Core architecture & first contribution
@@ -83,11 +83,11 @@ curriculum/
 │   └── labs/                          # Offline Python labs (BIP352 vectors, chain analysis, ...)
 ├── sovereign-bitcoiner/               # 5-10 week crash course
 │   ├── README.md                      # Syllabus
-│   └── week-01/ ... week-05/          # (materials coming soon)
+│   └── week-01/ ... week-05/          # One page per week (topics, hands-on, recaps)
 ├── nostr-workshops/                   # Monthly workshop modules
 │   ├── README.md
 │   └── modules/01-... 06-.../         # One self-contained workshop guide per module
-├── workshops/                         # Standalone workshops (materials coming soon)
+├── workshops/                         # Standalone 2-3 hour workshops, one facilitator guide each
 │   └── btcpay/ ecash/ mining/ multisig/ nodes/ nostr/ privacy/
 ├── resources/                         # Shared resources
 │   ├── reading-list.md

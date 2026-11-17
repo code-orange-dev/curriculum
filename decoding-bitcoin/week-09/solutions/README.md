@@ -73,7 +73,7 @@ Your transaction ids will differ. A correct table looks like this:
 | | P2TR key path | P2WPKH |
 |---|---|---|
 | Number of witness items | 1 | 2 |
-| Size of each item (bytes) | 64 (or 65 with a sighash byte) | about 71-72 (DER signature + sighash byte), then 33 |
+| Size of each item (bytes) | 64 (or 65 with a sighash byte) | 71, now and then 70 (DER signature + sighash byte; Bitcoin Core makes low-R signatures), then 33 |
 | Does the witness include a public key? | No | Yes, a 33-byte compressed key starting `02` or `03` |
 
 **Answer:** For P2TR the public key (the tweaked output key Q) is already in the output's scriptPubKey: `OP_1 <32-byte key>`. P2WPKH outputs only hold a 20-byte hash of the key, so the spender must reveal the key in the witness.
@@ -134,8 +134,8 @@ If your change output is P2WPKH instead, the numbers are 12 vbytes smaller (31-b
 | | P2TR (Lab 2) | P2WPKH (Lab 3) |
 |---|---|---|
 | Witness items | 1 | 2 |
-| Signature size | 64 bytes | about 71 bytes (Bitcoin Core makes low-R signatures, so 70-byte DER + 1 sighash byte is typical) |
-| Transaction vsize | 154 | about 141 |
+| Signature size | 64 bytes | 71 bytes (Bitcoin Core makes low-R signatures, so 70-byte DER + 1 sighash byte; now and then 1 byte less) |
+| Transaction vsize | 154 (size 205, weight 616) | 141 (size 222, weight 561) |
 | Output scriptPubKey size | 34 bytes (43 with amount and length) | 22 bytes (31 with amount and length) |
 
 - **Input:** P2TR is smaller, about 57.5 vB versus about 68 vB, because there is no public key in the witness and the signature is shorter.
@@ -147,6 +147,10 @@ If your change output is P2WPKH instead, the numbers are 12 vbytes smaller (31-b
 **4.1** Yes. The script prints `a60869f0dbcf1dc659c9cecbaf8050135ea9e8cdc487053f1dc6880949dc684c`, the same program you decoded from `bc1p5cyx...` in Exercise 2. The parity line prints 1, so this Q has an odd y coordinate.
 
 **4.2** The output key must equal your `witness_program`. The parity bit says whether Q's y coordinate is odd. A key-path spend does not need it (the signer adjusts their private key instead). A script-path spend does: the first byte of the control block is the leaf version (`0xc0`) plus this parity bit, so the control block starts with `c0` or `c1`. The verifier needs it to recompute Q from P and the Merkle root and check it matches the output.
+
+### Stretch task 1: Sighash flags
+
+With `walletprocesspsbt` and `sighashtype=ALL`, the key-path signature is **65 bytes**: the 64-byte Schnorr signature plus a `01` byte. With the default it is 64 bytes. The extra byte costs 0.25 vB per input and buys nothing here, which is why wallets use `SIGHASH_DEFAULT`.
 
 ---
 

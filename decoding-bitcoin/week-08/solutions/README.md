@@ -253,7 +253,7 @@ Any specific, kind, actionable comment counts. Weak: "Looks good." Strong: "Test
 
 **2.5** After 5 more blocks it is accepted. The witness is:
 
-1. A DER signature by key B (about 71 to 72 bytes, ending in `01` for SIGHASH_ALL).
+1. A DER signature by key B (71 bytes, now and then 70, ending in `01` for SIGHASH_ALL). Bitcoin Core grinds for a short `r` value, so you will rarely see 72.
 2. An empty item. This is the "dissatisfaction" for key A: an empty signature makes `<A> OP_CHECKSIG` push false without failing the script.
 3. The witness script.
 

@@ -50,6 +50,8 @@ What to write down: your guess for the change output and your reason. Clues peop
 
 ## Hands-on lab (bitcoin-cli, regtest)
 
+> Tested on Bitcoin Core 29.0 (regtest), November 2026.
+
 The full lab, including how to install Bitcoin Core (release binary or CMake build), is in [`bitcoin_core_cli.md`](bitcoin_core_cli.md). Do at least Exercises 1, 2 and 5 there. The steps below are a short version so you can check your setup quickly.
 
 ### Step 1: check your install

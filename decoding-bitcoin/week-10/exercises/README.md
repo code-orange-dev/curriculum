@@ -44,12 +44,15 @@ Fill in the cohort feedback form the Facilitator posts on Discord. Be specific: 
 
 ## Hands-on lab (bitcoin-cli, regtest)
 
+> Tested on Bitcoin Core 29.0 (regtest), November 2026.
+
 You need Bitcoin Core 28 or newer and `jq`. Earlier labs explain the setup: see [Week 1: Bitcoin Core CLI](../../week-01/exercises/bitcoin_core_cli.md) for regtest basics and [week 9's lab](../../week-09/exercises/README.md#hands-on-lab-bitcoin-cli-regtest) for key-path spends.
 
 ### Setup
 
 ```bash
-bitcoind -regtest -daemon -txindex=1
+# -fallbackfee lets sendtoaddress pay a fee on a fresh regtest chain with no fee history
+bitcoind -regtest -daemon -txindex=1 -fallbackfee=0.0001
 bitcoin-cli -regtest -named createwallet wallet_name=lab || bitcoin-cli -regtest loadwallet lab
 bitcoin-cli -regtest -rpcwallet=lab -generate 101
 
@@ -59,6 +62,8 @@ XPRV=$(bitcoin-cli -regtest -rpcwallet=lab listdescriptors true | jq -r '.descri
 # BIP341's "nothing up my sleeve" point: an x-only key with no known private key
 H=50929b74c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0
 ```
+
+If your node is already running without `-txindex` or `-fallbackfee`, run `bitcoin-cli -regtest stop`, wait a few seconds, and start it again with the command above.
 
 ### Lab 1: An inheritance output with a script-path spend (old Week 5, exercise 3)
 
@@ -86,6 +91,7 @@ echo "$ADDR"
 ```bash
 bitcoin-cli -regtest -named createwallet wallet_name=heir blank=true
 bitcoin-cli -regtest -rpcwallet=heir importdescriptors "[{\"desc\":\"$DESC\",\"timestamp\":\"now\"}]"
+# The warning "Not all private keys provided" is expected: the wallet has the heir's key but not the owner's.
 
 TXID=$(bitcoin-cli -regtest -rpcwallet=lab sendtoaddress "$ADDR" 1)
 bitcoin-cli -regtest -rpcwallet=lab -generate 1

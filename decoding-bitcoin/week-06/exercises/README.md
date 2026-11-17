@@ -66,6 +66,8 @@ Write down:
 
 ## Hands-on lab (bitcoin-cli, regtest)
 
+> Tested on Bitcoin Core 29.0 (regtest), November 2026.
+
 Works on Bitcoin Core 28 and 29 or newer, with descriptor wallets (the default). You also need `jq`. Setup help is in the [week 1 guide](../../week-01/exercises/bitcoin_core_cli.md). Since v29, Bitcoin Core builds with CMake (`cmake -B build && cmake --build build -j$(nproc)`, binaries in `build/bin/`).
 
 ### Step 0: Start a node
@@ -125,6 +127,8 @@ If Python says `unsupported hash type ripemd160` (some OpenSSL 3 systems), use `
 echo -n $PUB | xxd -r -p | openssl dgst -sha256 -binary \
   | openssl dgst -provider legacy -provider default -ripemd160
 ```
+
+`xxd` comes with vim. If you don't have it, replace `xxd -r -p` with `python3 -c "import sys; sys.stdout.buffer.write(bytes.fromhex(sys.stdin.read()))"`.
 
 **Question:** Does your hash match the 20 bytes in the scriptPubKey? Why does a P2PKH output store a hash and not the public key?
 

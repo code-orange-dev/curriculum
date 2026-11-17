@@ -114,11 +114,11 @@ As a bare multisig scriptPubKey, the output would be those 105 bytes. The P2SH s
 
 **Step 3.** Yes, `$MS_SH` is the same address as the legacy address from step 2. Same three keys, same order, same M, so same redeem script and same hash. The descriptor's key origins are only metadata for wallets and do not change the script.
 
-The funding output is `OP_HASH160 <20 bytes> OP_EQUAL` with type `scripthash`. No public keys are visible. An observer only learns that this is a P2SH output. They cannot tell that it is multisig.
+The funding output is `OP_HASH160 <20 bytes> OP_EQUAL` with type `scripthash`. No public keys are visible. An observer only learns that this is a P2SH output. They cannot tell that it is multisig. (The other output, also `scripthash`, is the miner's change. Core makes the change the same type as the payment, here P2SH-wrapped segwit, so the change is harder to spot.)
 
-**Step 4.** The coordinator adds the `redeem_script` (the multisig script) and `bip32_derivs` for all three keys (pubkey, fingerprint, path). It also adds the previous transaction (`non_witness_utxo`), which legacy inputs need. Before signing, `analyzepsbt` shows `next: signer` and lists missing signatures.
+**Step 4.** The coordinator adds the `redeem_script` (the multisig script) and `bip32_derivs` for all three keys (pubkey, fingerprint, path). It also adds the previous transaction (`non_witness_utxo`), which legacy inputs need. Before signing, `analyzepsbt` shows `next: signer` and lists three missing signatures (as key hashes), with `estimated_vsize` 334.
 
-After signer 1 only, the input has one partial signature, and `analyzepsbt` still shows `next: signer` (it is missing one more signature). Signer 1 cannot finalize because the redeem script needs 2 valid signatures. Signer 2 was not needed because any 2 of the 3 keys are enough. Here signers 1 and 3 signed.
+After signer 1 only, the input has one partial signature, and `analyzepsbt` still shows `next: signer` and lists the other two keys as missing (it needs one more of them). After combining signers 1 and 3 it shows `next: finalizer`. Signer 1 cannot finalize because the redeem script needs 2 valid signatures. Signer 2 was not needed because any 2 of the 3 keys are enough. Here signers 1 and 3 signed.
 
 **Step 5.** The scriptSig asm is `0 <sig1>[ALL] <sig3>[ALL] <redeemScript>`:
 
@@ -128,18 +128,18 @@ After signer 1 only, the input has one partial signature, and `analyzepsbt` stil
 
 Yes, this is the first time the three public keys appear on the blockchain.
 
-`size` equals `vsize` (no witness), about 334 bytes for one input and one P2WPKH output.
+`size` equals `vsize` (no witness): 334 bytes (weight 1336) for one input and one P2WPKH output. Signatures can be 1 byte shorter now and then, so you may see 333.
 
 **Step 6.** The scriptSig is empty. The witness has four items: an **empty** item (the dummy, shown as `""`), two signatures, and the witness script (the same 105-byte multisig script).
 
-`vsize` is about 146 vbytes, compared with about 334 for the P2SH spend. The base part is the same as any segwit input. The roughly 250 bytes of signatures and script are witness data and count at one quarter. That is a saving of roughly 55 to 60 percent of the fee. Expect a byte or two of difference because signature sizes vary.
+`vsize` is 146 vbytes (size 336, weight 582), compared with 334 for the P2SH spend. The base part is the same as any segwit input. The roughly 250 bytes of signatures and script are witness data and count at one quarter. That is a saving of about 56 percent of the fee. A signature can be 1 byte shorter, which changes `size` and `weight` by 1 but usually not `vsize`.
 
 ## Stretch answers
 
-1. `createmultisig` refuses with an error saying the redeem script exceeds the 520-byte size limit. 16 compressed keys make `1 + 16 × 34 + 1 + 1 = 547` bytes. In P2SH, the redeem script is pushed as one data item, and pushes are limited to 520 bytes. 15 keys make 513 bytes, so **15** is the maximum.
+1. `createmultisig` refuses with `redeemScript exceeds size limit: 547 > 520`. 16 compressed keys make `1 + 16 × 34 + 1 + 1 = 547` bytes. In P2SH, the redeem script is pushed as one data item, and pushes are limited to 520 bytes. 15 keys make 513 bytes, so **15** is the maximum.
 2. Core shows `type: multisig` and no `address` field. Bare multisig has no address format.
-3. Yes, the address usually changes, because `sortedmulti` sorts the keys by their bytes, and a different order gives a different script and hash. Sorted keys (BIP67) mean every participant gets the same address from the same set of keys, whatever order they were entered in. It also simplifies backups: you need the keys and the policy, not the order.
-4. `createwallet` with `disable_private_keys=true blank=true`, then `importdescriptors` with the same descriptor and an old `timestamp` (for example `0`), so the wallet rescans and finds the coins. With only three seeds, you would also need to know the derivation path used for each key, the script type (`sh`, `wsh`, ...), M, and whether keys were sorted. This is why multisig wallets ask you to back up the descriptor.
+3. The address changes unless the keys were already in sorted order, because `sortedmulti` sorts the keys by their bytes, and a different order gives a different script and hash. (With random keys there is a 1 in 6 chance for 3 keys that they were already sorted, and then the address stays the same.) Sorted keys (BIP67) mean every participant gets the same address from the same set of keys, whatever order they were entered in. It also simplifies backups: you need the keys and the policy, not the order.
+4. `createwallet` with a new name (for example `ms_sh_restored`) and `disable_private_keys=true blank=true`, then `importdescriptors` with the same descriptor and an old `timestamp` (for example `0`), so the wallet rescans and finds the coins. If you already spent the coin in step 4, the balance is 0, but `listtransactions "*" 10 0 true` shows the 1 BTC receive and the spend. With only three seeds, you would also need to know the derivation path used for each key, the script type (`sh`, `wsh`, ...), M, and whether keys were sorted. This is why multisig wallets ask you to back up the descriptor.
 
 ## Bonus questions
 

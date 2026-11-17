@@ -46,6 +46,8 @@ What to write down: the numbers, and an explanation of why weight is exactly 4 t
 
 ## Hands-on lab (bitcoin-cli, regtest)
 
+> Tested on Bitcoin Core 29.0 (regtest), November 2026.
+
 This lab builds on the week 2 setup: a regtest node started with `-txindex=1 -fallbackfee=0.0001` and a wallet called `alice` with mature coins. If you are starting fresh:
 
 ```bash
@@ -190,7 +192,11 @@ Look at the scriptPubKey length byte before each output script in `$RAW` (`16` =
 
 ### Lab: parse a real transaction in Python
 
-Lab: parse a real transaction in Python (`python3 week-03/check.py` from decoding-bitcoin/). You fill in a parser in `week-03/exercises/parse_tx.py`, and the checker tests it against real transactions. When it passes, run your parser on `$RAW` from step 2 and compare with `decoderawtransaction`.
+Lab: parse a real transaction in Python (`python3 week-03/check.py` from decoding-bitcoin/). You fill in a parser in `week-03/exercises/parse_tx.py`, and the checker tests it against real transactions. When it passes, run your parser on `$RAW` from step 2 and compare with `decoderawtransaction`. From the `decoding-bitcoin/` folder, in the same terminal as the lab:
+
+```bash
+python3 -c "import sys; sys.path.insert(0, 'week-03/exercises'); from parse_tx import parse_tx, txid, wtxid; r = bytes.fromhex(sys.argv[1]); t = parse_tx(r); print(t['version'], len(t['inputs']), len(t['outputs']), t['locktime']); print(txid(r)); print(wtxid(r))" "$RAW"
+```
 
 ## Stretch tasks
 
@@ -217,5 +223,7 @@ bitcoin-cli -regtest decoderawtransaction "$BIG_RAW" | jq '.vout | length'
 CB=$(bitcoin-cli -regtest getblock "$(bitcoin-cli -regtest getbestblockhash)" | jq -r '.tx[0]')
 bitcoin-cli -regtest getrawtransaction "$CB" true
 ```
+
+The decoded view hides the input's outpoint and shows a `coinbase` field instead, so look at the `hex` field for the raw bytes.
 
 **Question:** What is the previous txid and vout of a coinbase input? What is in its scriptSig (hint: BIP34 requires one thing at the start)? Does it have a witness?

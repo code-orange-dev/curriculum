@@ -108,17 +108,20 @@ Analogies are welcome (a sealed envelope, a fingerprint, a lock that has a hidde
 
 ## Hands-on lab (bitcoin-cli, regtest)
 
+> Tested on Bitcoin Core 29.0 (regtest), November 2026.
+
 You need Bitcoin Core 28 or newer and `jq`. If you have not set up regtest yet, see [Week 1: Bitcoin Core CLI](../../week-01/exercises/bitcoin_core_cli.md).
 
 ### Setup
 
 ```bash
-bitcoind -regtest -daemon -txindex=1
+# -fallbackfee lets sendtoaddress pay a fee on a fresh regtest chain with no fee history
+bitcoind -regtest -daemon -txindex=1 -fallbackfee=0.0001
 bitcoin-cli -regtest -named createwallet wallet_name=lab || bitcoin-cli -regtest loadwallet lab
 bitcoin-cli -regtest -rpcwallet=lab -generate 101
 ```
 
-If your node is already running without `-txindex`, run `bitcoin-cli -regtest stop`, wait a few seconds, and start it again with the command above.
+If your node is already running without `-txindex` or `-fallbackfee`, run `bitcoin-cli -regtest stop`, wait a few seconds, and start it again with the command above.
 
 ### Lab 1: Create a P2TR address and look inside (old Week 5, exercise 1)
 

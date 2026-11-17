@@ -99,7 +99,7 @@ There is no fixed answer. A good answer compares the numbers and links the chang
 
 ## Hands-on lab answers
 
-Your exact numbers may differ by a byte or two because signatures are sometimes 72 bytes instead of 71.
+The numbers below were measured on Bitcoin Core 29.0. Bitcoin Core makes 71-byte signatures (including the sighash byte); about 1 in 256 is 70 bytes, so a size can be 1 byte smaller than shown. Other wallets sometimes make 72-byte signatures.
 
 **Step 1.** For a 1-input, 2-output P2WPKH payment, `vsize` is 141, and the fee is 141 × 5 = 705 sats (0.00000705 BTC). 705 / 141 = 5 sat/vB. The fee depends on the size, and the size depends on which inputs are chosen and how big the signatures will be. So the wallet estimates the size of the signed transaction (using dummy signatures) before it signs, and sets the fee from that.
 
@@ -122,19 +122,19 @@ witness = 2 + 2×107 = 216
 total   = 401, weight = 185×3 + 401 = 956, vsize = 239
 ```
 
-Estimate with the rule of thumb: 10.5 + 2 × 68 + 3 × 31 = 239.5, so about 240 vB, and a fee of about 4,800 sats (0.000048 BTC) at 20 sat/vB. `testmempoolaccept` should report a `vsize` of 239 (or 240 if a signature is 72 bytes) and `fees.base` equal to the fee you chose. The real rate is your fee / vsize, for example 4800 / 239 = 20.1 sat/vB. It is not exactly 20 because you estimated the size before signing (signature sizes vary), and vsize is rounded up to whole vbytes.
+Estimate with the rule of thumb: 10.5 + 2 × 68 + 3 × 31 = 239.5, so about 240 vB, and a fee of about 4,800 sats (0.000048 BTC) at 20 sat/vB. `testmempoolaccept` reports a `vsize` of 239 (size 401, weight 956) and `fees.base` equal to the fee you chose (0.00004800). The real rate is 4800 / 239 = 20.08 sat/vB (`effective-feerate` 0.00020083 BTC/kvB). It is not exactly 20 because the rule of thumb (240) overestimates by half a vbyte, and in general you estimate the size before signing, when the signature sizes are not known yet.
 
-**Step 5.** The wallet usually picks 1 input (any coin bigger than 3 BTC plus fee) and adds a change output at a random position (`changepos` 0 or 1; -1 means no change was needed). The fee divided by the vsize of the signed transaction is 20 sat/vB or a tiny bit more, because the wallet rounds the fee up.
+**Step 5.** The wallet picks 1 input (any coin bigger than 3 BTC plus fee) and adds a change output at a random position (`changepos` 0 or 1; -1 means no change was needed). In our test the `fee` was 0.00002820 BTC and the signed transaction was 141 vB: 2820 / 141 = 20 sat/vB exactly. The unsigned hex decodes to only 113 vB (no witness yet), which would wrongly give 25 sat/vB. The wallet sets the fee from the size the transaction will have once signed.
 
-**Step 6.** `bumpfee` creates a replacement that spends the same input with a higher fee, and returns the new `txid`, `origfee` and `fee`. The old transaction is removed from the mempool (the wallet marks it as replaced) and only the new txid is in `getrawmempool`. The payment to Bob is unchanged and the change output is smaller by the extra fee. The change is the sender's own money, so taking the fee from it keeps the payment the same. If there were no change, the wallet would need to add another input.
+**Step 6.** `bumpfee` creates a replacement that spends the same input with a higher fee, and returns the new `txid`, `origfee` and `fee`. The old transaction is removed from the mempool (the wallet marks it as replaced) and the new txid is in `getrawmempool` instead (next to your Step 4 transaction, if you broadcast it and haven't mined a block since). In our test the fee went from 219 sats to 2,190 sats for a 219 vB transaction: the wallet had picked one of the legacy coins left over from Step 2, so your vsize may be 141 instead. The payment to Bob is unchanged and the change output is smaller by the extra fee. The change is the sender's own money, so taking the fee from it keeps the payment the same. If there were no change, the wallet would need to add another input.
 
 ### Python lab
 
-A reference solution is in [`fees.py`](fees.py) in this folder (grade it with `python3 week-04/check.py --solution`). When `python3 week-04/check.py` passes, your functions should give the same weight and vsize as `decoderawtransaction` for `$SW_SIGNED` (561 and 141) and `$MULTI_SIGNED` (about 956 and 239).
+A reference solution is in [`fees.py`](fees.py) in this folder (grade it with `python3 week-04/check.py --solution`). When `python3 week-04/check.py` passes, your functions should give the same weight and vsize as `decoderawtransaction` for `$SW_SIGNED` (561 and 141) and `$MULTI_SIGNED` (956 and 239).
 
 ### Stretch answers
 
-**A.** The child (1 input, 1 output, about 110 vB) pays 1 - 0.9995 = 0.0005 BTC = 50,000 sats, about 455 sat/vB on its own. The parent paid about 141 sats for 141 vB. Together: 50,141 sats / about 251 vB = about 200 sat/vB. A miner can only take the child's fee if the parent is in the same block or an earlier one, so it looks at the combined (ancestor) fee rate. In `getmempoolentry`, `fees.ancestor` divided by `ancestorsize` gives this rate. Bob can't use RBF because he can't sign Alice's inputs: only the sender can replace the parent.
+**A.** The child (1 P2WPKH input, 1 output, 110 vB) pays 1 - 0.9995 = 0.0005 BTC = 50,000 sats, about 455 sat/vB on its own. The parent pays 1 sat/vB, so its fee equals its vsize: 141 sats for 141 vB if the wallet spends a segwit coin, or 219 sats for 219 vB if it spends one of the legacy coins left over from Step 2 (that is what happened in our test). Together: 50,141 sats / 251 vB = about 200 sat/vB, or 50,219 sats / 329 vB = about 153 sat/vB. `getmempoolentry` shows these as `fees.ancestor` and `ancestorsize`. A miner can only take the child's fee if the parent is in the same block or an earlier one, so it looks at the combined (ancestor) fee rate. Bob can't use RBF because he can't sign Alice's inputs: only the sender can replace the parent.
 
 **B.** The wallet refuses with "Transaction amount too small". 200 sats is below the P2WPKH dust limit of 294 sats: (31-byte output + 67 vB to spend it) × 3 sat/vB = 294. A legacy P2PKH output has a higher limit, 546 sats: (34 + 148) × 3, because its output and its input are bigger.
 

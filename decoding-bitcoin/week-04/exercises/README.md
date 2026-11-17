@@ -49,6 +49,8 @@ What to write down: both sets of numbers and the time, and your explanation of w
 
 ## Hands-on lab (bitcoin-cli, regtest)
 
+> Tested on Bitcoin Core 29.0 (regtest), November 2026.
+
 This lab uses the setup from weeks 2 and 3: a node started with `-txindex=1 -fallbackfee=0.0001`, and wallets `alice` and `bob`. If you are starting fresh:
 
 ```bash
@@ -165,7 +167,15 @@ EMPTY=$(bitcoin-cli -regtest createrawtransaction '[]' '{"'$BOB'":3}')
 bitcoin-cli -regtest -rpcwallet=alice fundrawtransaction "$EMPTY" '{"fee_rate":20}'
 ```
 
-**Question:** How many inputs did the wallet choose, and where did it put the change (`changepos`)? Decode the returned hex and check that fee / vsize is 20 sat/vB (or just above).
+The returned `hex` is not signed yet, so it has no witness and its vsize is too small. Sign it before you measure:
+
+```bash
+FUNDED=$(bitcoin-cli -regtest -rpcwallet=alice fundrawtransaction "$EMPTY" '{"fee_rate":20}' | jq -r '.hex')
+FUNDED_SIGNED=$(bitcoin-cli -regtest -rpcwallet=alice signrawtransactionwithwallet "$FUNDED" | jq -r '.hex')
+bitcoin-cli -regtest decoderawtransaction "$FUNDED_SIGNED" | jq '{vsize, inputs: (.vin | length)}'
+```
+
+**Question:** How many inputs did the wallet choose, and where did it put the change (`changepos`)? Divide the `fee` from `fundrawtransaction` by the vsize of the signed transaction: is it 20 sat/vB (or just above)? What do you get if you use the vsize of the unsigned hex instead?
 
 ### Step 6: speed up with RBF
 
