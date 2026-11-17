@@ -42,6 +42,16 @@ jobs:
             (cd privacy-track/labs/$(dirname $lab) && python3 $(basename $lab) > /dev/null)
           done
 
+      - name: Decoding Bitcoin labs (solutions pass, unfinished exercises don't crash)
+        working-directory: decoding-bitcoin
+        run: |
+          for w in 3 4; do
+            python3 week-0$w/check.py --solution
+            out=$(python3 week-0$w/check.py)
+            echo "$out" | tail -1
+            if echo "$out" | grep -q "crashed\|Traceback"; then echo "::error::week $w stub crashed"; exit 1; fi
+          done
+
   links:
     runs-on: ubuntu-latest
     steps:
