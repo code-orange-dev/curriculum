@@ -19,7 +19,7 @@ All materials are released under **CC0 1.0 Universal (Public Domain)** - use the
 ### Recommended Learning Path
 
 ```
-Bitcoin Dojo (7 weeks) ──> rawBit (10 weeks) ──> Decoding Bitcoin (8 weeks) ──> Open-source contribution
+Bitcoin Dojo (7 weeks) ──> rawBit (10 weeks) ──> Decoding Bitcoin (10 weeks) ──> Open-source contribution
         │                                                                          ▲
         └── Sovereign Bitcoiner (5-10 weeks)       Privacy Track (drop-in, biweekly) ─┘
 ```
@@ -28,7 +28,7 @@ Bitcoin Dojo (7 weeks) ──> rawBit (10 weeks) ──> Decoding Bitcoin (8 wee
 |---------|----------|-------|-----------|
 | **Bitcoin Dojo** | 7 weeks | Beginner-Intermediate | [`/bitcoin-dojo/`](./bitcoin-dojo/) |
 | **rawBit Study Cohort** | 10 weeks | Intermediate | [`/rawbit/`](./rawbit/) |
-| **Decoding Bitcoin** | 8 weeks | Intermediate-Advanced | [`/decoding-bitcoin/`](./decoding-bitcoin/) |
+| **Decoding Bitcoin** | 10 weeks | Intermediate | [`/decoding-bitcoin/`](./decoding-bitcoin/) |
 | **Sovereign Bitcoiner Crash Course** | 5-10 weeks | Beginner-Intermediate | [`/sovereign-bitcoiner/`](./sovereign-bitcoiner/) |
 | **Privacy Track** | 12 biweekly sessions, drop-in | Intermediate | [`/privacy-track/`](./privacy-track/) |
 | **Vibe Coding on Nostr** | Monthly workshops | All levels | [`/nostr-workshops/`](./nostr-workshops/) |
@@ -68,60 +68,32 @@ curriculum/
 ├── CONTRIBUTING.md                    # How to contribute
 ├── bitcoin-dojo/                      # 7-week cryptography & primitives cohort
 │   ├── README.md                      # Program overview, syllabus & facilitator guide
-│   ├── week-01/                       # Finite Fields
-│   ├── week-02/                       # Elliptic Curves
-│   ├── week-03/                       # Keys, Addresses & Encoding
-│   ├── week-04/                       # Serialisation & Transactions
-│   ├── week-05/                       # Script & Transaction Validation
-│   ├── week-06/                       # SegWit & Advanced Transactions
-│   └── week-07/                       # Graduation & Next Steps
+│   ├── lib/, data/                    # Shared helpers and real mainnet transactions
+│   └── week-01/ ... week-07/          # exercises/, solutions/ and a check.py grader per week
 ├── rawbit/                            # 10-week raw transaction building cohort
 │   ├── README.md                      # Program overview, syllabus & facilitator guide
-│   ├── week-01/                       # Legacy Transactions (P2PK, P2PKH)
-│   ├── week-02/                       # Multisig Transactions
-│   ├── week-03/                       # Timelocks
-│   ├── week-04/                       # OP_RETURN & Data Anchoring
-│   ├── week-05/                       # Transaction Malleability & Payment Channels
-│   ├── week-06/                       # SegWit (P2WPKH)
-│   ├── week-07/                       # SegWit Scripts (P2WSH)
-│   ├── week-08/                       # Taproot Basics
-│   ├── week-09/                       # Advanced Taproot & MuSig2
-│   └── week-10/                       # Final Project & Graduation
-├── decoding-bitcoin/                  # 8-week protocol contribution cohort
-│   ├── README.md                      # Program overview & facilitator guide
-│   ├── week-01-bitcoin-fundamentals/
-│   ├── week-02-transactions/
-│   ├── week-03-script/
-│   ├── week-04-segwit/
-│   ├── week-05-taproot/
-│   ├── week-06-psbt/
-│   ├── week-07-bitcoin-core/
-│   └── week-08-contributing/
+│   └── week-01/ ... week-10/          # exercises/ and solutions/ (placeholders for now)
+├── decoding-bitcoin/                  # 10-week study cohort on Decoding Bitcoin (bitcoindevs.xyz)
+│   ├── README.md                      # Syllabus, schedule & facilitator guide
+│   ├── after-the-cohort.md            # Bitcoin Core architecture & first contribution
+│   ├── lib/, data/                    # Python lab helpers and real mainnet transactions
+│   └── week-01/ ... week-10/          # README, exercises/, solutions/, slides/, notes/
 ├── privacy-track/                     # The Privacy Sessions: 12 drop-in sessions + labs
 │   ├── README.md, SESSIONS.md         # Overview and session plans (starts with Silent Payments)
 │   └── labs/                          # Offline Python labs (BIP352 vectors, chain analysis, ...)
 ├── sovereign-bitcoiner/               # 5-10 week crash course
-│   ├── README.md
-│   ├── week-01-philosophy/
-│   ├── week-02-nodes/
-│   ├── week-03-mining/
-│   ├── week-04-multisig/
-│   └── week-05-privacy/
+│   ├── README.md                      # Syllabus
+│   └── week-01/ ... week-05/          # (materials coming soon)
 ├── nostr-workshops/                   # Monthly workshop modules
 │   ├── README.md
-│   └── modules/
-├── workshops/                         # Standalone workshop slides & guides
-│   ├── mining/
-│   ├── multisig/
-│   ├── nodes/
-│   ├── privacy/
-│   ├── ecash/
-│   ├── btcpay/
-│   └── nostr/
-└── resources/                         # Shared resources
-    ├── seed-phrase-backup-sheet.pdf
-    ├── reading-list.md
-    └── tools-and-software.md
+│   └── modules/01-... 06-.../         # One self-contained workshop guide per module
+├── workshops/                         # Standalone workshops (materials coming soon)
+│   └── btcpay/ ecash/ mining/ multisig/ nodes/ nostr/ privacy/
+├── resources/                         # Shared resources
+│   ├── reading-list.md
+│   └── tools-and-software.md
+└── tools/
+    └── check_links.py                 # CI check: every relative link and #heading resolves
 ```
 
 ---

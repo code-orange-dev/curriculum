@@ -25,7 +25,7 @@
 → You'll write your first Bitcoin scripts and understand the protocol
 
 ### "I can code and want to contribute to Bitcoin"
-→ Join **Decoding Bitcoin** (8 weeks, transaction deep dive)
+→ Join **Decoding Bitcoin** (10 weeks, transactions, Script and Taproot)
 → Or drop into the **Privacy Track** (12 biweekly sessions, Silent Payments through ecash)
 → You'll submit your first PR to a real Bitcoin project
 

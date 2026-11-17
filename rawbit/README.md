@@ -235,7 +235,7 @@ Graduates are ready to:
 - Build wallet software that constructs transactions correctly
 - Review PRs involving transaction format changes
 - Teach others using rawBit as a visual aid
-- Continue to the [Decoding Bitcoin](../decoding-bitcoin/) cohort for Bitcoin Core contribution
+- Continue to the [Decoding Bitcoin](../decoding-bitcoin/) cohort for deeper protocol study and your first open-source contribution
 
 ---
 
