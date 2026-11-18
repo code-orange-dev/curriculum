@@ -39,7 +39,7 @@ jobs:
           ls -la site
       - name: Build the index page
         run: python3 tools/build_slides_site.py site
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
