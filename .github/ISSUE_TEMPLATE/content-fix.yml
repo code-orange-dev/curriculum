@@ -1,0 +1,21 @@
+name: Something is wrong or unclear
+description: A mistake, a broken link, or an explanation that is hard to follow
+labels: ["content"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Which file?
+      placeholder: decoding-bitcoin/week-03/notes/README.md
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong or unclear?
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: Suggested fix (optional)

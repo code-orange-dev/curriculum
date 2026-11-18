@@ -1,0 +1,23 @@
+name: Idea for new material
+description: A new exercise, workshop, translation or program
+labels: ["idea"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like to add?
+    validations:
+      required: true
+  - type: textarea
+    id: who
+    attributes:
+      label: Who is it for, and how would it be used?
+      placeholder: Beginners at a meetup, a 2-hour workshop, self-study...
+  - type: dropdown
+    id: help
+    attributes:
+      label: Would you like to write it?
+      options:
+        - Yes, I'd like to open a pull request
+        - Maybe, with some help
+        - No, just suggesting it

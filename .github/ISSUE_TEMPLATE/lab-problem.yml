@@ -1,0 +1,32 @@
+name: A lab or exercise doesn't work
+description: A command fails, or the output doesn't match the solutions
+labels: ["lab"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for testing! Exact details help us fix it fast.
+  - type: input
+    id: where
+    attributes:
+      label: Which file and step?
+      placeholder: decoding-bitcoin/week-05/exercises/README.md, step 4
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Bitcoin Core version (bitcoind -version) and operating system
+      placeholder: v32.1 on Ubuntu 24.04
+  - type: textarea
+    id: what
+    attributes:
+      label: What you ran and what happened
+      description: Paste the command and the full error or output.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: For example what the solutions file says.
