@@ -53,7 +53,7 @@ Before the session:
 Where people get stuck:
 
 - **"Fee estimation failed. Fallbackfee is disabled."** The node needs `-fallbackfee=0.0001`. Restart `bitcoind` with it.
-- **"Wallet file not specified".** With two wallets loaded, every wallet command needs `-rpcwallet=alice` or `-rpcwallet=bob`, including `-generate`.
+- **"Multiple wallets are loaded. Please select which wallet to use..."** (error code -19; before v29 the message was "Wallet file not specified"). With two wallets loaded, every wallet command needs `-rpcwallet=alice` or `-rpcwallet=bob`, including `-generate`.
 - **Shell quoting.** The JSON for `createrawtransaction` is easy to break. Have people `echo "$INPUTS"` and `echo "$OUTPUTS"` to see what they built. Amounts must be numbers (no quotes), and txids must be in quotes.
 - **Wrong change amount.** If inputs minus outputs is negative, signing works but `testmempoolaccept` fails with an error about values (`bad-txns-in-belowout`). Check the arithmetic.
 - **Choosing an immature coinbase.** `listunspent` only lists spendable coins, but if someone copies a txid from `getblock`, the spend fails as premature. Use `listunspent`.

@@ -104,7 +104,7 @@ bitcoin-cli -regtest getblockheader "$(bitcoin-cli -regtest getbestblockhash)"
 ## Stretch tasks
 
 - Do Exercises 3 and 4 in [`bitcoin_core_cli.md`](bitcoin_core_cli.md) (decode a raw transaction, explore a block).
-- Change one bit of an input and count how many of the 256 output bits flip. Do it ten times. You should see close to half (128) every time. This is called the avalanche effect.
+- Make a tiny change to an input and count how many of the 256 output bits flip. The example below changes the last letter from `i` to `j`, which flips only 2 bits of the input. Try ten different small changes. You should see close to half (128) every time. This is called the avalanche effect.
 
   ```bash
   python3 -c "
