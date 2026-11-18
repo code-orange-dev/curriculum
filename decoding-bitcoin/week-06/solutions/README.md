@@ -115,7 +115,7 @@ P2WPKH is the shortest standard type. P2WSH and P2TR are the longest of the addr
 
 **Step 3.** The hash matches the 20 bytes between `76a914` and `88ac`. The output stores a hash because it is shorter (20 bytes instead of 33), gives a short address with a checksum, and keeps the public key private until the coin is spent.
 
-**Step 4.** The scriptSig asm is `<signature>[ALL] <pubkey>`. The second item is exactly `$PUB`. `[ALL]` is Core showing that the signature's last byte is `01`, SIGHASH_ALL (week 5). The scriptSig is about 106 to 107 bytes: 1 push byte + about 72 signature bytes + 1 push byte + 33 key bytes.
+**Step 4.** The scriptSig asm is `<signature>[ALL] <pubkey>`. The second item is exactly `$PUB`. `[ALL]` is Core showing that the signature's last byte is `01`, SIGHASH_ALL (week 5). The scriptSig is 106 bytes (212 hex characters): 1 push byte (`47`) + 71 signature bytes + 1 push byte (`21`) + 33 key bytes. Bitcoin Core makes 71-byte signatures; about 1 in 256 is 70 bytes, which makes the scriptSig 105 bytes.
 
 **Step 5.** `type` is `pubkey`, and there is **no** `address` field: P2PK has no standard address format. The script is 35 bytes (`21`, a 33-byte compressed key, `ac`), compared with 67 bytes for the uncompressed keys of 2009. To spend it, the scriptSig would be only `<signature>`. It is shorter than P2PKH because the public key is already in the scriptPubKey.
 
@@ -128,7 +128,7 @@ P2WPKH is the shortest standard type. P2WSH and P2TR are the longest of the addr
 | bech32 | `witness_v0_keyhash` | `bcrt1q` | `0014...` |
 | bech32m | `witness_v1_taproot` | `bcrt1p` | `5120...` |
 
-The change is the output whose value is not 0.1 BTC (the wallet adds it at a random position).
+The change is the output whose value is not 0.1 BTC (the wallet adds it at a random position). In our test it was a fifth output of type `witness_v1_taproot`: because one of the payments goes to a taproot address, Bitcoin Core makes the change taproot too.
 
 ## Stretch answers
 

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Ask a question on Discord
+    url: https://discord.gg/xd6dmPF9bA
+    about: For quick questions about the cohorts and workshops, chat with us on Discord.
+  - name: Good first issues
+    url: https://github.com/code-orange-dev/curriculum/labels/good%20first%20issue
+    about: Small, well-described tasks to start contributing.

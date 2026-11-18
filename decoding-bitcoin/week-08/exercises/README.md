@@ -106,13 +106,16 @@ A helpful comment is specific and kind. Some ideas:
 
 ## Hands-on lab (bitcoin-cli, regtest)
 
+> Tested on Bitcoin Core 29.0 (regtest), November 2026.
+
 These labs use Bitcoin Core as the "reference answer" for your interpreter. You need Bitcoin Core 28 or newer, and `jq` for reading JSON. If you have not set up regtest yet, see [Week 1: Bitcoin Core CLI](../../week-01/exercises/bitcoin_core_cli.md).
 
 ### Setup
 
 ```bash
 # -txindex=1 lets getrawtransaction find confirmed transactions
-bitcoind -regtest -daemon -txindex=1
+# -fallbackfee lets the wallet pay a fee on a fresh regtest chain with no fee history
+bitcoind -regtest -daemon -txindex=1 -fallbackfee=0.0001
 
 # Create a wallet (or load it if you made it in an earlier week)
 bitcoin-cli -regtest -named createwallet wallet_name=lab || bitcoin-cli -regtest loadwallet lab
@@ -122,7 +125,7 @@ bitcoin-cli -regtest -rpcwallet=lab -generate 101
 bitcoin-cli -regtest -rpcwallet=lab getbalance
 ```
 
-If your node is already running without `-txindex`, stop it with `bitcoin-cli -regtest stop` and start it again with the command above.
+If your node is already running without `-txindex` or `-fallbackfee`, stop it with `bitcoin-cli -regtest stop` and start it again with the command above.
 
 ### Lab 1: Check your parser with `decodescript`
 
@@ -188,6 +191,7 @@ echo "$ADDR"
 ```bash
 bitcoin-cli -regtest -named createwallet wallet_name=csv blank=true
 bitcoin-cli -regtest -rpcwallet=csv importdescriptors "[{\"desc\":\"$DESC\",\"timestamp\":\"now\"}]"
+# The warning "Not all private keys provided" is expected: the wallet has key B but not key A.
 
 TXID=$(bitcoin-cli -regtest -rpcwallet=lab sendtoaddress "$ADDR" 1)
 bitcoin-cli -regtest -rpcwallet=lab -generate 1

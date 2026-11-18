@@ -1,0 +1,58 @@
+name: Slides
+
+# Builds every Decoding Bitcoin Marp deck into web slides and PDFs.
+# Pull requests: build only (check the decks still render).
+# main: also publish them with GitHub Pages
+# (one-time setup: Settings > Pages > Source: GitHub Actions).
+
+on:
+  push:
+    branches: [main]
+    paths: ["decoding-bitcoin/**", "tools/build_slides_site.py", ".github/workflows/slides.yml"]
+  pull_request:
+    paths: ["decoding-bitcoin/**", "tools/build_slides_site.py", ".github/workflows/slides.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: slides-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Render decks (HTML and PDF)
+        run: |
+          mkdir -p site
+          for deck in decoding-bitcoin/week-*/slides/slides.md; do
+            week=$(basename "$(dirname "$(dirname "$deck")")")
+            npx -y @marp-team/marp-cli@4.1.2 "$deck" --html --allow-local-files -o "site/$week.html"
+            npx -y @marp-team/marp-cli@4.1.2 "$deck" --pdf --allow-local-files -o "site/$week.pdf"
+          done
+          ls -la site
+      - name: Build the index page
+        run: python3 tools/build_slides_site.py site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

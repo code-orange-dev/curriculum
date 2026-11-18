@@ -54,6 +54,8 @@ Write down:
 
 ## Hands-on lab (bitcoin-cli, regtest)
 
+> Tested on Bitcoin Core 29.0 (regtest), November 2026.
+
 Works on Bitcoin Core 28 and 29 or newer. Wallets are descriptor wallets by default. Older guides use `addmultisigaddress` and `dumpprivkey`, which only work with legacy wallets and are gone in new versions. We use descriptors and PSBTs instead, the same way the official [Bitcoin Core multisig tutorial](https://github.com/bitcoin/bitcoin/blob/master/doc/multisig-tutorial.md) does.
 
 You need `jq`. Setup help is in the [week 1 guide](../../week-01/exercises/bitcoin_core_cli.md). Since v29, Bitcoin Core builds with CMake (`cmake -B build && cmake --build build -j$(nproc)`, binaries in `build/bin/`).
@@ -209,6 +211,6 @@ bitcoin-cli -regtest getrawtransaction $WSH_SPEND true \
 1. **The P2SH size limit.** Make 16 public keys (call `key` in a loop, or reuse keys) and try `createmultisig 2 [16 keys] legacy`. What happens, and why? How many compressed keys fit in a P2SH redeem script?
 2. **Bare multisig on regtest.** Mine a block to a bare multisig with `generatetodescriptor 1 "$(bitcoin-cli -regtest getdescriptorinfo "multi(1,$P1,$P2)" | jq -r .descriptor)"` and look at the coinbase output's `scriptPubKey`. What `type` does Core give it? Is there an address?
 3. **Sorted keys.** Replace `multi` with `sortedmulti` in the descriptor. Does the address change? Why do many multisig wallets use sorted keys (BIP67)?
-4. **Recovery drill.** Unload `ms_sh` (`unloadwallet ms_sh`) and pretend it is lost. Using only `$K1`, `$K2`, `$K3` (or the descriptor string), rebuild the watch-only wallet and find the coins again. What would you have needed if you had only the three seeds and not the descriptor?
+4. **Recovery drill.** Unload `ms_sh` (`unloadwallet ms_sh`) and pretend it is lost. Using only `$K1`, `$K2`, `$K3` (or the descriptor string), rebuild the watch-only wallet under a new name (the old wallet folder still exists, so `createwallet ms_sh` fails) and find the coin's history again with `listtransactions "*" 10 0 true`. What would you have needed if you had only the three seeds and not the descriptor?
 
 When you are done: `bitcoin-cli -regtest stop`.

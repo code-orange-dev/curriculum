@@ -63,6 +63,8 @@ Write down:
 
 ## Hands-on lab (bitcoin-cli, regtest)
 
+> Tested on Bitcoin Core 29.0 (regtest), November 2026.
+
 This lab works on Bitcoin Core 28 and 29 or newer. Wallets are descriptor wallets by default. You also need `jq` (`sudo apt install jq` or `brew install jq`).
 
 If you do not have a node yet, follow the [week 1 setup guide](../../week-01/exercises/bitcoin_core_cli.md). Since v29, Bitcoin Core builds with CMake: `cmake -B build && cmake --build build -j$(nproc)`, and the binaries end up in `build/bin/`.
@@ -239,7 +241,7 @@ bitcoin-cli -regtest sendrawtransaction $HEX
 
 ## Stretch tasks
 
-1. **Prove why NONE is dangerous.** Take `$S_NONE` from step 3 (it spends the same coin as `$SIGNED`, so create a fresh coin and a fresh `RAW` first). Find the destination scriptPubKey with `getaddressinfo $DEST | jq -r .scriptPubKey`, make a new address for yourself, and replace the old scriptPubKey hex with the new one inside the signed hex (both are 22 bytes for P2WPKH): `NEW=${S_NONE/$OLD_SPK/$NEW_SPK}`. Broadcast `$NEW`. Then try the same trick on an `ALL`-signed transaction. What happens in each case?
+1. **Prove why NONE is dangerous.** Take `$S_NONE` from step 3 (it spends the same coin as `$SIGNED`, so create a fresh coin and a fresh `RAW` first). Find the destination scriptPubKey with `OLD_SPK=$(bitcoin-cli -regtest -rpcwallet=miner getaddressinfo $DEST | jq -r .scriptPubKey)` (`getaddressinfo` is a wallet command, so it needs `-rpcwallet` when several wallets are loaded). Make a new address in Bob's wallet (the "thief") and get its scriptPubKey `NEW_SPK` the same way. Replace the old scriptPubKey hex with the new one inside the signed hex (both are 22 bytes for P2WPKH). Try the `ALL`-signed transaction first: `NEW=${SIGNED/$OLD_SPK/$NEW_SPK}` and broadcast `$NEW`. Then do the same with `NEW=${S_NONE/$OLD_SPK/$NEW_SPK}`. (Do `ALL` first: once the `NONE` version is in the mempool the coin is spent, and the `ALL` attempt fails for that reason instead.) What happens in each case?
 2. **Hardware wallet simulator.** Install [HWI](https://github.com/bitcoin-core/HWI) and a device emulator (the Trezor emulator works well). Run `hwi enumerate`, get an xpub with `hwi -t trezor -d <path> --chain regtest getxpub m/84h/1h/0h`, import it into a watch-only wallet as a `wpkh(...)` descriptor, build a PSBT there, and sign it with `hwi ... signtx <psbt>`. Check flags with `hwi --help`, as they change between versions. What did the emulator show on its screen before signing?
 3. **Read the sighash code.** In the Bitcoin Core source, open `src/script/interpreter.cpp` and find `SignatureHash`. Which branch handles segwit v0 (BIP143)? Which values are cached between inputs, and why does that matter for large transactions?
 

@@ -246,9 +246,11 @@ bitcoin-cli -regtest listunspent
 
 **5.3** Send a transaction that combines multiple UTXOs:
 ```bash
-# Send an amount larger than any single UTXO
-bitcoin-cli -regtest sendtoaddress <address> 75
+# Send an amount larger than any single UTXO, to your "alice" address from 2.1
+bitcoin-cli -regtest sendtoaddress <alice_address> 75
 ```
+
+Then look at the inputs with `bitcoin-cli -regtest getrawtransaction <txid> true` (or `gettransaction <txid>`, which also shows the fee).
 
 **Question**: How many inputs does this transaction have? Why?
 

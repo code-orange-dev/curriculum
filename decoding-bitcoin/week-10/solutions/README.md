@@ -110,7 +110,7 @@ No model answer. Specific feedback ("the week 4 weight lab needed a worked examp
 | 1 | 36 bytes | The leaf script |
 | 2 | 65 bytes | The control block (33 + one 32-byte path hash, since the tree has two leaves) |
 
-Expected size for 1 input and 1 P2TR output: 94 non-witness bytes and 171 witness bytes (marker and flag 2, item count 1, then 1 + 64, 1 + 36 and 1 + 65), so `weight` = 94 x 4 + 171 = 547 and `vsize` = 137 (136.75 rounded up).
+Measured for 1 input and 1 P2TR output: `size` 265, `weight` 547, `vsize` 137. By hand: 94 non-witness bytes and 171 witness bytes (marker and flag 2, item count 1, then 1 + 64, 1 + 36 and 1 + 65), so `weight` = 94 x 4 + 171 = 547 and `vsize` = 137 (136.75 rounded up). Schnorr signatures are always 64 bytes, so these numbers do not vary.
 
 **1.5** The leaf script is `<heir x-only key> OP_CHECKSIGVERIFY 5 OP_CHECKSEQUENCEVERIFY`. In hex: `20`, the 32-byte key, `ad`, `55`, `b2`.
 
@@ -135,12 +135,19 @@ Notes: the P2WSH script is 105 bytes (OP_2, three 34-byte key pushes, OP_3, OP_C
 
 **2.2** Expected results (1 input, 1 P2TR output, 94 non-witness bytes):
 
-- `ms_wsh`: weight about 630, **vsize about 158**, 4 witness items. (Bitcoin Core makes 71-byte low-R signatures, so it is slightly smaller than the table's 72-byte estimate.)
+- `ms_wsh`: weight 630, **vsize 158**, 4 witness items. (Bitcoin Core makes 71-byte low-R signatures, so it is 2 weight units smaller than the table's 72-byte estimate. Now and then a signature is 1 byte shorter, giving weight 629.)
 - `ms_tr`: weight 649, **vsize 163**, 5 witness items.
 
 So the **Taproot script path is a little bigger** than P2WSH for a single 2-of-3 leaf. Schnorr signatures save bytes, but `multi_a` needs a witness item for every key (even unused ones) and the control block adds 33 bytes. Taproot multisig is not automatically smaller: the savings come from the key path.
 
 **MuSig2 key path:** the same transaction would have a 68-byte witness (marker and flag 2, count 1, length 1, signature 64), so weight 376 + 68 = 444 and **vsize 111**, about 30% smaller. It would also look like a single-sig payment. Bitcoin Core does not do it here because MuSig2 needs an interactive two-round protocol between the signers to make one aggregate key and one signature. Our descriptor has no aggregate key at all: the internal key is the unspendable `H`, and the three keys only exist inside the leaf script.
+
+### Stretch answers
+
+1. **Leaf A.** The witness has the same three items, but the leaf script is only 34 bytes (`<owner x-only key> OP_CHECKSIG`) and there is no timelock: the wallet uses the default sequence (`0xfffffffd`) and the spend is accepted at once. The control block is again 65 bytes and starts with the same `H`. Its last 32 bytes are now the hash of the **heir's** leaf. Measured: weight 545, vsize 137.
+2. **Split tree.** With `sendall` the wallet uses the 2-of-2 leaf with the shortest path, `and_v(v:pk(K1),pk(K2))`, which sits one level below the root. The witness has 4 items: two 64-byte signatures, the 68-byte leaf script and a 65-byte control block (33 + one 32-byte path hash). Measured: weight 644, vsize 161, between `ms_wsh` (158) and `ms_tr` (163). The two deeper leaves would need a 97-byte control block.
+3. See bonus question 1.
+4. No model answer.
 
 ---
 

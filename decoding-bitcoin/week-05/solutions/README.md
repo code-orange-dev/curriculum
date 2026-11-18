@@ -100,7 +100,7 @@ The answer depends on the transaction you find. A correct answer has:
 **Step 1.**
 
 - Before signing, `scriptSig` is empty (`"asm": "", "hex": ""`) and there is no `txinwitness` field.
-- After signing, `txinwitness` has 2 items: a DER-encoded ECDSA signature (usually 71 or 72 bytes, shown as about 142 hex characters) and a 33-byte compressed public key starting with `02` or `03`. The signature ends with `01`, which is SIGHASH_ALL.
+- After signing, `txinwitness` has 2 items: a DER-encoded ECDSA signature (71 bytes including the sighash byte, shown as 142 hex characters; Bitcoin Core makes them this size, and about 1 in 256 is 70 bytes) and a 33-byte compressed public key starting with `02` or `03`. The signature ends with `01`, which is SIGHASH_ALL.
 - The `txid` is the **same** before and after signing, because the witness is not part of the txid. The `hash` (wtxid) changes, because it includes the witness.
 
 **Step 2.** The two results are identical. Bitcoin Core makes the nonce from the private key and the sighash (RFC 6979), so the same key and the same message always give the same signature. This is safe because a different message gives a different nonce. It removes the risk of a bad random number generator reusing a nonce.
@@ -111,21 +111,21 @@ With `NONE`, the outputs are not signed. Anyone who sees the transaction before 
 
 **Step 4.** Regtest legacy (P2PKH) addresses start with `m` or `n`. The signature and public key are in `scriptSig` (asm like `3044...[ALL] 02ab...`), and there is no `txinwitness`. The txid **changes** after signing, because the scriptSig is part of the txid.
 
-In `getrawtransaction`, the legacy spend has `size == vsize` and `weight == 4 × size` (no witness). For one input and one P2WPKH output it is about 188 vbytes. The segwit spend is about 110 vbytes, because about 107 bytes of signature and public key are in the witness and count only one quarter. Small differences of 1 byte are normal: signature length varies.
+In `getrawtransaction`, the legacy spend has `size == vsize` and `weight == 4 × size` (no witness): size 188, vsize 188, weight 752 for one input and one P2WPKH output. The segwit spend has size 191, vsize 110, weight 437. It is bigger in bytes but much cheaper, because the 109 witness bytes (marker, flag, signature and public key) count only one quarter. A difference of 1 byte is possible if a signature happens to be 70 bytes.
 
-**Step 5.** The PSBT input has `witness_utxo` (amount and scriptPubKey of the coin), usually also `non_witness_utxo` (the full previous transaction), and `bip32_derivs` (which key, by fingerprint and path, can sign). The signer needs the amount because the BIP143 sighash commits to it, and to show the user the real fee. Before signing, `analyzepsbt` says the next role is `signer`.
+**Step 5.** The PSBT input has `witness_utxo` (amount and scriptPubKey of the coin), usually also `non_witness_utxo` (the full previous transaction), and `bip32_derivs` (which key, by fingerprint and path, can sign). The signer needs the amount because the BIP143 sighash commits to it, and to show the user the real fee. Before signing, `analyzepsbt` says the next role is `signer`, with `estimated_vsize` 141 and a fee of 282 sats (2 sat/vB).
 
 After `walletprocesspsbt` with `finalize=false`, the input has a `partial_signatures` entry (pubkey → signature) and `analyzepsbt` says `finalizer`. `finalizepsbt` turns the partial signature into the final witness, then extracts the network transaction. Roles: `walletcreatefundedpsbt` was **Creator** and **Updater**, `walletprocesspsbt` was **Signer**, `finalizepsbt` was **Finalizer** and **Extractor**.
 
-**Step 6.** After Alice processes the PSBT, her input is final (`is_final: true`, because `walletprocesspsbt` finalizes by default) and Bob's still needs a signer (`next: updater` or `signer`, as Alice's wallet knows nothing about Bob's coin). After `combinepsbt`, both inputs are final.
+**Step 6.** After Alice processes the PSBT, her input is final (`is_final: true`, because `walletprocesspsbt` finalizes by default) and Bob's is not (`is_final: false, next: updater`, because Alice's wallet knows nothing about Bob's coin, not even its amount). After `combinepsbt`, both inputs are final.
 
-The fee is `1 + 1 − 1.9999 = 0.0001 BTC = 10,000 sats`. That is about 56 sat/vB for this roughly 178 vbyte transaction (two P2WPKH inputs, one output). High, but fine on regtest.
+The fee is `1 + 1 − 1.9999 = 0.0001 BTC = 10,000 sats`. That is about 56.5 sat/vB for this 177 vbyte transaction (two P2WPKH inputs, one output, weight 708). High, but fine on regtest.
 
 Bob cannot change the output. Alice used SIGHASH_ALL, which commits to every input and every output. Any change invalidates her signature, and Bob cannot make a new one without her key.
 
 ## Stretch answers
 
-1. The `NONE` transaction with a swapped output is accepted by `sendrawtransaction`: the outputs were never signed. The `ALL` transaction with a swapped output is rejected with a script verification error (the exact message depends on the version, often `mandatory-script-verify-flag-failed`).
+1. The `NONE` transaction with a swapped output is accepted by `sendrawtransaction`: the outputs were never signed. The `ALL` transaction with a swapped output is rejected with a script verification error. On Bitcoin Core 29 it is `mandatory-script-verify-flag-failed (Script evaluated without error but finished with a false/empty top stack element)`: the signature no longer matches the changed transaction.
 2. The emulator shows each output address and amount (and the fee) and waits for a button press. Change to its own keys is usually hidden or marked, because it recognises the derivation path in the PSBT.
 3. In `SignatureHash`, the `sigversion == SigVersion::WITNESS_V0` branch implements BIP143. `hashPrevouts`, `hashSequence` and `hashOutputs` are computed once in `PrecomputedTransactionData` and reused for every input. This makes signature hashing linear in the size of the transaction instead of quadratic.
 

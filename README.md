@@ -3,6 +3,11 @@
 > **Free, open-source Bitcoin developer education for Southeast Asia and beyond.**
 
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-orange.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
+[![Labs](https://github.com/code-orange-dev/curriculum/actions/workflows/labs.yml/badge.svg)](https://github.com/code-orange-dev/curriculum/actions/workflows/labs.yml)
+[![Bitcoin Dojo](https://github.com/code-orange-dev/curriculum/actions/workflows/dojo.yml/badge.svg)](https://github.com/code-orange-dev/curriculum/actions/workflows/dojo.yml)
+[![Good first issues](https://img.shields.io/github/issues/code-orange-dev/curriculum/good%20first%20issue?label=good%20first%20issues&color=7057ff)](https://github.com/code-orange-dev/curriculum/labels/good%20first%20issue)
+
+**Start here:** [Decoding Bitcoin, week 1](./decoding-bitcoin/week-01/) · [All programs](#programs) · [Facilitator slides](https://code-orange-dev.github.io/curriculum/) · [Contribute](#contributing)
 
 ---
 
@@ -24,8 +29,17 @@ Bitcoin Dojo (7 weeks) ──> rawBit (10 weeks) ──> Decoding Bitcoin (10 we
         └── Sovereign Bitcoiner (5-10 weeks)       Privacy Track (drop-in, biweekly) ─┘
 ```
 
-| Program | Duration | Level | Directory |
-|---------|----------|-------|-----------|
+| Program | Duration | Level | What's inside |
+|---------|----------|-------|---------------|
+| **[Decoding Bitcoin](./decoding-bitcoin/)** | 10 weeks | Intermediate | Week guides, slides, notes, model answers, regtest labs tested on Bitcoin Core, Python labs |
+| **[Bitcoin Dojo](./bitcoin-dojo/)** | 7 weeks | Beginner-Intermediate | Python exercises with self-grading checks against real mainnet transactions |
+| **[Privacy Track](./privacy-track/)** | 12 biweekly sessions, drop-in | Intermediate | Session plans and offline labs (Silent Payments test vectors, chain analysis, coin selection) |
+| **[rawBit Study Cohort](./rawbit/)** | 10 weeks | Intermediate | Syllabus and week pages (exercises wanted, see good first issues) |
+| **[Sovereign Bitcoiner](./sovereign-bitcoiner/)** | 5-10 weeks | Beginner | Syllabus, week pages and recaps of past sessions |
+| **[Workshops](./workshops/)** | 2-3 hours each | Beginner | Facilitator guides: multisig, nodes, mining, BTCPay, ecash, Nostr, privacy |
+| **[Vibe Coding on Nostr](./nostr-workshops/)** | Monthly | All levels | 6 developer workshop modules with working code |
+
+---------|----------|-------|-----------|
 | **Bitcoin Dojo** | 7 weeks | Beginner-Intermediate | [`/bitcoin-dojo/`](./bitcoin-dojo/) |
 | **rawBit Study Cohort** | 10 weeks | Intermediate | [`/rawbit/`](./rawbit/) |
 | **Decoding Bitcoin** | 10 weeks | Intermediate | [`/decoding-bitcoin/`](./decoding-bitcoin/) |
@@ -53,9 +67,19 @@ Bitcoin Dojo (7 weeks) ──> rawBit (10 weeks) ──> Decoding Bitcoin (10 we
 3. **Try the exercises** - they're designed to be hands-on, not theoretical
 4. **Join our Discord** for peer support: [discord.gg/xd6dmPF9bA](https://discord.gg/xd6dmPF9bA)
 
-### For Contributors
+### Contributing
 
-See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for how to submit improvements, translations, or new modules.
+Found a mistake, or ran a lab and something didn't match? That is the most useful contribution there is.
+
+- **Small fix:** open a pull request. The template has a short checklist.
+- **Not sure how to fix it:** [open an issue](https://github.com/code-orange-dev/curriculum/issues/new/choose). There are forms for broken labs, unclear writing and new ideas.
+- **Want something to work on:** pick a [good first issue](https://github.com/code-orange-dev/curriculum/labels/good%20first%20issue).
+
+More in [`CONTRIBUTING.md`](./CONTRIBUTING.md). What changed recently is in the [changelog](./CHANGELOG.md).
+
+### Thank you
+
+Thanks to everyone who has tested labs, fixed mistakes and proposed workshops, including [Itokichi0000](https://github.com/Itokichi0000) and [RazorBest](https://github.com/RazorBest). See all [contributors](https://github.com/code-orange-dev/curriculum/graphs/contributors).
 
 ---
 
@@ -72,7 +96,7 @@ curriculum/
 │   └── week-01/ ... week-07/          # exercises/, solutions/ and a check.py grader per week
 ├── rawbit/                            # 10-week raw transaction building cohort
 │   ├── README.md                      # Program overview, syllabus & facilitator guide
-│   └── week-01/ ... week-10/          # exercises/ and solutions/ (placeholders for now)
+│   └── week-01/ ... week-10/          # Week page; exercises/ and solutions/ still to come
 ├── decoding-bitcoin/                  # 10-week study cohort on Decoding Bitcoin (bitcoindevs.xyz)
 │   ├── README.md                      # Syllabus, schedule & facilitator guide
 │   ├── after-the-cohort.md            # Bitcoin Core architecture & first contribution
@@ -83,17 +107,18 @@ curriculum/
 │   └── labs/                          # Offline Python labs (BIP352 vectors, chain analysis, ...)
 ├── sovereign-bitcoiner/               # 5-10 week crash course
 │   ├── README.md                      # Syllabus
-│   └── week-01/ ... week-05/          # (materials coming soon)
+│   └── week-01/ ... week-05/          # One page per week (topics, hands-on, recaps)
 ├── nostr-workshops/                   # Monthly workshop modules
 │   ├── README.md
 │   └── modules/01-... 06-.../         # One self-contained workshop guide per module
-├── workshops/                         # Standalone workshops (materials coming soon)
+├── workshops/                         # Standalone 2-3 hour workshops, one facilitator guide each
 │   └── btcpay/ ecash/ mining/ multisig/ nodes/ nostr/ privacy/
 ├── resources/                         # Shared resources
 │   ├── reading-list.md
 │   └── tools-and-software.md
 └── tools/
-    └── check_links.py                 # CI check: every relative link and #heading resolves
+    ├── check_links.py                 # CI check: every relative link and #heading resolves
+    └── build_slides_site.py           # Index page for the slides website (built by CI)
 ```
 
 ---
