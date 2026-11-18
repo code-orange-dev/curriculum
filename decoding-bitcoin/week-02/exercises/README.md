@@ -55,7 +55,7 @@ The lab keeps values in shell variables like `$TXID`. If you open a new terminal
 
 ### Step 1: start a fresh regtest node with two wallets
 
-If you have an old regtest chain, you can start fresh: `bitcoin-cli -regtest stop`, then delete the regtest folder (`~/.bitcoin/regtest` on Linux).
+If you have an old regtest chain (for example from the week 1 lab), start fresh so that your block heights and amounts match the solutions: `bitcoin-cli -regtest stop`, then delete the regtest folder (`~/.bitcoin/regtest` on Linux, `~/Library/Application Support/Bitcoin/regtest` on macOS).
 
 ```bash
 bitcoind -regtest -daemon -txindex=1 -fallbackfee=0.0001

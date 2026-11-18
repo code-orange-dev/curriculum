@@ -40,13 +40,13 @@ Since v29, Bitcoin Core builds with CMake. The old `./autogen.sh`, `./configure`
 # Install build dependencies (Ubuntu/Debian)
 sudo apt-get update
 sudo apt-get install build-essential cmake pkgconf python3 \
-  libevent-dev libboost-dev libsqlite3-dev
+  libevent-dev libboost-dev libsqlite3-dev libcapnp-dev capnproto
 
 # Get the source and check out the newest release tag
 git clone https://github.com/bitcoin/bitcoin.git
 cd bitcoin
-git tag -l 'v*'           # pick the newest release, for example v29.0
-git checkout v29.0        # replace with the tag you picked
+git tag -l 'v*' --sort=-v:refname | grep -v rc | head -5   # newest releases first
+git checkout v32.1        # replace with the newest tag in the list
 
 # Configure and build (this takes a while the first time)
 cmake -B build
@@ -61,7 +61,8 @@ Notes:
 
 - `libsqlite3-dev` is needed for the wallet. Without it CMake builds Bitcoin Core with no wallet, and this lab needs one.
 - The GUI (`bitcoin-qt`) is not built by default. You don't need it for this cohort.
-- On newer versions, if CMake stops with an error about Cap'n Proto (used for the new multiprocess/IPC build), either install `capnproto libcapnp-dev` or configure with `cmake -B build -DENABLE_IPC=OFF`.
+- `libcapnp-dev` and `capnproto` (Cap'n Proto) are needed from v30 on, where the multiprocess/IPC build is on by default. Without them `cmake -B build` stops with an error saying Cap'n Proto was not found. If you can't install them, configure with `cmake -B build -DENABLE_IPC=OFF` instead.
+- `libevent-dev` is needed up to v31. From v32 on you can leave it out.
 - To use the commands below without typing the full path, add the folder to your `PATH`: `export PATH="$PWD/build/bin:$PATH"` (run it from the `bitcoin` folder, or put the full path in your `~/.bashrc`).
 - Optional: run the unit tests with `ctest --test-dir build -j"$(nproc)"`.
 
